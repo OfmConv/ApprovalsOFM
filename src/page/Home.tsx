@@ -306,9 +306,9 @@ function MainContent() {
     init();
   }, []);
 
-  const vikaris = dewanPimpinan.find((d) => d.position?.includes("Vikaris"));
-  const minister = dewanPimpinan.find((d) => d.position?.includes("Minister"));
-  const sekretaris = dewanPimpinan.find((d) => d.position?.includes("Sekretaris"));
+  // const vikaris = dewanPimpinan.find((d) => d.position?.includes("Vikaris"));
+  // const minister = dewanPimpinan.find((d) => d.position?.includes("Minister"));
+  // const sekretaris = dewanPimpinan.find((d) => d.position?.includes("Sekretaris"));
 
   return (
     <div className="relative z-10 mt-[100vh] bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
