@@ -127,20 +127,24 @@ function Hero() {
   const navigate = useNavigate();
 
   function HandleHistory() {
-    navigate("/history")
+    navigate("/history");
   }
+
   return (
-    <section className="fixed inset-x-0 top-0 z-0 h-screen w-full overflow-hidden">
+    // 1. Mengubah h-screen menjadi h-[100dvh] agar tinggi menyesuaikan layar HP dengan akurat (mengabaikan address bar)
+    <section className="fixed inset-x-0 top-0 z-0 h-[100dvh] w-full overflow-hidden">
       <img
         src="/Kapitularis-1536x802.jpg"
         alt="Interior gereja New Horizon Chapel"
-        className="absolute inset-0 h-full w-full object-cover"
+        // 2. Menambahkan object-center agar saat gambar terpotong di HP, bagian tengahnya tetap fokus
+        className="absolute inset-0 h-full w-full object-cover object-center md:object-top"
         loading="eager"
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
-      <div className="relative mx-auto flex h-full max-w-6xl flex-col justify-end px-4 pb-10 sm:px-6 sm:pb-14">
+      {/* 3. Mengubah pb-10 menjadi pb-20 khusus mobile agar teks dan tombol tidak terlalu mepet ke bawah layar */}
+      <div className="relative mx-auto flex h-full max-w-6xl flex-col justify-end px-4 pb-20 sm:px-6 sm:pb-14">
         <div className="flex flex-col justify-end gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
             <h1 className="max-w-lg font-serif text-3xl leading-[1.15] text-white sm:text-4xl sm:leading-[1.1] md:text-5xl">
@@ -170,7 +174,8 @@ function Hero() {
             </div>
           </div>
 
-          <div className="flex gap-6 sm:gap-8">
+          {/* 4. Mengubah gap-6 menjadi gap-4 agar informasi angka (1209, 113, 70) muat sejajar di layar HP yang sempit */}
+          <div className="flex gap-4 sm:gap-8">
             <div className="text-right">
               <p className="font-serif text-2xl text-white sm:text-3xl">1209</p>
               <p className="text-[11px] text-gray-300 sm:text-xs">Didirikan</p>
