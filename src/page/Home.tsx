@@ -196,7 +196,8 @@ function Hero() {
 
 function LeaderCard({ photo, name, role }: any) {
   return (
-    <div className="mx-auto w-full max-w-[200px] sm:max-w-[240px]">
+    // Memperkecil max-w di mobile (160px) agar muat dalam grid 2 kolom tanpa overflow
+    <div className="mx-auto w-full max-w-[160px] sm:max-w-[240px]">
       <div className="relative">
         <div className="rounded-sm border-[3px] border-[#616572] bg-white shadow-[0_15px_30px_-10px_rgba(0,0,0,0.25)]">
           <div className="border border-[#616572]/30">
@@ -209,11 +210,12 @@ function LeaderCard({ photo, name, role }: any) {
         </div>
       </div>
 
-      <div className="mt-4 text-center sm:mt-5">
-        <p className="font-serif text-base leading-snug text-gray-900 sm:text-lg">
+      <div className="mt-3 text-center sm:mt-5">
+        {/* Mengecilkan teks di mobile menjadi text-sm agar tidak terlalu panjang */}
+        <p className="font-serif text-sm leading-snug text-gray-900 sm:text-lg">
           {name}
         </p>
-        <p className="mt-1 text-[11px] font-semibold uppercase tracking-widest text-[#616572] sm:text-xs">
+        <p className="mt-1 text-[10px] font-semibold uppercase tracking-widest text-[#616572] sm:text-xs">
           {role}
         </p>
       </div>
@@ -221,27 +223,40 @@ function LeaderCard({ photo, name, role }: any) {
   );
 }
 
-function LayoutArtikel() {
+
+
+function History() {
   return (
     <Reveal>
-      <div className="flex flex-col md:flex-row md:items-start">
-        <div className="w-full md:w-1/2">
+      <div className="flex flex-col md:flex-row md:items-start md:gap-8">
+        <div className="flex w-full items-start justify-center md:w-1/4">
           <img
-            src="./Gabungan.jpg"
-            alt="Foto para frater bersama"
-            className="h-full w-full object-cover"
+            src="./Logo_ordo.jpeg"
+            alt="Logo OFMConv"
+            className="h-auto w-full max-w-[160px] object-contain sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px]"
           />
         </div>
 
-        {/* Judul dan deskripsi di sebelah kanan, rata kiri, mentok atas dengan gambar */}
-        <div className="w-full px-6 pt-0 pb-8 text-left md:w-1/2 md:px-10">
-          <h3 className="font-serif text-lg text-gray-900 sm:text-xl">
-            Judul Anda di Sini
+        {/* Memperbaiki md:w-1/1 menjadi flex-1 dan menambahkan pt-6 untuk jarak di mobile */}
+        <div className="w-full flex-1 px-4 pt-6 pb-8 text-left sm:px-6 md:px-0 md:pt-0">
+          <h3 className="pb-4 font-serif text-xl text-gray-900 sm:text-2xl">
+            Sejarah Ordo OFMConv
           </h3>
-          <p className="mt-3 text-sm leading-relaxed text-gray-600">
-            Tuliskan deskripsi singkat di sini. Bagian ini menjelaskan
-            konteks foto atau informasi tambahan yang ingin Anda
-            sampaikan kepada pembaca. Ganti teks ini sesuai kebutuhan.
+          <p className="text-sm leading-relaxed text-gray-600 text-justify sm:text-base">
+            Ordo Saudara Dina Konventual (OFMConv) adalah cabang dari Ordo
+            Fransiskan yang didirikan oleh Santo Fransiskus dari Assisi. Kata
+            "konventual" merujuk pada kehidupan biara yang terstruktur. Di
+            Indonesia, ordo ini hadir di Bogor pada tahun 1937 dan berkembang di
+            Sumatera Utara sejak 1967. Pada tahun 2019, wilayah Indonesia resmi
+            menjadi Provinsi mandiri.
+          </p>
+          <br />
+          <p className="text-sm leading-relaxed text-gray-600 text-justify sm:text-base">
+            Pada awal abad ke-13, Santo Fransiskus dari Assisi mendirikan Ordo
+            Saudara Dina (Friars Minor) yang berfokus pada kehidupan injili,
+            kemiskinan, dan karya amal. Seiring berjalannya waktu, ordo ini
+            berkembang sangat pesat, dan terjadi perbedaan interpretasi mengenai
+            cara menghidupi semangat kemiskinan Fransiskan.
           </p>
         </div>
       </div>
@@ -249,29 +264,27 @@ function LayoutArtikel() {
   );
 }
 
-
-function History() {
+function LayoutArtikel() {
   return (
     <Reveal>
-      <div className="flex flex-col md:flex-row md:items-start">
-        <div className="w-full md:w-1/4 flex justify-center items-start">
+      <div className="flex flex-col md:flex-row md:items-start md:gap-8">
+        <div className="w-full md:w-1/2">
           <img
-            src="./Logo_ordo.jpeg"
+            src="./Gabungan.jpg"
             alt="Foto para frater bersama"
-            className="w-full max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] h-auto object-contain"
+            className="h-full w-full object-cover rounded-sm"
           />
         </div>
 
-        <div className="w-full px-6 pt-0 pb-8 text-left md:w-1/1 md:px-10">
-          <h3 className="font-serif text-lg text-gray-900 sm:text-xl pb-5">
-            Sejarah Ordo OFMConv
+        {/* Menambahkan pt-6 untuk memberi nafas jarak teks terhadap gambar di atasnya saat mobile */}
+        <div className="w-full flex-1 px-4 pt-6 pb-8 text-left sm:px-6 md:px-0 md:pt-0">
+          <h3 className="font-serif text-xl text-gray-900 sm:text-2xl">
+            Judul Anda di Sini
           </h3>
-          <p className="mt-3 text-sm leading-relaxed text-gray-600 text-justify">
-            Ordo Saudara Dina Konventual (OFMConv) adalah cabang dari Ordo Fransiskan yang didirikan oleh Santo Fransiskus dari Assisi. Kata "konventual" merujuk pada kehidupan biara yang terstruktur. Di Indonesia, ordo ini hadir di Bogor pada tahun 1937 dan berkembang di Sumatera Utara sejak 1967. Pada tahun 2019, wilayah Indonesia resmi menjadi Provinsi mandiri.
-          </p>
-          <br />
-          <p className="mt-3 text-sm leading-relaxed text-gray-600 text-justify">
-            Pada awal abad ke-13, Santo Fransiskus dari Assisi mendirikan Ordo Saudara Dina (Friars Minor) yang berfokus pada kehidupan injili, kemiskinan, dan karya amal. Seiring berjalannya waktu, ordo ini berkembang sangat pesat, dan terjadi perbedaan interpretasi mengenai cara menghidupi semangat kemiskinan Fransiskan.
+          <p className="mt-3 text-sm leading-relaxed text-gray-600 sm:text-base">
+            Tuliskan deskripsi singkat di sini. Bagian ini menjelaskan konteks
+            foto atau informasi tambahan yang ingin Anda sampaikan kepada
+            pembaca. Ganti teks ini sesuai kebutuhan.
           </p>
         </div>
       </div>
@@ -306,21 +319,22 @@ function MainContent() {
     init();
   }, []);
 
-  // const vikaris = dewanPimpinan.find((d) => d.position?.includes("Vikaris"));
-  // const minister = dewanPimpinan.find((d) => d.position?.includes("Minister"));
-  // const sekretaris = dewanPimpinan.find((d) => d.position?.includes("Sekretaris"));
-
   return (
-    <div className="relative z-10 mt-[100vh] bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
+    // Gunakan 100dvh yang sudah kita perbaiki pada respons sebelumnya
+    <div className="relative z-10 mt-[100dvh] bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
       <div id="kuria" className="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-16">
-        <div className="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-16">
+
+        {/* Wrapper untuk komponen history tidak perlu padding ganda agar tidak over-padding di mobile */}
+        <div className="mb-16 sm:mb-24">
           <History />
         </div>
-        <h2 className="text-center font-serif text-2xl text-gray-900 sm:text-3xl">
-          <SectionHeading>Minister & Definitorium</SectionHeading>
-        </h2>
 
-        <div className="mt-10 grid grid-cols-2 gap-8 sm:mt-14 sm:grid-cols-3 sm:gap-8">
+        <div className="text-center">
+          <SectionHeading>Minister & Definitorium</SectionHeading>
+        </div>
+
+        {/* Ubah gap-8 menjadi gap-4 khusus mobile. Di layar besar (sm:) baru menjadi gap-8 */}
+        <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-14 sm:grid-cols-3 sm:gap-8">
           <Reveal delay={120}>
             <LeaderCard
               photo="test"
@@ -329,11 +343,7 @@ function MainContent() {
             />
           </Reveal>
           <Reveal delay={0}>
-            <LeaderCard
-              photo="test"
-              name="test"
-              role="Minister Provinsial"
-            />
+            <LeaderCard photo="test" name="test" role="Minister Provinsial" />
           </Reveal>
           <Reveal delay={0}>
             <LeaderCard
@@ -344,7 +354,8 @@ function MainContent() {
           </Reveal>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-8 sm:mt-14 sm:grid-cols-5 sm:gap-8">
+        {/* Sama seperti di atas, gunakan gap-4 untuk mobile */}
+        <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-14 md:grid-cols-5 sm:gap-8">
           <Reveal delay={120}>
             <LeaderCard
               photo="/vikaris-provinsial.jpg"
@@ -383,22 +394,24 @@ function MainContent() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-16">
+      <div className="mx-auto max-w-6xl px-4 pb-16 pt-4 sm:px-6 sm:pb-24 sm:pt-8">
         <LayoutArtikel />
       </div>
 
       <div id="berkarya" className="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-9">
-        <h2 className="text-center font-serif text-2xl text-gray-900 sm:text-3xl">
+        <div className="text-center">
+          <SectionHeading>
+            Peta Wilayah Pelayanan Fransiskan Konventual
+          </SectionHeading>
+        </div>
+        <img src="./Map.png" alt="Peta Wilayah" className="mx-auto mt-6 w-full max-w-3xl object-contain" />
 
-          <SectionHeading>Peta Wilayah Pelayanan Fransiskan Konventual Di Indonesia Dan Timor Leste</SectionHeading>
-          <img src="./Map.png" className="mx-auto mt-6 w-full max-w-3xl" />
-        </h2>
-        <div className="mt-10">
-          <DataTableWilayah
-            data={wilayah}
-          />
+        {/* Tambahkan overflow-x-auto pada table pembungkus supaya data table bisa digeser kanan-kiri di layar kecil */}
+        <div className="mt-10 w-full overflow-x-auto">
+          <DataTableWilayah data={wilayah} />
         </div>
       </div>
+
       <Footer />
     </div>
   );

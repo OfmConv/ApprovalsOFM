@@ -219,7 +219,7 @@ export function DataTableWilayah({
       <div className="flex items-center justify-between px-4 lg:px-6 pb-6">
         <div className="flex items-center gap-2 text-muted-foreground"></div>
         <div className="flex items-center gap-2">
-          <Select value={searchColumn} onValueChange={setSearchColumn}>
+          {/* <Select value={searchColumn} onValueChange={setSearchColumn}>
             <SelectTrigger className="w-[160px] h-9">
               <SelectValue placeholder="Pilih Kolom" />
             </SelectTrigger>
@@ -231,7 +231,7 @@ export function DataTableWilayah({
               <SelectItem value="provinsi">Provinsi</SelectItem>
               <SelectItem value="pemimpin">Pemimpin</SelectItem>
             </SelectContent>
-          </Select>
+          </Select> */}
 
           <div className="relative">
             <IconSearch className="absolute left-2.5 top-2.5 size-4 text-muted-foreground" />
@@ -243,7 +243,7 @@ export function DataTableWilayah({
             />
           </div>
 
-          <DropdownMenu>
+          {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
@@ -274,7 +274,7 @@ export function DataTableWilayah({
                   </DropdownMenuCheckboxItem>
                 ))}
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu> */}
         </div>
       </div>
 
