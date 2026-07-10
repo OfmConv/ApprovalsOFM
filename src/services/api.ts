@@ -51,7 +51,7 @@ axiosInstance.interceptors.response.use(
           return Promise.reject(error);
         }
 
-        const res = await axios.post("http://localhost:8080/api/v1/refreshToken", {
+        const res = await axios.post(`${BASE_URL}/api/v1/refreshToken`, {
           refresh_token: rToken,
         });
 
