@@ -23,12 +23,17 @@ const navLinks = [
 
 function SectionHeading({ children }: { children: ReactNode }) {
   return (
-    <div className="flex items-center gap-4">
-      <Separator className="flex-1" />
-      <h2 className="shrink-0 font-serif text-2xl text-gray-900 sm:text-3xl">
+    <div className="flex w-full items-center gap-2 sm:gap-4">
+      {/* Tambahkan min-w-[20px] agar garis tidak hilang sepenuhnya saat teks sangat panjang */}
+      <Separator className="flex-1 min-w-[20px]" />
+      
+      {/* HAPUS 'shrink-0' dan ubah ukuran teks mobile jadi text-lg. 
+          Tambahkan 'text-center' dan 'leading-tight' agar rapi saat turun baris */}
+      <h2 className="text-center font-serif text-lg leading-tight text-gray-900 sm:text-2xl md:text-3xl">
         {children}
       </h2>
-      <Separator className="flex-1" />
+      
+      <Separator className="flex-1 min-w-[20px]" />
     </div>
   );
 }
@@ -456,7 +461,7 @@ function Reveal({ children, delay = 0 }: any) {
 
 function Home() {
   return (
-    <div className="relative min-h-screen bg-white">
+    <div className="relative min-h-screen w-full overflow-x-hidden bg-white">
       <Navbar />
       <Hero />
       <MainContent />
