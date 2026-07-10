@@ -131,21 +131,21 @@ function Hero() {
   }
 
   return (
-    // 1. Mengubah h-screen menjadi h-[100dvh] agar tinggi menyesuaikan layar HP dengan akurat (mengabaikan address bar)
-    <section className="fixed inset-x-0 top-0 z-0 h-[100dvh] w-full overflow-hidden">
+    // Menggunakan h-[100svh] agar tidak bentrok dengan bar navigasi peramban HP
+    <section className="fixed inset-x-0 top-0 z-0 h-[100svh] w-full overflow-hidden">
       <img
         src="/Kapitularis-1536x802.jpg"
         alt="Interior gereja New Horizon Chapel"
-        // 2. Menambahkan object-center agar saat gambar terpotong di HP, bagian tengahnya tetap fokus
         className="absolute inset-0 h-full w-full object-cover object-center md:object-top"
         loading="eager"
       />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+      {/* Gradien dibuat sedikit lebih pekat di bawah agar teks putih lebih terbaca */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
 
-      {/* 3. Mengubah pb-10 menjadi pb-20 khusus mobile agar teks dan tombol tidak terlalu mepet ke bawah layar */}
-      <div className="relative mx-auto flex h-full max-w-6xl flex-col justify-end px-4 pb-20 sm:px-6 sm:pb-14">
-        <div className="flex flex-col justify-end gap-6 md:flex-row md:items-end md:justify-between">
+      {/* UBAH DI SINI: Mengubah pb-20 menjadi pb-28 agar konten naik lebih ke atas di HP */}
+      <div className="relative mx-auto flex h-full max-w-6xl flex-col justify-end px-4 pb-28 sm:px-6 sm:pb-20">
+        <div className="flex flex-col justify-end gap-8 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
             <h1 className="max-w-lg font-serif text-3xl leading-[1.15] text-white sm:text-4xl sm:leading-[1.1] md:text-5xl">
               Melayani dalam Jejak
@@ -174,19 +174,19 @@ function Hero() {
             </div>
           </div>
 
-          {/* 4. Mengubah gap-6 menjadi gap-4 agar informasi angka (1209, 113, 70) muat sejajar di layar HP yang sempit */}
-          <div className="flex gap-4 sm:gap-8">
-            <div className="text-right">
+          {/* UBAH DI SINI: Statistik dirapikan. Di HP rata kiri dan justify-between agar tidak berdesakan */}
+          <div className="flex w-full justify-between gap-2 md:w-auto md:justify-end md:gap-8">
+            <div className="text-left md:text-right">
               <p className="font-serif text-2xl text-white sm:text-3xl">1209</p>
               <p className="text-[11px] text-gray-300 sm:text-xs">Didirikan</p>
             </div>
-            <div className="text-right">
+            <div className="text-left md:text-right">
               <p className="font-serif text-2xl text-white sm:text-3xl">113</p>
               <p className="text-[11px] text-gray-300 sm:text-xs">
                 Saudara di Indonesia
               </p>
             </div>
-            <div className="text-right">
+            <div className="text-left md:text-right">
               <p className="font-serif text-2xl text-white sm:text-3xl">70</p>
               <p className="text-[11px] text-gray-300 sm:text-xs">
                 Negara di Dunia
@@ -227,8 +227,6 @@ function LeaderCard({ photo, name, role }: any) {
     </div>
   );
 }
-
-
 
 function History() {
   return (
@@ -326,7 +324,7 @@ function MainContent() {
 
   return (
     // Gunakan 100dvh yang sudah kita perbaiki pada respons sebelumnya
-    <div className="relative z-10 mt-[100dvh] bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
+   <div className="relative z-10 mt-[100svh] bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
       <div id="kuria" className="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-16">
 
         {/* Wrapper untuk komponen history tidak perlu padding ganda agar tidak over-padding di mobile */}
