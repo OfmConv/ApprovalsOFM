@@ -131,20 +131,21 @@ function Hero() {
   }
 
   return (
-    // Menggunakan h-[100svh] agar tidak bentrok dengan bar navigasi peramban HP
-    <section className="fixed inset-x-0 top-0 z-0 h-[100svh] w-full overflow-hidden">
+    // 1. UBAH DI SINI: Ganti 'fixed' menjadi 'relative'.
+    // Menggunakan min-h-[100dvh] atau min-h-screen agar tingginya 100% dari layar HP
+    <section className="relative w-full min-h-[100dvh] overflow-hidden flex flex-col justify-end">
       <img
         src="/Kapitularis-1536x802.jpg"
         alt="Interior gereja New Horizon Chapel"
+        // 2. Gambar tetap absolute di dalam container Hero ini saja
         className="absolute inset-0 h-full w-full object-cover object-center md:object-top"
         loading="eager"
       />
 
-      {/* Gradien dibuat sedikit lebih pekat di bawah agar teks putih lebih terbaca */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
 
-      {/* UBAH DI SINI: Mengubah pb-20 menjadi pb-28 agar konten naik lebih ke atas di HP */}
-      <div className="relative mx-auto flex h-full max-w-6xl flex-col justify-end px-4 pb-28 sm:px-6 sm:pb-20">
+      {/* 3. Padding bawah (pb-24) untuk memberi jarak aman ke batas bawah layar */}
+      <div className="relative z-10 mx-auto flex w-full h-full max-w-6xl flex-col justify-end px-4 pb-24 pt-32 sm:px-6 sm:pb-20">
         <div className="flex flex-col justify-end gap-8 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
             <h1 className="max-w-lg font-serif text-3xl leading-[1.15] text-white sm:text-4xl sm:leading-[1.1] md:text-5xl">
@@ -174,7 +175,6 @@ function Hero() {
             </div>
           </div>
 
-          {/* UBAH DI SINI: Statistik dirapikan. Di HP rata kiri dan justify-between agar tidak berdesakan */}
           <div className="flex w-full justify-between gap-2 md:w-auto md:justify-end md:gap-8">
             <div className="text-left md:text-right">
               <p className="font-serif text-2xl text-white sm:text-3xl">1209</p>
@@ -324,10 +324,8 @@ function MainContent() {
 
   return (
     // Gunakan 100dvh yang sudah kita perbaiki pada respons sebelumnya
-   <div className="relative z-10 mt-[100svh] bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
+ <div className="relative z-20 bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
       <div id="kuria" className="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-16">
-
-        {/* Wrapper untuk komponen history tidak perlu padding ganda agar tidak over-padding di mobile */}
         <div className="mb-16 sm:mb-24">
           <History />
         </div>
