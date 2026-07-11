@@ -34,7 +34,7 @@ interface Profile {
 const TABS = [
   { key: "profil", label: "Profil" },
   { key: "pendidikan", label: "Pendidikan" },
-  { key: "religius", label: "Pesta Religius" },
+  // { key: "religius", label: "Pesta Religius" },
 ] as const
 
 type TabKey = (typeof TABS)[number]["key"]
@@ -116,7 +116,7 @@ const PendidikanTab = memo(({ profile }: { profile: Profile }) => {
               </div>
               <div>
                 <p className="text-left font-semibold text-zinc-700 dark:text-zinc-200">{edu.institution || "-"}</p>
-                <p className="text-xs text-zinc-400 mt-0.5">
+                <p className="text-xs text-left text-zinc-400 mt-0.5">
                   {edu.level}{edu.start_year && edu.end_year ? ` (${edu.start_year} - ${edu.end_year})` : ""}
                 </p>
               </div>
@@ -144,52 +144,52 @@ const PendidikanTab = memo(({ profile }: { profile: Profile }) => {
 })
 PendidikanTab.displayName = "PendidikanTab"
 
-const ReligiusTab = memo(({ profile }: { profile: Profile }) => {
-  const hasFeastivalData = Array.isArray(profile.feastival) && profile.feastival.length > 0
+// const ReligiusTab = memo(({ profile }: { profile: Profile }) => {
+//   const hasFeastivalData = Array.isArray(profile.feastival) && profile.feastival.length > 0
 
-  const fallbackFields = useMemo(() => [
-    { label: "Profesi Perdana", value: profile.profesiPerdana },
-    { label: "Profesi Meriah", value: profile.profesiMeriah },
-    { label: "Tahbisan Imamat", value: profile.tahbisanImamat },
-  ], [profile])
+//   const fallbackFields = useMemo(() => [
+//     { label: "Profesi Perdana", value: profile.profesiPerdana },
+//     { label: "Profesi Meriah", value: profile.profesiMeriah },
+//     { label: "Tahbisan Imamat", value: profile.tahbisanImamat },
+//   ], [profile])
 
-  if (hasFeastivalData) {
-    return (
-      <div className="grid grid-cols-2 gap-x-8 gap-y-0">
-        {profile.feastival!.map((f: any) => (
-          <div key={f.religious_id} className="flex items-start gap-3 py-3 border-b border-zinc-100 dark:border-zinc-800">
-            <div className="w-7 h-7 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 shrink-0 mt-0.5">
-              <IconCross size={14} />
-            </div>
-            <div>
-              <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-200">{f.formation_type || "-"}</p>
-              <p className="text-xs text-zinc-400 mt-0.5">
-                {f.location}{f.formation_date ? ` - ${new Date(f.formation_date).toLocaleDateString("id-ID")}` : ""}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    )
-  }
+//   if (hasFeastivalData) {
+//     return (
+//       <div className="grid grid-cols-2 gap-x-8 gap-y-0">
+//         {profile.feastival!.map((f: any) => (
+//           <div key={f.religious_id} className="flex items-start gap-3 py-3 border-b border-zinc-100 dark:border-zinc-800">
+//             <div className="w-7 h-7 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 shrink-0 mt-0.5">
+//               <IconCross size={14} />
+//             </div>
+//             <div>
+//               <p className="text-left font-semibold text-zinc-700 dark:text-zinc-200">{f.formation_type || "-"}</p>
+//               <p className="text-xs text-left text-zinc-400 mt-0.5">
+//                 {f.location}{f.formation_date ? ` - ${new Date(f.formation_date).toLocaleDateString("id-ID")}` : ""}
+//               </p>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     )
+//   }
 
-  return (
-    <div className="grid grid-cols-2 gap-x-8 gap-y-0">
-      {fallbackFields.map((item) => (
-        <div key={item.label} className="flex items-start gap-3 py-3 border-b border-zinc-100 dark:border-zinc-800">
-          <div className="w-7 h-7 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 shrink-0 mt-0.5">
-            <IconCross size={14} />
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-200">{item.value || "-"}</p>
-            <p className="text-xs text-zinc-400 mt-0.5">{item.label}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-})
-ReligiusTab.displayName = "ReligiusTab"
+//   return (
+//     <div className="grid grid-cols-2 gap-x-8 gap-y-0">
+//       {fallbackFields.map((item) => (
+//         <div key={item.label} className="flex items-start gap-3 py-3 border-b border-zinc-100 dark:border-zinc-800">
+//           <div className="w-7 h-7 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 shrink-0 mt-0.5">
+//             <IconCross size={14} />
+//           </div>
+//           <div>
+//             <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-200">{item.value || "-"}</p>
+//             <p className="text-xs text-zinc-400 mt-0.5">{item.label}</p>
+//           </div>
+//         </div>
+//       ))}
+//     </div>
+//   )
+// })
+// ReligiusTab.displayName = "ReligiusTab"
 
 export function ProfileModal({ profile }: { profile: Profile }) {
   const [open, setOpen] = useState(false)
@@ -268,7 +268,7 @@ export function ProfileModal({ profile }: { profile: Profile }) {
             <div className="overflow-y-auto flex-1 px-6 py-4">
               {activeTab === "profil" && <ProfilTab profile={profile} />}
               {activeTab === "pendidikan" && <PendidikanTab profile={profile} />}
-              {activeTab === "religius" && <ReligiusTab profile={profile} />}
+              {/* {activeTab === "religius" && <ReligiusTab profile={profile} />} */}
             </div>
           </div>
         </div>
