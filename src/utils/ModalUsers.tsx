@@ -92,7 +92,7 @@ const PendidikanTab = memo(({ profile }: { profile: Profile }) => {
 
   if (hasEducationData) {
     return (
-      <div className="grid grid-cols-2 gap-x-8 gap-y-0">
+      <div className="grid grid-cols-1 gap-x-8 gap-y-0">
         {profile.education!.map((edu: any) => (
           <div key={edu.education_id} className="flex items-start gap-3 py-3 border-b border-zinc-100 dark:border-zinc-800">
             <div className="w-7 h-7 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 shrink-0 mt-0.5">
