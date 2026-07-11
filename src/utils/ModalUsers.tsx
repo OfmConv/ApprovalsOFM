@@ -93,19 +93,35 @@ const PendidikanTab = memo(({ profile }: { profile: Profile }) => {
   if (hasEducationData) {
     return (
       <div className="grid grid-cols-1 gap-x-8 gap-y-0">
-        {profile.education!.map((edu: any) => (
-          <div key={edu.education_id} className="flex items-start gap-3 py-3 border-b border-zinc-100 dark:border-zinc-800">
-            <div className="w-7 h-7 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 shrink-0 mt-0.5">
-              <IconBook size={14} />
+        {profile.education!.sort((a, b) => {
+          const order: any = {
+            SD: 1,
+            SMP: 2,
+            SMA: 3,
+            D1: 4,
+            D2: 5,
+            D3: 6,
+            D4: 7,
+            S1: 8,
+            S2: 9,
+            S3: 10,
+          };
+
+          return (order[a.level] || 99) - (order[b.level] || 99);
+        })
+          .map((edu: any) => (
+            <div key={edu.education_id} className="flex items-start gap-3 py-3 border-b border-zinc-100 dark:border-zinc-800">
+              <div className="w-7 h-7 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 shrink-0 mt-0.5">
+                <IconBook size={14} />
+              </div>
+              <div>
+                <p className="text-left font-semibold text-zinc-700 dark:text-zinc-200">{edu.institution || "-"}</p>
+                <p className="text-xs text-zinc-400 mt-0.5">
+                  {edu.level}{edu.start_year && edu.end_year ? ` (${edu.start_year} - ${edu.end_year})` : ""}
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-200">{edu.institution || "-"}</p>
-              <p className="text-xs text-zinc-400 mt-0.5">
-                {edu.level}{edu.start_year && edu.end_year ? ` (${edu.start_year} - ${edu.end_year})` : ""}
-              </p>
-            </div>
-          </div>
-        ))}
+          ))}
       </div>
     )
   }
