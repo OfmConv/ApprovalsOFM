@@ -439,7 +439,15 @@ export default function ReligiousFeastSection({ nkp, isAdmin = false }: { nkp: s
             setDeleteTarget(null);
         }
     };
-
+    const formationOrder: Record<string, number> = {
+        "Postulat I": 1,
+        "Postulat II": 2,
+        "Novisiat": 3,
+        "Profesi Perdana": 4,
+        "Profesi Meriah": 5,
+        "Tahbisan Diakonat": 6,
+        "Tahbisan Imamat": 7,
+    };
     return (
         <div className="mx-auto space-y-5 mt-5">
             <Card className="border-0 shadow-sm">
@@ -473,46 +481,59 @@ export default function ReligiousFeastSection({ nkp, isAdmin = false }: { nkp: s
                             Belum ada riwayat keagamaan. Klik "Tambah" untuk menambahkan.
                         </p>
                     ) : (
+
+
                         <div className="space-y-3">
-                            {list.map((record) => (
-                                <div
-                                    key={record.religious_id}
-                                    className="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50/60 px-4 py-3"
-                                >
-                                    <div className="flex items-center gap-3">
-                                        <span
-                                            className="text-xs font-semibold px-2.5 py-1 rounded-full text-white shrink-0"
-                                            style={{ backgroundColor: "#1B3A5C" }}
-                                        >
-                                            {record.formation_type}
-                                        </span>
-                                        <div>
-                                            <p className="text-left text-gray-800 font-medium">{record.location}</p>
-                                            <p className="text-xs text-gray-400">
-                                                {record.formation_date?.split("T")[0]}
-                                                {record.notes ? ` — ${record.notes}` : ""}
-                                            </p>
+                            {[...list]
+                                .sort(
+                                    (a, b) =>
+                                        (formationOrder[a.formation_type] ?? 99) -
+                                        (formationOrder[b.formation_type] ?? 99)
+                                )
+                                .map((record) => (
+                                    <div
+                                        key={record.religious_id}
+                                        className="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50/60 px-4 py-3"
+                                    >
+                                        <div className="flex items-center gap-3">
+                                            <span
+                                                className="text-xs font-semibold px-2.5 py-1 rounded-full text-white shrink-0"
+                                                style={{ backgroundColor: "#1B3A5C" }}
+                                            >
+                                                {record.formation_type}
+                                            </span>
+
+                                            <div>
+                                                <p className="text-left text-gray-800 font-medium">
+                                                    {record.location}
+                                                </p>
+
+                                                <p className="text-xs text-gray-400">
+                                                    {record.formation_date?.split("T")[0]}
+                                                    {record.notes ? ` — ${record.notes}` : ""}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex items-center gap-1">
+                                            <button
+                                                onClick={() => openEditForm(record)}
+                                                className="p-1.5 text-gray-400 hover:text-[#1B3A5C] transition-colors"
+                                                title="Edit"
+                                            >
+                                                <Pencil className="w-3.5 h-3.5" />
+                                            </button>
+
+                                            <button
+                                                onClick={() => setDeleteTarget(record)}
+                                                className="p-1.5 text-gray-400 hover:text-red-500 transition-colors"
+                                                title="Hapus"
+                                            >
+                                                <Trash2 className="w-3.5 h-3.5" />
+                                            </button>
                                         </div>
                                     </div>
-
-                                    <div className="flex items-center gap-1">
-                                        <button
-                                            onClick={() => openEditForm(record)}
-                                            className="p-1.5 text-gray-400 hover:text-[#1B3A5C] transition-colors"
-                                            title="Edit"
-                                        >
-                                            <Pencil className="w-3.5 h-3.5" />
-                                        </button>
-                                        <button
-                                            onClick={() => setDeleteTarget(record)}
-                                            className="p-1.5 text-gray-400 hover:text-red-500 transition-colors"
-                                            title="Hapus"
-                                        >
-                                            <Trash2 className="w-3.5 h-3.5" />
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
+                                ))}
                         </div>
                     )}
                 </CardContent>
