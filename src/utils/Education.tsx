@@ -326,7 +326,6 @@ export default function EducationSection({ nkp, isAdmin = false }: { nkp: string
     const [successModalOpen, setSuccessModalOpen] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
 
-    // confirm delete
     const [deleteTarget, setDeleteTarget] = useState<EducationRecord | null>(null);
 
     useEffect(() => {
@@ -477,7 +476,22 @@ export default function EducationSection({ nkp, isAdmin = false }: { nkp: string
                         </p>
                     ) : (
                         <div className="space-y-3">
-                            {educationList.map((record) => (
+                            {educationList.sort((a, b) => {
+          const order: any = {
+            SD: 1,
+            SMP: 2,
+            SMA: 3,
+            D1: 4,
+            D2: 5,
+            D3: 6,
+            D4: 7,
+            S1: 8,
+            S2: 9,
+            S3: 10,
+          };
+
+          return (order[a.level] || 99) - (order[b.level] || 99);
+        }).map((record) => (
                                 <div
                                     key={record.education_id}
                                     className="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50/60 px-4 py-3"
