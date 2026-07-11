@@ -343,60 +343,37 @@ function MainContent() {
         <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-14 sm:grid-cols-3 sm:gap-8">
           <Reveal delay={120}>
             <LeaderCard
-              photo="test"
-              name="Sdr. Gonzales Petrus Zonggar, OFMConv"
-              role="Vikaris Provinsial Definitor 1"
+              photo={dewanPimpinan[1]?.profile}
+              name={dewanPimpinan[1]?.name}
+              role={dewanPimpinan[1]?.position}
             />
           </Reveal>
           <Reveal delay={0}>
-            <LeaderCard photo="test" name="test" role="Minister Provinsial" />
+            <LeaderCard
+              photo={dewanPimpinan[0]?.profile}
+              name={dewanPimpinan[0]?.name}
+              role={dewanPimpinan[0]?.position}
+            />
           </Reveal>
           <Reveal delay={0}>
             <LeaderCard
-              photo="/ero.jpeg"
-              name="Sdr. Rufinus Ero Jenska P., OFMConv"
-              role="Sekretaris Provinsi"
+              photo={dewanPimpinan[2]?.profile}
+              name={dewanPimpinan[2]?.name}
+              role={dewanPimpinan[2]?.position}
             />
           </Reveal>
         </div>
 
-        {/* Sama seperti di atas, gunakan gap-4 untuk mobile */}
         <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-14 md:grid-cols-5 sm:gap-8">
-          <Reveal delay={120}>
-            <LeaderCard
-              photo="/vikaris-provinsial.jpg"
-              name="Sdr. Gonzales Petrus Zonggar, OFMConv"
-              role="Definitor 3"
-            />
-          </Reveal>
-          <Reveal delay={0}>
-            <LeaderCard
-              photo="/vikaris-provinsial.jpg"
-              name="Sdr. Gonzales Petrus Zonggar, OFMConv"
-              role="Definitor 3"
-            />
-          </Reveal>
-          <Reveal delay={0}>
-            <LeaderCard
-              photo="/vikaris-provinsial.jpg"
-              name="Sdr. Gonzales Petrus Zonggar, OFMConv"
-              role="Definitor 3"
-            />
-          </Reveal>
-          <Reveal delay={0}>
-            <LeaderCard
-              photo="/vikaris-provinsial.jpg"
-              name="Sdr. Gonzales Petrus Zonggar, OFMConv"
-              role="Definitor 3"
-            />
-          </Reveal>
-          <Reveal delay={0}>
-            <LeaderCard
-              photo="/vikaris-provinsial.jpg"
-              name="Sdr. Gonzales Petrus Zonggar, OFMConv"
-              role="Definitor 3"
-            />
-          </Reveal>
+          {[3, 4, 5, 6, 7].map((idx, i) => (
+            <Reveal delay={i === 0 ? 120 : 0} key={idx}>
+              <LeaderCard
+                photo={dewanPimpinan[idx]?.profile}
+                name={dewanPimpinan[idx]?.name}
+                role={dewanPimpinan[idx]?.position}
+              />
+            </Reveal>
+          ))}
         </div>
       </div>
 
