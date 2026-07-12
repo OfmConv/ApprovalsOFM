@@ -438,16 +438,17 @@ export default function CommunitySection({ nkp, isAdmin = false }: { nkp: string
                                     className="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50/60 px-4 py-3"
                                 >
                                     <div className="flex items-center gap-3">
+                                        <div>
+                                            <p className="text-center text-gray-800 font-medium rounded-full text-white" style={{ backgroundColor: "#1B3A5C" }}>{record.location}</p>
+                                            <p className="text-left text-gray-400">{record.date?.split("T")[0]}</p>
+                                        </div>
                                         <span
-                                            className="text-xs font-semibold px-2.5 py-1 rounded-full text-white shrink-0"
-                                            style={{ backgroundColor: "#1B3A5C" }}
+                                            className="text-xs font-semibold px-2.5 py-1  shrink-0"
+                                            
                                         >
                                             {record.tugas}
                                         </span>
-                                        <div>
-                                            <p className="text-left text-gray-800 font-medium">{record.location}</p>
-                                            <p className="text-left text-gray-400">{record.date?.split("T")[0]}</p>
-                                        </div>
+                                        
                                     </div>
 
                                     <div className="flex items-center gap-1">
