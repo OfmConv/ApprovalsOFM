@@ -335,14 +335,14 @@ function MainContent() {
             <LeaderCard
               photo={dewanPimpinan[1]?.profile}
               name={dewanPimpinan[1]?.name}
-              role={dewanPimpinan[1]?.position}
+              role="Vikaris Provinsial & Definitor 1"
             />
           </Reveal>
           <Reveal delay={0}>
             <LeaderCard
               photo={dewanPimpinan[0]?.profile}
               name={dewanPimpinan[0]?.name}
-              role={dewanPimpinan[0]?.position}
+              role="Minister Provinsial"
             />
           </Reveal>
           <Reveal delay={0}>
