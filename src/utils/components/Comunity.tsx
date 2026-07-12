@@ -439,8 +439,8 @@ export default function CommunitySection({ nkp, isAdmin = false }: { nkp: string
                                 >
                                     <div className="flex items-center gap-3">
                                         <div>
-                                            <p className="text-center text-gray-800 font-medium rounded-full text-white" style={{ backgroundColor: "#1B3A5C" }}>{record.location}</p>
-                                            <p className="text-left text-gray-400">{record.date?.split("T")[0]}</p>
+                                            <p className="pt-1 pb-1 text-center text-gray-800 font-medium rounded-full text-white" style={{ backgroundColor: "#1B3A5C", fontSize: "13px" }}>{record.location}</p>
+                                            <p className="text-left text-gray-400 text-[14px]">{record.date?.split("T")[0]}</p>
                                         </div>
                                         <span
                                             className="text-xs font-semibold px-2.5 py-1  shrink-0"
