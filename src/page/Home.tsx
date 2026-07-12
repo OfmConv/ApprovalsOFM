@@ -14,8 +14,8 @@ import { DataTableWilayah } from "@/utils/components/DataTableWilayah"
 import { getAllWilayah } from "@/services/api"
 
 const navLinks = [
-  { label: "Beranda", href: "#", active: true },
-  { label: "Kuria Dewan Pimpinan", href: "#kuria" },
+  { label: "Beranda", href: "#" },
+  { label: "Struktur Kepemimpinan ", href: "#kepemimpinan" },
   { label: "Tentang Kami", href: "#tentang" },
   { label: "Berkarya di ", href: "#berkarya" },
 ];
@@ -45,7 +45,7 @@ function Navbar() {
   }
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-black/5 bg-white">
+    <nav className="fixed top-0 z-50 w-full bg-black border-b border-black/5 bg-white">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
         <a
           href="#"
@@ -66,9 +66,7 @@ function Navbar() {
               key={link.label}
               href={link.href}
               className={
-                link.active
-                  ? "text-sm font-medium text-red-800"
-                  : "text-sm font-medium text-gray-700 transition-colors hover:text-red-800"
+                "text-sm font-medium text-gray-700 transition-colors hover:text-red-800"
               }
             >
               {link.label}
@@ -102,9 +100,7 @@ function Navbar() {
                     <a
                       href={link.href}
                       className={
-                        link.active
-                          ? "text-base font-medium text-red-800"
-                          : "text-base font-medium text-gray-700 transition-colors hover:text-red-800"
+                          "text-base font-medium text-gray-700 transition-colors hover:text-red-800"
                       }
                     >
                       {link.label}
@@ -136,8 +132,6 @@ function Hero() {
   }
 
   return (
-    // 1. UBAH DI SINI: Ganti 'fixed' menjadi 'relative'.
-    // Menggunakan min-h-[100dvh] atau min-h-screen agar tingginya 100% dari layar HP
     <section className="relative w-full min-h-[100dvh] overflow-hidden flex flex-col justify-end">
       <img
         src="/Kapitularis-1536x802.jpg"
@@ -171,12 +165,12 @@ function Hero() {
                 Lihat Sejarah
                 <ArrowRight className="h-4 w-4" />
               </button>
-              <a
+              {/* <a
                 href="#"
                 className="inline-flex items-center gap-2 rounded-md border border-white/40 bg-white/5 px-4 py-2.5 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/15 sm:px-5"
               >
                 Jadwal
-              </a>
+              </a> */}
             </div>
           </div>
 
@@ -287,12 +281,10 @@ function LayoutArtikel() {
         {/* Menambahkan pt-6 untuk memberi nafas jarak teks terhadap gambar di atasnya saat mobile */}
         <div className="w-full flex-1 px-4 pt-6 pb-8 text-left sm:px-6 md:px-0 md:pt-0">
           <h3 className="font-serif text-xl text-gray-900 sm:text-2xl">
-            Judul Anda di Sini
+             Menjawab Panggilan dan Melayani dalam Persaudaraan.
           </h3>
           <p className="mt-3 text-sm leading-relaxed text-gray-600 sm:text-base">
-            Tuliskan deskripsi singkat di sini. Bagian ini menjelaskan konteks
-            foto atau informasi tambahan yang ingin Anda sampaikan kepada
-            pembaca. Ganti teks ini sesuai kebutuhan.
+            Segenap jajaran imam dan saudara Ordo Saudara Dina Konventual (OFMConv) berfoto bersama di depan kompleks Biara Santo Yosef Delitua, Sumatra Utara. Foto ini mengabadikan momen kebersamaan dan kesatuan hati para saudara dalam menjalankan roda pelayanan kasih, pembinaan iman, serta karya pastoral di bumi Nusantara.
           </p>
         </div>
       </div>
@@ -328,18 +320,16 @@ function MainContent() {
   }, []);
 
   return (
-    // Gunakan 100dvh yang sudah kita perbaiki pada respons sebelumnya
  <div className="relative z-20 bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
-      <div id="kuria" className="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-16">
+      <div  className="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-16">
         <div className="mb-16 sm:mb-24">
           <History />
         </div>
 
-        <div className="text-center">
-          <SectionHeading>Minister & Definitorium</SectionHeading>
+        <div id="kepemimpinan" className="text-center">
+          <SectionHeading>Struktur Kepemimpinan</SectionHeading>
         </div>
 
-        {/* Ubah gap-8 menjadi gap-4 khusus mobile. Di layar besar (sm:) baru menjadi gap-8 */}
         <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-14 sm:grid-cols-3 sm:gap-8">
           <Reveal delay={120}>
             <LeaderCard
