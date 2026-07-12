@@ -233,7 +233,7 @@ function History() {
 
         <div className="w-full flex-1 px-4 pt-6 pb-8 text-left sm:px-6 md:px-0 md:pt-0">
           <h3 className="pb-4 font-serif text-xl text-gray-900 sm:text-2xl">
-            Sejarah OFMConv
+            Sejarah OFMConv Indonesia
           </h3>
           <p className="text-sm leading-relaxed text-gray-600 text-justify sm:text-base">
             Ordo Saudara Dina Konventual (OFMConv) adalah cabang dari Ordo
