@@ -458,7 +458,7 @@ export default function ReligiousFeastSection({ nkp, isAdmin = false }: { nkp: s
                                 <Church className="w-4 h-4 text-gray-700" />
                             </div>
                             <div>
-                                <h2 className="text-left font-semibold text-gray-800">Riwayat Keagamaan</h2>
+                                <h2 className="text-left font-semibold text-gray-800">Pesta Religius</h2>
                                 <p className="text-xs text-gray-400">Isi tahapan formasi yang sudah ditempuh.</p>
                             </div>
                         </div>
