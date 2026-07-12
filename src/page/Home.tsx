@@ -26,17 +26,18 @@ function SectionHeading({ children }: { children: ReactNode }) {
     <div className="flex w-full items-center gap-2 sm:gap-4">
       {/* Tambahkan min-w-[20px] agar garis tidak hilang sepenuhnya saat teks sangat panjang */}
       <Separator className="flex-1 min-w-[20px]" />
-      
+
       {/* HAPUS 'shrink-0' dan ubah ukuran teks mobile jadi text-lg. 
           Tambahkan 'text-center' dan 'leading-tight' agar rapi saat turun baris */}
       <h2 className="text-center font-serif text-lg leading-tight text-gray-900 sm:text-2xl md:text-3xl">
         {children}
       </h2>
-      
+
       <Separator className="flex-1 min-w-[20px]" />
     </div>
   );
 }
+
 function Navbar() {
   const navigate = useNavigate();
 
@@ -49,17 +50,15 @@ function Navbar() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
         <a
           href="#"
-          className="flex items-center gap-2 font-serif text-lg font-semibold text-[#1B1C1F]"
-        >
+          className="flex items-center gap-2 font-serif text-lg font-semibold text-[#1B1C1F]">
           <img
             src="./Logo_ordo1.png"
             alt="Logo OFMConv"
             className="h-8 w-8 object-contain sm:h-9 sm:w-9"
           />
-          <span>OFMConv</span>
+          <span>OFMConv Indonesia</span>
         </a>
 
-        {/* Desktop nav */}
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <a
@@ -100,7 +99,7 @@ function Navbar() {
                     <a
                       href={link.href}
                       className={
-                          "text-base font-medium text-gray-700 transition-colors hover:text-red-800"
+                        "text-base font-medium text-gray-700 transition-colors hover:text-red-800"
                       }
                     >
                       {link.label}
@@ -136,23 +135,22 @@ function Hero() {
       <img
         src="/Kapitularis-1536x802.jpg"
         alt="Interior gereja New Horizon Chapel"
-        // 2. Gambar tetap absolute di dalam container Hero ini saja
         className="absolute inset-0 h-full w-full object-cover object-center md:object-top"
         loading="eager"
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
 
-      {/* 3. Padding bawah (pb-24) untuk memberi jarak aman ke batas bawah layar */}
       <div className="relative z-10 mx-auto flex w-full h-full max-w-6xl flex-col justify-end px-4 pb-24 pt-32 sm:px-6 sm:pb-20">
         <div className="flex flex-col justify-end gap-8 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
-            <h1 className="max-w-lg font-serif text-3xl leading-[1.15] text-white sm:text-4xl sm:leading-[1.1] md:text-5xl">
-              Melayani dalam Jejak
+
+              <h1 className="max-w-lg text-left font-serif text-3xl leading-[1.15] text-white sm:text-4xl sm:leading-[1.1] md:text-2xl">
+              OFMConv 
               <br />
-              Fransiskus dari Assisi
-            </h1>
-            <p className="mt-4 max-w-md text-left text-sm text-gray-200 sm:text-base">
+              Fraternitas, Minoritas, Konventualitas
+              </h1>
+            <p className="mt-4 max-w-md text-left text-sm text-gray-200 md:text-1xl">
               Ordo Fratrum Minorum Conventual (OFMConv) adalah ordo Fransiskan
               tertua, hidup dalam persaudaraan, kesederhanaan, dan doa sejak
               tahun 1209.
@@ -165,12 +163,6 @@ function Hero() {
                 Lihat Sejarah
                 <ArrowRight className="h-4 w-4" />
               </button>
-              {/* <a
-                href="#"
-                className="inline-flex items-center gap-2 rounded-md border border-white/40 bg-white/5 px-4 py-2.5 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/15 sm:px-5"
-              >
-                Jadwal
-              </a> */}
             </div>
           </div>
 
@@ -239,10 +231,9 @@ function History() {
           />
         </div>
 
-        {/* Memperbaiki md:w-1/1 menjadi flex-1 dan menambahkan pt-6 untuk jarak di mobile */}
         <div className="w-full flex-1 px-4 pt-6 pb-8 text-left sm:px-6 md:px-0 md:pt-0">
           <h3 className="pb-4 font-serif text-xl text-gray-900 sm:text-2xl">
-            Sejarah Ordo OFMConv
+            Sejarah OFMConv
           </h3>
           <p className="text-sm leading-relaxed text-gray-600 text-justify sm:text-base">
             Ordo Saudara Dina Konventual (OFMConv) adalah cabang dari Ordo
@@ -281,7 +272,7 @@ function LayoutArtikel() {
         {/* Menambahkan pt-6 untuk memberi nafas jarak teks terhadap gambar di atasnya saat mobile */}
         <div className="w-full flex-1 px-4 pt-6 pb-8 text-left sm:px-6 md:px-0 md:pt-0">
           <h3 className="font-serif text-xl text-gray-900 sm:text-2xl">
-             Menjawab Panggilan dan Melayani dalam Persaudaraan.
+            Menjawab Panggilan dan Melayani dalam Persaudaraan.
           </h3>
           <p className="mt-3 text-sm leading-relaxed text-gray-600 sm:text-base">
             Segenap jajaran imam dan saudara Ordo Saudara Dina Konventual (OFMConv) berfoto bersama di depan kompleks Biara Santo Yosef Delitua, Sumatra Utara. Foto ini mengabadikan momen kebersamaan dan kesatuan hati para saudara dalam menjalankan roda pelayanan kasih, pembinaan iman, serta karya pastoral di bumi Nusantara.
@@ -320,8 +311,8 @@ function MainContent() {
   }, []);
 
   return (
- <div className="relative z-20 bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
-      <div  className="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-16">
+    <div className="relative z-20 bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
+      <div className="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-16">
         <div className="mb-16 sm:mb-24">
           <History />
         </div>

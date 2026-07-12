@@ -76,7 +76,7 @@ export function AppSidebar({ userSelect, ...props }: React.ComponentProps<typeof
             >
               <a href="#">
                 <img src="/Logo_ordo1.png" className="size-8!"/>
-                <span className="text-base font-semibold">(OFMConv.)</span>
+                <span className="text-base font-semibold">OFMConv-Indo</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

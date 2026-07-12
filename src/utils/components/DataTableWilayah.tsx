@@ -103,18 +103,16 @@ function buildColumns(): ColumnDef<z.infer<typeof schema>>[] {
   return [
     {
       accessorKey: "nama_lokasi",
-      header: "Nama Lokasi",
+      header: "Komunitas",
       cell: ({ row }) => (
         <div className="w-full font-medium text-sm">{row.original.nama_lokasi}</div>
       ),
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: "Karya",
       cell: ({ row }) => (
-        <div className="w-full">
-          <Badge variant={statusVariant(row.original.status)}>{row.original.status}</Badge>
-        </div>
+          <div className="w-full">{row.original.status}</div>
       ),
     },
     {
@@ -129,22 +127,22 @@ function buildColumns(): ColumnDef<z.infer<typeof schema>>[] {
     },
     {
       accessorKey: "pemimpin",
-      header: "Pemimpin",
+      header: "Guardian",
       cell: ({ row }) => (
         <div className="w-full text-sm truncate max-w-[220px]">{row.original.pemimpin}</div>
       ),
     },
-    {
-      accessorKey: "jabatan",
-      header: "Jabatan",
-      cell: ({ row }) => (
-        <div className="w-full">
-          <Badge variant="outline" className="text-muted-foreground">
-            {row.original.jabatan}
-          </Badge>
-        </div>
-      ),
-    },
+    // {
+    //   accessorKey: "jabatan",
+    //   header: "Jabatan",
+    //   cell: ({ row }) => (
+    //     <div className="w-full">
+    //       <Badge variant="outline" className="text-muted-foreground">
+    //         {row.original.jabatan}
+    //       </Badge>
+    //     </div>
+    //   ),
+    // },
     {
       id: "detail",
       header: "Detail",

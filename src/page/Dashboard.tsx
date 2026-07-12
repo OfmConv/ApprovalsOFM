@@ -33,7 +33,7 @@ export default function Page() {
   const handleSearch = () => {
     setAppliedSearch(searchInput.trim().toLowerCase());
   };
-  
+
   const filteredProfiles = appliedSearch
     ? userProfile.filter((e) =>
       e.full_name?.toLowerCase().includes(appliedSearch)
@@ -116,7 +116,7 @@ export default function Page() {
   const fullName = userProfile?.map((e) => e.full_name)
   return (
     <SidebarProvider style={{ "--sidebar-width": "calc(var(--spacing) * 50)", "--header-height": "calc(var(--spacing) * 15)", } as React.CSSProperties}>
-      <AppSidebar variant="inset"  userSelect={setUserSelect} />
+      <AppSidebar variant="inset" userSelect={setUserSelect} />
       {
         userSelect === 0 ?
           <SidebarInset>
@@ -214,18 +214,18 @@ export default function Page() {
 
                 </SidebarInset> :
                 userSelect === 4 ?
-                 <SidebarInset className="w-full ">
-                  <SiteHeader Headers="Update Landing Page" />
-                  <div className="flex justify-center p-6">
-                   <FormJabatan />
-                  </div>
-                </SidebarInset>
-                : <SidebarInset className="w-full">
-                  <SiteHeader Headers="Settings" />
-                  <div className="flex justify-center p-6">
-                    <SettingsPage detailUser={fullName} Udata={userProfile} />
-                  </div>
-                </SidebarInset>
+                  <SidebarInset className="w-full ">
+                    <SiteHeader Headers="Update Landing Page" />
+                    <div className="flex justify-center p-6">
+                      <FormJabatan />
+                    </div>
+                  </SidebarInset>
+                  : <SidebarInset className="w-full">
+                    <SiteHeader Headers="Settings" />
+                    <div className="flex justify-center p-6">
+                      <SettingsPage detailUser={fullName} Udata={userProfile} />
+                    </div>
+                  </SidebarInset>
       }
       <ApprovalAlertModal
         open={approvalPopupOpen}
