@@ -189,7 +189,7 @@ export function ProfileModal({ profile }: { profile: Profile }) {
 
             <div className="px-6 pb-0 relative">
               <div className="absolute -top-8 left-6">
-                <div className="w-16 h-16 rounded-full bg-zinc-200 dark:bg-zinc-700 border-4 border-white dark:border-zinc-900 flex items-center justify-center text-zinc-500 dark:text-zinc-300 text-xl font-bold shadow-md overflow-hidden">
+                <div className="w-17 h-17 rounded-full bg-zinc-200 dark:bg-zinc-700 border-4 dark:border-zinc-900 flex items-center justify-center text-zinc-500 dark:text-zinc-300 text-xl font-bold shadow-md overflow-hidden">
                   {profile.avatarUrl ? (
                     <img src={profile.avatarUrl} alt={initials} className="w-full h-full object-cover" />
                   ) : (
