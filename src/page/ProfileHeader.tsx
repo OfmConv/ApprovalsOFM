@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Camera, Loader2 } from "lucide-react";
@@ -8,14 +8,14 @@ import type { PresignResponse } from "@/types/interface";
 const TABS = ["Profile", "Education", "Religious Feasts", "Community", "Photo Gallery", "Other Information"];
 
 export default function ProfileHeader({
-  name = "Rafiqur Rahman",
+  name = "-",
   email,
   coverSrc,
   avatarSrc,
   onCoverChange,
   onAvatarChange,
   change,
-  nkp, // <-- baru: dipakai sebagai "id" saat presign
+  nkp,
 }: {
   name?: string;
   role?: string;
@@ -23,6 +23,7 @@ export default function ProfileHeader({
   location?: string;
   coverSrc?: string;
   avatarSrc?: string;
+  bg?: string,
   onCoverChange?: (url: string) => void;
   onAvatarChange?: (url: string) => void;
   change?: Dispatch<SetStateAction<number>>;
@@ -42,12 +43,19 @@ export default function ProfileHeader({
     .join("")
     .toUpperCase();
 
+  console.log(avatarSrc)
   async function uploadFile(file: File, target: "cover" | "avatar") {
     if (!nkp) {
       console.error("[ProfileHeader] nkp kosong, tidak bisa upload");
       return;
     }
+    useEffect(() => {
+      setCoverPreview(coverSrc);
+    }, [coverSrc]);
 
+    useEffect(() => {
+      setAvatarPreview(avatarSrc);
+    }, [avatarSrc]);
     const localPreview = URL.createObjectURL(file);
     if (target === "cover") {
       setCoverPreview(localPreview);
@@ -59,10 +67,10 @@ export default function ProfileHeader({
 
     try {
       const presignRes = await axiosInstance.post<PresignResponse>("/storage/presign", {
-  type: target === "cover" ? "background" : "profile",
-  nkp: String(nkp),
-  content_type: file.type,
-});
+        type: target === "cover" ? "background" : "profile",
+        nkp: String(nkp),
+        content_type: file.type,
+      });
 
       const { upload_url, public_url } = presignRes.data;
 
