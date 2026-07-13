@@ -93,7 +93,7 @@ export default function ProfilePage() {
     useEffect(() => {
         async function load() {
             const profileData = await getProfile("nkp", nkp);
-
+            
             const listUsers = profileData?.users?.users || profileData?.users || [];
             const safeUsers = Array.isArray(listUsers) ? listUsers : [];
 
