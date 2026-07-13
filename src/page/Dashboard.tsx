@@ -153,7 +153,7 @@ export default function Page() {
             </div>
 
             <div className="flex flex-1 flex-col">
-              <div className="grid grid-cols-4 gap-4 p-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-5">
                 {filteredProfiles.map((e) => (
                   <div key={e.nkp}>
                     <ProfileCard

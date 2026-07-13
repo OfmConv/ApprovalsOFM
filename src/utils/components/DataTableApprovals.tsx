@@ -273,68 +273,68 @@ export function DataTableApprovals({
 
   return (
     <div className="w-full flex-col justify-start gap-6">
-      <div className="flex items-center justify-between px-4 lg:px-6 pb-6">
-        <div className="flex items-center gap-2 text-muted-foreground">
-          
-        </div>
-        <div className="flex items-center gap-2">
-          <Select value={searchColumn} onValueChange={setSearchColumn}>
-            <SelectTrigger className="w-[160px] h-9">
-              <SelectValue placeholder="Pilih Kolom" />
-            </SelectTrigger>
-            <SelectContent side="bottom">
-              <SelectItem value="all">Semua Kolom</SelectItem>
-              <SelectItem value="nkp">NKP</SelectItem>
-              <SelectItem value="tipe">Tipe</SelectItem>
-              <SelectItem value="status">Status</SelectItem>
-              <SelectItem value="description">Deskripsi</SelectItem>
-            </SelectContent>
-          </Select>
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between px-4 lg:px-6 pb-6">
+  <div className="flex items-center gap-2 text-muted-foreground">
+    
+  </div>
+  <div className="flex flex-wrap items-center gap-2">
+    <Select value={searchColumn} onValueChange={setSearchColumn}>
+      <SelectTrigger className="w-[140px] sm:w-[160px] h-9">
+        <SelectValue placeholder="Pilih Kolom" />
+      </SelectTrigger>
+      <SelectContent side="bottom">
+        <SelectItem value="all">Semua Kolom</SelectItem>
+        <SelectItem value="nkp">NKP</SelectItem>
+        <SelectItem value="tipe">Tipe</SelectItem>
+        <SelectItem value="status">Status</SelectItem>
+        <SelectItem value="description">Deskripsi</SelectItem>
+      </SelectContent>
+    </Select>
 
-          <div className="relative">
-            <IconSearch className="absolute left-2.5 top-2.5 size-4 text-muted-foreground" />
-            <Input
-              placeholder="Cari approval..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="h-9 w-[200px] pl-8 lg:w-[250px]"
-            />
-          </div>
+    <div className="relative flex-1 min-w-[140px] sm:flex-none">
+      <IconSearch className="absolute left-2.5 top-2.5 size-4 text-muted-foreground" />
+      <Input
+        placeholder="Cari approval..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="h-9 w-full sm:w-[200px] pl-8 lg:w-[250px]"
+      />
+    </div>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className="bg-[#2E6193] hover:bg-[#1477C2] text-white hover:text-white"
-              >
-                <IconLayoutColumns />
-                <span className="hidden lg:inline">Customize Columns</span>
-                <span className="lg:hidden">Columns</span>
-                <IconChevronDown />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              {table
-                .getAllColumns()
-                .filter(
-                  (column) =>
-                    typeof column.accessorFn !== "undefined" && column.getCanHide()
-                )
-                .map((column) => (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="outline"
+          size="sm"
+          className="bg-[#2E6193] hover:bg-[#1477C2] text-white hover:text-white"
+        >
+          <IconLayoutColumns />
+          <span className="hidden lg:inline">Customize Columns</span>
+          <span className="lg:hidden">Columns</span>
+          <IconChevronDown />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56">
+        {table
+          .getAllColumns()
+          .filter(
+            (column) =>
+              typeof column.accessorFn !== "undefined" && column.getCanHide()
+          )
+          .map((column) => (
+            <DropdownMenuCheckboxItem
+              key={column.id}
+              className="capitalize"
+              checked={column.getIsVisible()}
+              onCheckedChange={(value) => column.toggleVisibility(!!value)}
+            >
+              {column.id}
+            </DropdownMenuCheckboxItem>
+          ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  </div>
+</div>
 
       <div className="overflow-auto rounded-lg border h-[450px] mx-4 lg:mx-6">
         <Table>
