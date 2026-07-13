@@ -400,7 +400,7 @@ export function FormAccount() {
   return (
     <div className="w-full rounded-2xl border bg-card shadow-sm overflow-hidden">
 
-      <div className="flex flex-col gap-6 px-8 py-6">
+      <div className="flex flex-col gap-6 px-4 sm:px-8 py-6">
         {detailProfile ?
           <div>
             <div className="flex items-center gap-2 mb-5">
@@ -410,7 +410,7 @@ export function FormAccount() {
               <div className="flex-1 h-px bg-border" />
             </div>
 
-            <div className="grid grid-cols-2 gap-x-6 gap-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
 
               <div className="flex flex-col gap-1.5">
                 <Label htmlFor="name" className="text-sm font-medium">Full Name</Label>
@@ -553,7 +553,7 @@ export function FormAccount() {
               <div className="flex-1 h-px bg-border" />
             </div>
 
-            <div className="grid grid-cols-2 gap-x-6 gap-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
 
               <div className="flex flex-col gap-1.5">
                 <Label htmlFor="familyName" className="text-sm font-medium">Family Name</Label>
@@ -728,7 +728,7 @@ export function FormAccount() {
         onConfirm={() => setShowPassConfirm(false)}
       />
 
-      <div className="flex items-center justify-end gap-2 border-t bg-muted/20 px-8 py-4">
+      <div className="flex items-center justify-end gap-2 border-t bg-muted/20 px-4 sm:px-8 py-4">
         <Button onClick={setButton} className={detailProfile ? "px-6 bg-[#2E6193] hover:bg-[#1477C2] text-white" : "px-6 bg-white border border-[#1477C2] text-[#1477C2] hover:bg-[#1477C2]/10"}>{detailProfile ? "Next" : "Back"}</Button>
         {detailProfile === false ? <Button onClick={() => setShowSubmitForm(true)} className="px-6 bg-[#2E6193] hover:bg-[#1477C2] text-white">Submit</Button> : <></>}
       </div>
