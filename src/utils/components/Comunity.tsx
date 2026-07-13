@@ -173,30 +173,24 @@ export default function CommunitySection({ nkp, isAdmin = false }: { nkp: string
                             {list.map((record) => (
                                 <div
                                     key={record.assignment_id}
-                                    className="flex items-start justify-between gap-4 rounded-lg border border-gray-100 bg-gray-50/60 px-4 py-3.5"
+                                    className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-lg border border-gray-100 bg-gray-50/60 px-4 py-3"
                                 >
-                                    <div className="flex flex-1 items-start gap-4 min-w-0">
-                                        {/* Lokasi + tanggal */}
-                                        <div className="shrink-0 w-44">
-                                            <span
-                                                className="inline-block max-w-full truncate px-3 py-1 rounded-full text-white text-xs font-medium"
-                                                style={{ backgroundColor: "#1B3A5C" }}
-                                                title={record.location}
+                                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                                        <div className="shrink-0">
+                                            <p
+                                                className="pt-1 pb-1 px-3 text-center text-gray-800 font-medium rounded-full text-white inline-block"
+                                                style={{ backgroundColor: "#1B3A5C", fontSize: "13px" }}
                                             >
                                                 {record.location}
-                                            </span>
-                                            <p className="mt-1.5 text-xs text-gray-400">
-                                                {record.date?.split("T")[0]}
                                             </p>
+                                            <p className="text-left text-gray-400 text-[14px] mt-1">{record.date?.split("T")[0]}</p>
                                         </div>
-
-                                        {/* Tugas */}
-                                        <p className="text-sm text-gray-700 leading-relaxed pt-0.5">
+                                        <span className="text-xs font-semibold px-2.5 py-1 shrink-0 sm:pt-0">
                                             {record.tugas}
-                                        </p>
+                                        </span>
                                     </div>
 
-                                    <div className="flex items-center gap-1 shrink-0">
+                                    <div className="flex items-center gap-1 self-end sm:self-center shrink-0">
                                         <button
                                             onClick={() => openEditForm(record)}
                                             className="p-1.5 text-gray-400 hover:text-[#1B3A5C] transition-colors"

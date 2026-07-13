@@ -236,8 +236,6 @@ export default function ProfileHeader({
   const [uploadingCover, setUploadingCover] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
 
-  // Sync ulang preview kalau prop dari parent berubah
-  // (misalnya setelah fetch profile selesai / ganti nkp)
   useEffect(() => {
     setCoverPreview(coverSrc);
   }, [coverSrc]);
@@ -308,7 +306,7 @@ export default function ProfileHeader({
 
   return (
     <div className="rounded-2xl overflow-hidden border border-gray-100 bg-white shadow-sm">
-      {/* Cover */}
+
       <div
         className="relative h-40 sm:h-48"
         style={{
@@ -337,10 +335,9 @@ export default function ProfileHeader({
         </label>
       </div>
 
-      {/* Info row */}
       <div className="px-6 pb-4">
-        <div className="flex items-end -mt-10 sm:-mt-12">
-          <div className="relative">
+        <div className="flex flex-col sm:flex-row sm:items-end -mt-10 sm:-mt-12">
+          <div className="relative z-10">
             <Avatar className="w-20 h-20 sm:w-24 sm:h-24 border-4 border-white shadow-md">
               {avatarPreview ? (
                 <AvatarImage src={avatarPreview} />
@@ -370,7 +367,7 @@ export default function ProfileHeader({
             </label>
           </div>
 
-          <div className="ml-4 mb-1 text-left">
+          <div className="mt-3 sm:mt-0 sm:ml-4 sm:mb-1 text-left">
             <p className="text-lg font-semibold text-gray-900">{name}</p>
             <p className="text-sm text-gray-500">
               {email}
@@ -378,7 +375,7 @@ export default function ProfileHeader({
           </div>
         </div>
 
-        {/* Tab row */}
+
         <div className="flex gap-1 mt-5 border-t border-gray-100 pt-3 overflow-x-auto">
           {TABS.map((tab, idx) => (
             <button
