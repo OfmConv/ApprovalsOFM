@@ -255,7 +255,6 @@ export function WilayahForm() {
         </Button>
       </form>
 
-      {/* LIST + DELETE */}
       <div className="rounded-xl border p-6 shadow-sm">
         <h2 className="mb-4 text-lg font-semibold">Data Wilayah Tersimpan</h2>
         <Separator className="mb-4" />

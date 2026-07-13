@@ -32,29 +32,24 @@ const EMPTY_FORM = {
   urutan: "",
 }
 
-// Potong bagian waktu dari format ISO (misal "2024-02-07T00:00:00Z") biar cocok dengan <input type="date">
 function toDateInputValue(value?: string | null) {
   if (!value) return ""
   return value.split("T")[0]
 }
 
 export function MinisterProvinsialForm() {
-  // ===== Form CREATE (selalu inline, tidak untuk edit) =====
   const [form, setForm] = React.useState(EMPTY_FORM)
   const [submitting, setSubmitting] = React.useState(false)
 
-  // ===== Data list =====
   const [list, setList] = React.useState<MinisterProvinsial[]>([])
   const [loading, setLoading] = React.useState(false)
   const [deletingId, setDeletingId] = React.useState<number | null>(null)
 
-  // ===== Modal EDIT (popup terpisah) =====
   const [editItem, setEditItem] = React.useState<MinisterProvinsial | null>(null)
   const [editForm, setEditForm] = React.useState(EMPTY_FORM)
   const [showEditModal, setShowEditModal] = React.useState(false)
   const [editSubmitting, setEditSubmitting] = React.useState(false)
 
-  // ===== Modal hasil (sukses/gagal) =====
   const [resultModal, setResultModal] = React.useState<{
     open: boolean
     title: string
@@ -255,23 +250,6 @@ export function MinisterProvinsialForm() {
               value={form.periode_selesai}
               onChange={(e) => updateField("periode_selesai", e.target.value)}
               placeholder="Kosongkan jika masih menjabat"
-            />
-          </div>
-
-          <div className="space-y-1.5">
-            <Label htmlFor="urutan">Urutan Tampil</Label>
-            <Input
-              id="urutan"
-              type="number"
-              min="1"
-              step="1"
-              value={form.urutan}
-              onChange={(e) => {
-                const value = e.target.value
-                if (value !== "" && Number(value) < 1) return
-                updateField("urutan", value)
-              }}
-              placeholder="1"
             />
           </div>
 
