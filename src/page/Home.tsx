@@ -446,7 +446,7 @@ function Footer() {
               <span>OFMConv</span>
             </a>
             <p className="mt-4 max-w-xs text-left text-sm leading-relaxed text-gray-400">
-              OFMConv-Indonesia.org merupakan situs resmi Kongregasi OFM Conventual Indonesia yang menyajikan update berita dan informasi seputar komunitas OFMConv Indonesia dan dunia.
+              convindo.com merupakan Approvals system OFM Conventual Indonesia yang menyajikan update berita dan informasi seputar komunitas OFMConv di Indonesia.
             </p>
           </div>
 
