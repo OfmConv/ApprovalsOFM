@@ -370,7 +370,6 @@ function MainContent() {
         </div>
         <img src="./Map.png" alt="Peta Wilayah" className="mx-auto mt-6 w-full max-w-3xl object-contain" />
 
-        {/* Tambahkan overflow-x-auto pada table pembungkus supaya data table bisa digeser kanan-kiri di layar kecil */}
         <div className="mt-10 w-full overflow-x-auto">
           <DataTableWilayah data={wilayah} />
         </div>

@@ -47,7 +47,6 @@ export function NavUser({
 
   function handleProfile() {
     const token = localStorage.getItem("token")
-    console.log(token)
     setTimeout(() => navigate(`/anggota/${token}`, { state: { nkp: nkp,  isAdmin: true  } }), 1000);
   }
 

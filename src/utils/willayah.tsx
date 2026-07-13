@@ -151,7 +151,7 @@ export function WilayahForm() {
   return (
     <div className=" space-y-10 ">
       <form onSubmit={handleSubmit} className="space-y-6 rounded-xl border p-6 shadow-sm">
-        
+
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div className="space-y-1.5">
@@ -166,7 +166,7 @@ export function WilayahForm() {
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="status">Status</Label>
+            <Label htmlFor="status">keterangan</Label>
             <Select value={form.status} onValueChange={(v) => updateField("status", v)}>
               <SelectTrigger id="status" className="w-full">
                 <SelectValue placeholder="Pilih status" />
@@ -200,7 +200,7 @@ export function WilayahForm() {
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="negara">Negara</Label>
+            <Label htmlFor="negara">Komunitas</Label>
             <Input
               id="negara"
               value={form.negara}
@@ -208,22 +208,8 @@ export function WilayahForm() {
             />
           </div>
 
-          <div className="space-y-1.5">
-            <Label htmlFor="jabatan">Jabatan</Label>
-            <Select value={form.jabatan} onValueChange={(v) => updateField("jabatan", v)}>
-              <SelectTrigger id="jabatan" className="w-full">
-                <SelectValue placeholder="Pilih jabatan" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Guardian">Guardian</SelectItem>
-                <SelectItem value="Delegatus">Delegatus</SelectItem>
-                <SelectItem value="Minister Provinsial">Minister Provinsial</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
           <div className="space-y-1.5 sm:col-span-2">
-            <Label htmlFor="pemimpin">Nama Pemimpin</Label>
+            <Label htmlFor="pemimpin">Guardian</Label>
             <Input
               id="pemimpin"
               value={form.pemimpin}
@@ -253,7 +239,7 @@ export function WilayahForm() {
           </div>
 
           <div className="space-y-1.5 sm:col-span-2">
-            <Label htmlFor="fungsi_khusus">Fungsi Khusus (opsional)</Label>
+            <Label htmlFor="fungsi_khusus">Karya</Label>
             <Input
               id="fungsi_khusus"
               value={form.fungsi_khusus}

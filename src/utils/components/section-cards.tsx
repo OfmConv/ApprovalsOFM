@@ -5,7 +5,6 @@ import type { interfaceProfile } from "@/types/interface";
 import { ProfileModal } from "../ModalUsers";
 
 export function ProfileCard({ nkp, familyName, fullname, religiousName, ktpName, namePassport, dateBirth, placeBirth, phoneNumber, study, email, avatarUrl, education, assignment, feastival }: interfaceProfile) {
-  console.log("PROPS DI PROFILECARD nkp", nkp, "education:", education, "feastival:", feastival);
   return (
     <Card className="w-full min-h-[320px] rounded-2xl border shadow-sm flex flex-col">
       <CardContent className="pt-3 pb-1 flex flex-col flex-1 items-center gap-2">

@@ -110,7 +110,7 @@ function buildColumns(): ColumnDef<z.infer<typeof schema>>[] {
     },
     {
       accessorKey: "status",
-      header: "Karya",
+      header: "Keterangan",
       cell: ({ row }) => (
           <div className="w-full">{row.original.status}</div>
       ),
@@ -217,19 +217,6 @@ export function DataTableWilayah({
       <div className="flex items-center justify-between px-4 lg:px-6 pb-6">
         <div className="flex items-center gap-2 text-muted-foreground"></div>
         <div className="flex items-center gap-2">
-          {/* <Select value={searchColumn} onValueChange={setSearchColumn}>
-            <SelectTrigger className="w-[160px] h-9">
-              <SelectValue placeholder="Pilih Kolom" />
-            </SelectTrigger>
-            <SelectContent side="bottom">
-              <SelectItem value="all">Semua Kolom</SelectItem>
-              <SelectItem value="nama_lokasi">Nama Lokasi</SelectItem>
-              <SelectItem value="status">Status</SelectItem>
-              <SelectItem value="kota">Kota</SelectItem>
-              <SelectItem value="provinsi">Provinsi</SelectItem>
-              <SelectItem value="pemimpin">Pemimpin</SelectItem>
-            </SelectContent>
-          </Select> */}
 
           <div className="relative">
             <IconSearch className="absolute left-2.5 top-2.5 size-4 text-muted-foreground" />
@@ -241,38 +228,7 @@ export function DataTableWilayah({
             />
           </div>
 
-          {/* <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className="bg-[#2E6193] hover:bg-[#1477C2] text-white hover:text-white"
-              >
-                <IconLayoutColumns />
-                <span className="hidden lg:inline">Customize Columns</span>
-                <span className="lg:hidden">Columns</span>
-                <IconChevronDown />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              {table
-                .getAllColumns()
-                .filter(
-                  (column) =>
-                    typeof column.accessorFn !== "undefined" && column.getCanHide()
-                )
-                .map((column) => (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                ))}
-            </DropdownMenuContent>
-          </DropdownMenu> */}
+
         </div>
       </div>
 
@@ -402,7 +358,7 @@ function WilayahDetailViewer({ item }: { item: z.infer<typeof schema> }) {
               <Separator className="mb-5" />
               <div className="grid grid-cols-2 gap-x-6 gap-y-5">
                 <div className="flex flex-col gap-1.5">
-                  <span className="font-medium text-muted-foreground">Status</span>
+                  <span className="font-medium text-muted-foreground">Keterangan</span>
                   <div>
                     <Badge variant={statusVariant(item.status)}>{item.status}</Badge>
                   </div>
@@ -412,13 +368,10 @@ function WilayahDetailViewer({ item }: { item: z.infer<typeof schema> }) {
                   <span className="font-medium text-foreground">{formatValue(item.negara)}</span>
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <span className="font-medium text-muted-foreground">Pemimpin</span>
+                  <span className="font-medium text-muted-foreground">Guardian</span>
                   <span className="font-medium text-foreground">{formatValue(item.pemimpin)}</span>
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <span className="font-medium text-muted-foreground">Jabatan</span>
-                  <span className="font-medium text-foreground">{formatValue(item.jabatan)}</span>
-                </div>
+             
                 <div className="flex flex-col gap-1.5">
                   <span className="font-medium text-muted-foreground">Periode Mulai</span>
                   <span className="font-medium text-foreground">
@@ -432,7 +385,7 @@ function WilayahDetailViewer({ item }: { item: z.infer<typeof schema> }) {
                   </span>
                 </div>
                 <div className="col-span-2 flex flex-col gap-1.5">
-                  <span className="font-medium text-muted-foreground">Fungsi Khusus</span>
+                  <span className="font-medium text-muted-foreground">karya</span>
                   <span className="font-medium text-foreground">
                     {formatValue(item.fungsi_khusus)}
                   </span>
