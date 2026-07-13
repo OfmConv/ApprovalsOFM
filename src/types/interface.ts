@@ -81,10 +81,3 @@ export interface JabatanRow {
   photo: File | null
 }
 
-type RequestGalleryPhotoApproval struct {
-    NKP          string       `json:"nkp"`
-    Description  *string      `json:"description"`
-    Action       string       `json:"action"`
-    TargetID     *int         `json:"target_id,omitempty"`
-    GalleryPhoto GalleryPhoto `json:"gallery_photo"`
-}

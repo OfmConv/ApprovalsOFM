@@ -492,10 +492,15 @@ export async function deleteUser(nkp: string) {
  * Khusus ADMIN: update data profil utama langsung (tanpa approval).
  * Backend PATCH langsung ke tabel details_users berdasarkan nkp.
  */
-export async function updateProfileDirect(nkp: string, detailUser: Record<string, any>) {
+export async function updateProfileDirect(
+  nkp: string,
+  detailUser: Record<string, any>,
+  email?: string
+) {
   try {
     const res = await axiosInstance.patch("/admin/updateProfile", {
       nkp,
+      email,
       detail_user: detailUser,
     });
     console.log(res);
@@ -543,9 +548,6 @@ export async function updateReligiousFeastDirect(
   return res.data;
 }
 
-/**
- * Khusus ADMIN: insert/update/delete penugasan langsung, tanpa approval.
- */
 export async function updateAssignmentDirect(
   nkp: string,
   action: "insert" | "update" | "delete",
@@ -583,9 +585,6 @@ export async function requestGalleryPhotoChange(
   return res.data;
 }
 
-/**
- * Khusus ADMIN: insert/update/delete foto galeri langsung, tanpa approval.
- */
 export async function updateGalleryPhotoDirect(
   nkp: string,
   action: "insert" | "update" | "delete",
