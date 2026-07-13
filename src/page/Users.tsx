@@ -117,7 +117,7 @@ export default function ProfilePage() {
 
     const updateField = (key: string) => (val: string) => {
         setProfile((prev: any) => ({ ...prev, [key]: val }));
-        setChanges((prev: any) => ({ ...prev, [key]: val })); 
+        setChanges((prev: any) => ({ ...prev, [key]: val }));
     };
 
     const handleSubmit = async () => {
@@ -130,7 +130,8 @@ export default function ProfilePage() {
                 const { email, ...detailChanges } = changes;
                 await updateProfileDirect(nkp, detailChanges, email);
             } else {
-                await requestChange(nkp, "Update data pribadi", changes);
+                const { email, ...detailChanges } = changes;
+                await requestChange(nkp, "Update data pribadi", detailChanges, email);
             }
             setChanges({});
             setSuccessModalOpen(true);
@@ -148,7 +149,7 @@ export default function ProfilePage() {
         <div className="min-h-screen bg-gray-50/70 py-8 px-4">
             <ProfileHeader
                 change={setIsChange}
-                 nkp={nkp} 
+                nkp={nkp}
                 name={profile.full_name}
                 role={profile.religious_name}
                 email={profile.email}

@@ -263,17 +263,23 @@ export async function changeAdminAcc(currentNKP: string, newNKP: string) {
   }
 }
 
-export async function requestChange(nkp: string, description: string, detailUser: Record<string, any>) {
+export async function requestChange(
+  nkp: string,
+  description: string,
+  detailUser: Record<string, any>,
+  email?: string
+) {
   try {
     const res = await axiosInstance.post("/request-change", {
       nkp,
       description,
+      email,
       detail_user: detailUser,
     });
-    console.log("SUCCESS:", res.data); // cek ini juga
+    console.log("SUCCESS:", res.data);
     return res.data;
   } catch (error) {
-    console.log("MASUK CATCH?", error); // ini harus muncul kalau gagal
+    console.log("MASUK CATCH?", error);
     throw error;
   }
 }
