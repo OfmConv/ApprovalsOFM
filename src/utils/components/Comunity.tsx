@@ -136,7 +136,7 @@ export default function CommunitySection({ nkp, isAdmin = false }: { nkp: string
         }
     };
 
-    return (
+   return (
         <div className="mx-auto space-y-5 mt-5">
             <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
@@ -176,14 +176,14 @@ export default function CommunitySection({ nkp, isAdmin = false }: { nkp: string
                                     className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-lg border border-gray-100 bg-gray-50/60 px-4 py-3"
                                 >
                                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-                                        <div className="shrink-0">
+                                        <div className="shrink-0 text-center">
                                             <p
                                                 className="pt-1 pb-1 px-3 text-center text-gray-800 font-medium rounded-full text-white inline-block"
                                                 style={{ backgroundColor: "#1B3A5C", fontSize: "13px" }}
                                             >
                                                 {record.location}
                                             </p>
-                                            <p className="text-left text-gray-400 text-[14px] mt-1">{record.date?.split("T")[0]}</p>
+                                            <p className="text-center text-gray-400 text-[14px] mt-1">{record.date?.split("T")[0]}</p>
                                         </div>
                                         <span className="text-xs font-semibold px-2.5 py-1 shrink-0 sm:pt-0">
                                             {record.tugas}
