@@ -208,7 +208,7 @@ export default function ProfilePage() {
                             <SectionHeader icon={HeartCrack} title="Death" />
                             <p className="text-xs text-gray-400 -mt-3 mb-4">Fill in only if deceased.</p>
                             <div className="grid sm:grid-cols-2 gap-4">
-                                <EditableField label="Date of Death" value={profile.dead_date} onChange={updateField("dead_date")} />
+                                <EditableField label="Date of Death" value={profile.dead_date?.split("T")[0] ?? ""} onChange={updateField("dead_date")} />
                                 <EditableField label="Place of Burial" value={profile.place_of_burial} onChange={updateField("place_of_burial")} />
                             </div>
                         </CardContent>
