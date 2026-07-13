@@ -93,7 +93,7 @@ export default function ProfilePage() {
     useEffect(() => {
         async function load() {
             const profileData = await getProfile("nkp", nkp);
-            
+
             const listUsers = profileData?.users?.users || profileData?.users || [];
             const safeUsers = Array.isArray(listUsers) ? listUsers : [];
 
@@ -164,7 +164,7 @@ export default function ProfilePage() {
 
                     <Card className="border-0 shadow-sm">
                         <CardContent className="p-6">
-                            <SectionHeader icon={User} title="Identity" />
+                            <SectionHeader icon={User} title="Profil" />
                             <div className="grid sm:grid-cols-2 gap-4">
                                 <EditableField label="Full Name" value={profile.full_name} onChange={updateField("full_name")} />
                                 <EditableField label="Family Name" value={profile.family_name} onChange={updateField("family_name")} />
@@ -235,7 +235,7 @@ export default function ProfilePage() {
                                     <div className="mx-auto space-y-5 mt-5">
                                         <Card className="border-0 shadow-sm">
                                             <CardContent className="p-6">
-                                                <SectionHeader icon={FileText} title="Other Information" />
+                                                <SectionHeader icon={FileText} title="Informasi Lainnya" />
                                                 <EditableField
                                                     label="Notes"
                                                     value={profile.other_information}
