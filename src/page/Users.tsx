@@ -126,20 +126,20 @@ export default function ProfilePage() {
         }
 
         try {
-    if (isAdmin) {
-        const { email, ...detailChanges } = changes;
-        await updateProfileDirect(nkp, detailChanges, email);
-    } else {
-        await requestChange(nkp, "Update data pribadi", changes);
-    }
-    setChanges({});
-    setSuccessModalOpen(true);
-} catch (error: any) {
-    setErrorMessage(
-        error?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
-    );
-    setErrorModalOpen(true);
-}
+            if (isAdmin) {
+                const { email, ...detailChanges } = changes;
+                await updateProfileDirect(nkp, detailChanges, email);
+            } else {
+                await requestChange(nkp, "Update data pribadi", changes);
+            }
+            setChanges({});
+            setSuccessModalOpen(true);
+        } catch (error: any) {
+            setErrorMessage(
+                error?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
+            );
+            setErrorModalOpen(true);
+        }
     };
 
     const submitLabel = isAdmin ? "Save Changes" : "Send Request";
