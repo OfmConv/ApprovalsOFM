@@ -19,6 +19,7 @@ interface Profile {
   email: string
   pendidikan: string
   avatarUrl?: string
+  background?: string,
   sd?: string
   smp?: string
   sma?: string
@@ -144,53 +145,6 @@ const PendidikanTab = memo(({ profile }: { profile: Profile }) => {
 })
 PendidikanTab.displayName = "PendidikanTab"
 
-// const ReligiusTab = memo(({ profile }: { profile: Profile }) => {
-//   const hasFeastivalData = Array.isArray(profile.feastival) && profile.feastival.length > 0
-
-//   const fallbackFields = useMemo(() => [
-//     { label: "Profesi Perdana", value: profile.profesiPerdana },
-//     { label: "Profesi Meriah", value: profile.profesiMeriah },
-//     { label: "Tahbisan Imamat", value: profile.tahbisanImamat },
-//   ], [profile])
-
-//   if (hasFeastivalData) {
-//     return (
-//       <div className="grid grid-cols-2 gap-x-8 gap-y-0">
-//         {profile.feastival!.map((f: any) => (
-//           <div key={f.religious_id} className="flex items-start gap-3 py-3 border-b border-zinc-100 dark:border-zinc-800">
-//             <div className="w-7 h-7 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 shrink-0 mt-0.5">
-//               <IconCross size={14} />
-//             </div>
-//             <div>
-//               <p className="text-left font-semibold text-zinc-700 dark:text-zinc-200">{f.formation_type || "-"}</p>
-//               <p className="text-xs text-left text-zinc-400 mt-0.5">
-//                 {f.location}{f.formation_date ? ` - ${new Date(f.formation_date).toLocaleDateString("id-ID")}` : ""}
-//               </p>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     )
-//   }
-
-//   return (
-//     <div className="grid grid-cols-2 gap-x-8 gap-y-0">
-//       {fallbackFields.map((item) => (
-//         <div key={item.label} className="flex items-start gap-3 py-3 border-b border-zinc-100 dark:border-zinc-800">
-//           <div className="w-7 h-7 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 shrink-0 mt-0.5">
-//             <IconCross size={14} />
-//           </div>
-//           <div>
-//             <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-200">{item.value || "-"}</p>
-//             <p className="text-xs text-zinc-400 mt-0.5">{item.label}</p>
-//           </div>
-//         </div>
-//       ))}
-//     </div>
-//   )
-// })
-// ReligiusTab.displayName = "ReligiusTab"
-
 export function ProfileModal({ profile }: { profile: Profile }) {
   const [open, setOpen] = useState(false)
   const [activeTab, setActiveTab] = useState<TabKey>("profil")
@@ -221,7 +175,7 @@ export function ProfileModal({ profile }: { profile: Profile }) {
           <div className="absolute inset-0 bg-black/40 modal-backdrop" />
 
           <div className="relative z-10 bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col modal-content" onClick={stopPropagation}>
-            <div className="bg-[url('/Castle.jpg')] bg-cover bg-center bg-no-repeat w-full h-40 relative">
+            <div className=" bg-cover bg-center bg-no-repeat w-full h-40 relative" style={{ backgroundImage: `url(${profile.background})` }}>
               <button
                 onClick={handleClose}
                 className="absolute top-3 right-3 bg-black/30 hover:bg-black/50 text-white rounded-lg p-1.5 transition-colors"

@@ -112,7 +112,7 @@ function buildColumns(): ColumnDef<z.infer<typeof schema>>[] {
       accessorKey: "status",
       header: "Keterangan",
       cell: ({ row }) => (
-          <div className="w-full">{row.original.status}</div>
+        <div className="w-full">{row.original.status}</div>
       ),
     },
     {
@@ -371,7 +371,7 @@ function WilayahDetailViewer({ item }: { item: z.infer<typeof schema> }) {
                   <span className="font-medium text-muted-foreground">Guardian</span>
                   <span className="font-medium text-foreground">{formatValue(item.pemimpin)}</span>
                 </div>
-             
+
                 <div className="flex flex-col gap-1.5">
                   <span className="font-medium text-muted-foreground">Periode Mulai</span>
                   <span className="font-medium text-foreground">

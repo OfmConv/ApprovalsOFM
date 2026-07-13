@@ -13,6 +13,7 @@ export interface interfaceProfile {
   study: string,
   email: string,
   avatarUrl: string,
+  background: string,
   education: any[],
   assignment: any[],
   feastival: any[]

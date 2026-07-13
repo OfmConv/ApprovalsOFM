@@ -40,6 +40,7 @@ export default function Page() {
     )
     : userProfile;
 
+    // console.log(filteredProfiles);
   useEffect(() => {
     if (initRef.current) return;
     initRef.current = true;
@@ -167,11 +168,11 @@ export default function Page() {
                       phoneNumber={e.phone_number}
                       email={e.email}
                       avatarUrl={e.photo_profile}
+                      background={e.photo_background}
                       education={e.education}
                       study={e.education?.[e.education.length - 1]?.institution}
                       assignment={e.assignment}
                       feastival={e.feastival}
-
                     />
                   </div>
                 ))}

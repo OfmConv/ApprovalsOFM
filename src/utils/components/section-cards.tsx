@@ -4,7 +4,7 @@ import { Phone, Mail, GraduationCap, Cross } from "lucide-react";
 import type { interfaceProfile } from "@/types/interface";
 import { ProfileModal } from "../ModalUsers";
 
-export function ProfileCard({ nkp, familyName, fullname, religiousName, ktpName, namePassport, dateBirth, placeBirth, phoneNumber, study, email, avatarUrl, education, assignment, feastival }: interfaceProfile) {
+export function ProfileCard({ nkp, familyName, fullname, religiousName, ktpName, namePassport, dateBirth, placeBirth, phoneNumber, study, email, avatarUrl, background, education, assignment, feastival }: interfaceProfile) {
   return (
     <Card className="w-full min-h-[320px] rounded-2xl border shadow-sm flex flex-col">
       <CardContent className="pt-3 pb-1 flex flex-col flex-1 items-center gap-2">
@@ -41,6 +41,7 @@ export function ProfileCard({ nkp, familyName, fullname, religiousName, ktpName,
             noHp: phoneNumber,
             email: email,
             avatarUrl: avatarUrl,
+            background: background,
             pendidikan: "-",
             s1: "-",
             profesiPerdana: "-",
