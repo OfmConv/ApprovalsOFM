@@ -155,7 +155,7 @@ export function WilayahForm() {
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div className="space-y-1.5">
-            <Label htmlFor="nama_lokasi">Nama Lokasi</Label>
+            <Label htmlFor="nama_lokasi">komunitas</Label>
             <Input
               id="nama_lokasi"
               value={form.nama_lokasi}
@@ -166,8 +166,8 @@ export function WilayahForm() {
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="status">keterangan</Label>
-            <Select value={form.status} onValueChange={(v) => updateField("status", v)}>
+            <Label htmlFor="status">Karya</Label>
+            {/* <Select value={form.status} onValueChange={(v) => updateField("status", v)}>
               <SelectTrigger id="status" className="w-full">
                 <SelectValue placeholder="Pilih status" />
               </SelectTrigger>
@@ -176,7 +176,13 @@ export function WilayahForm() {
                 <SelectItem value="Rumah Filial">Rumah Filial</SelectItem>
                 <SelectItem value="Kantor Provinsi">Kantor Provinsi</SelectItem>
               </SelectContent>
-            </Select>
+            </Select> */}
+            <Input
+              id="status"
+              value={form.status}
+              onChange={(e) => updateField("status", e.target.value)}
+              placeholder="Isi karya..."
+            />
           </div>
 
           <div className="space-y-1.5">
@@ -200,7 +206,7 @@ export function WilayahForm() {
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="negara">Komunitas</Label>
+            <Label htmlFor="negara">Negara</Label>
             <Input
               id="negara"
               value={form.negara}
@@ -238,7 +244,7 @@ export function WilayahForm() {
             />
           </div>
 
-          <div className="space-y-1.5 sm:col-span-2">
+          {/* <div className="space-y-1.5 sm:col-span-2">
             <Label htmlFor="fungsi_khusus">Karya</Label>
             <Input
               id="fungsi_khusus"
@@ -246,7 +252,7 @@ export function WilayahForm() {
               onChange={(e) => updateField("fungsi_khusus", e.target.value)}
               placeholder="Kantor Pusat Provinsi"
             />
-          </div>
+          </div> */}
         </div>
 
         <Button type="submit" disabled={submitting} className="w-full sm:w-auto bg-[#2E6193] hover:bg-[#1477C2] text-white ">

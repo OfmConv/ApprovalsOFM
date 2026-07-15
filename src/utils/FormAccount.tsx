@@ -20,6 +20,7 @@ import {
   IconIdBadge,
   IconCross,
   IconEPassport,
+  IconWorld,
 } from "@tabler/icons-react"
 import { createAccount, getToken, verifyEmail, verifyNKP } from "@/services/api"
 import { Button } from "@/components/ui/button"
@@ -29,6 +30,7 @@ import { Badge } from "@/components/ui/badge"
 import { Field } from "@/components/ui/field"
 import { Modal } from "./Modals"
 import { Popup } from "./popup"
+import { Globe, MapPin } from "lucide-react"
 
 export function FormAccount() {
   const [isVerifyNkp, setIsVerifyNkp] = React.useState("NeedVerify")
@@ -269,7 +271,7 @@ export function FormAccount() {
             }
           })
         } else if (isVerifyEmail === "Error") {
-          await verificationNKP(values)
+          await verificationEmail(values)
         }
 
       } else if (key === "familyName") {
@@ -575,7 +577,7 @@ export function FormAccount() {
                   <IconUser className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                   <Input
                     onChange={(e) => handleInput(e)}
-                    autoComplete="off"
+                    autoComplete="disable-autofill"
                     id="Name"
                     name="Name"
                     placeholder="e.g. Test"
@@ -589,7 +591,7 @@ export function FormAccount() {
                   <IconCross className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                   <Input
                     onChange={(e) => handleInput(e)}
-                    autoComplete="off"
+                    autoComplete="disable-autofill"
                     id="religiousName"
                     name="religiousName"
                     placeholder="e.g. Test"
@@ -603,7 +605,7 @@ export function FormAccount() {
                   <IconIdBadge className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                   <Input
                     onChange={(e) => handleInput(e)}
-                    autoComplete="off"
+                    autoComplete="disable-autofill"
                     id="ktpName"
                     name="ktpName"
                     placeholder="e.g. TEST USER"
@@ -617,11 +619,19 @@ export function FormAccount() {
                   <IconEPassport className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                   <Input
                     onChange={(e) => handleInput(e)}
-                    autoComplete="off"
+                    autoComplete="disable-autofill"
                     id="passportName"
                     name="passportName"
                     placeholder="e.g. Test User"
                     className="pl-9" />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="phoneNumber" className="text-sm font-medium">Phone Number</Label>
+                <div className="relative">
+                  <IconPhone className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                  <Input onChange={(e) => handleInput(e)} autoComplete="disable-autofill" name="phoneNumber" id="phoneNumber" placeholder="e.g. 081234567890" inputMode="tel" className="pl-9" />
                 </div>
               </div>
 
@@ -649,18 +659,36 @@ export function FormAccount() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <Label htmlFor="phoneNumber" className="text-sm font-medium">Phone Number</Label>
+                <Label htmlFor="birthProvince" className="text-sm font-medium mb-1.5">Birth Province</Label>
                 <div className="relative">
-                  <IconPhone className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                  <Input onChange={(e) => handleInput(e)} autoComplete="off" name="phoneNumber" id="phoneNumber" placeholder="e.g. 081234567890" inputMode="tel" className="pl-9" />
+                  <IconMapPin className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                  <Input onChange={(e) => handleInput(e)} type="text" autoComplete="disable-autofill" id="birthProvince" name="birthProvince" placeholder="Enter birth province" className="pl-9" />
                 </div>
               </div>
+
+
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="birthRegion" className="text-sm font-medium mb-1.5">Birth Region</Label>
+                <div className="relative">
+                  <IconMapPin className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                  <Input onChange={(e) => handleInput(e)} type="text" autoComplete="disable-autofill" id="birthRegion" name="birthRegion" placeholder="Enter birth region" className="pl-9" />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="birthCountry" className="text-sm font-medium mb-1.5">Birth Country</Label>
+                <div className="relative">
+                  <IconWorld className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                  <Input onChange={(e) => handleInput(e)} type="text" autoComplete="disable-autofill" id="birthCountry" name="birthCountry" placeholder="Enter birth country" className="pl-9" />
+                </div>
+              </div>
+
 
               <div className="flex flex-col gap-1.5">
                 <Label htmlFor="deadDate" className="text-sm font-medium">Dead Date (Optional)</Label>
                 <div className="relative">
                   <IconCalendar className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                  <Input onChange={(e) => handleInput(e)} id="deadDate" name="deadDate" autoComplete="off" type="date" className="pl-9" />
+                  <Input onChange={(e) => handleInput(e)} id="deadDate" name="deadDate" autoComplete="disable-autofill" type="date" className="pl-9" />
                 </div>
               </div>
 
@@ -668,35 +696,15 @@ export function FormAccount() {
                 <Label htmlFor="placeOfBurial" className="text-sm font-medium">Place of Burial (Optional)</Label>
                 <div className="relative">
                   <IconMapPin className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                  <Input onChange={(e) => handleInput(e)} type="text" autoComplete="off" id="placeOfBurial" name="placeOfBurial" placeholder="Enter place of burial" className="pl-9" />
+                  <Input onChange={(e) => handleInput(e)} type="text" autoComplete="disable-autofill" id="placeOfBurial" name="placeOfBurial" placeholder="Enter place of burial" className="pl-9" />
                 </div>
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <div>
-                  <Label htmlFor="birthProvince" className="text-sm font-medium font-medium mb-1.5">Birth Province</Label>
-                  <Input onChange={(e) => handleInput(e)} type="text" autoComplete="off" id="birthProvince" name="birthProvince" placeholder="Enter birthProvince" className="pl-9" />
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <div>
-                  <Label htmlFor="birthRegion" className="text-sm font-medium mb-1.5">Birth Region</Label>
-                  <Input onChange={(e) => handleInput(e)} type="text" autoComplete="off" id="birthRegion" name="birthRegion" placeholder="Enter birthRegion" className="pl-9" />
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <div>
-                  <Label htmlFor="birthCountry" className="text-sm font-medium mb-1.5">Birth Country</Label>
-                  <Input onChange={(e) => handleInput(e)} type="text" autoComplete="off" id="birthCountry" name="birthCountry" placeholder="Enter birthCountry" className="pl-9" />
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <div>
-                  <Label htmlFor="placeOfDeath" className="text-sm font-medium mb-1.5">Place Of Death</Label>
-                  <Input onChange={(e) => handleInput(e)} type="text" autoComplete="off" id="placeOfDeath" name="placeOfDeath" placeholder="Enter placeOfDeath" className="pl-9" />
+                <Label htmlFor="placeOfDeath" className="text-sm font-medium mb-1.5">Place Of Death</Label>
+                <div className="relative">
+                  <IconMapPin className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                  <Input onChange={(e) => handleInput(e)} type="text" autoComplete="disable-autofill" id="placeOfDeath" name="placeOfDeath" placeholder="Enter place of death" className="pl-9" />
                 </div>
               </div>
 
@@ -704,7 +712,7 @@ export function FormAccount() {
                 <Label htmlFor="otherInfo" className="text-sm font-medium">Other Information</Label>
                 <div className="relative">
                   <IconFileText className="absolute left-3 top-3 size-4 text-muted-foreground" />
-                  <textarea onChange={(e) => handleInput(e)} id="otherInfo" name="otherInfo" autoComplete="off" placeholder="Enter additional information" className="w-full pl-9 p-3 rounded-md border border-input bg-background text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-24 resize-none" />
+                  <textarea onChange={(e) => handleInput(e)} id="otherInfo" name="otherInfo" autoComplete="disable-autofill" placeholder="Enter additional information" className="w-full pl-9 p-3 rounded-md border border-input bg-background text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-24 resize-none" />
                 </div>
               </div>
 

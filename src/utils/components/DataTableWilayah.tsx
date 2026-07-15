@@ -86,18 +86,6 @@ function formatDate(value: unknown) {
   return str.split("T")[0]
 }
 
-function statusVariant(status: string): "default" | "secondary" | "destructive" | "outline" {
-  switch (status?.toLowerCase()) {
-    case "biara":
-      return "default"
-    case "rumah filial":
-      return "secondary"
-    case "kantor provinsi":
-      return "outline"
-    default:
-      return "secondary"
-  }
-}
 
 function buildColumns(): ColumnDef<z.infer<typeof schema>>[] {
   return [
@@ -110,7 +98,7 @@ function buildColumns(): ColumnDef<z.infer<typeof schema>>[] {
     },
     {
       accessorKey: "status",
-      header: "Keterangan",
+      header: "Karya",
       cell: ({ row }) => (
         <div className="w-full">{row.original.status}</div>
       ),
@@ -357,12 +345,7 @@ function WilayahDetailViewer({ item }: { item: z.infer<typeof schema> }) {
               </div>
               <Separator className="mb-5" />
               <div className="grid grid-cols-2 gap-x-6 gap-y-5">
-                <div className="flex flex-col gap-1.5">
-                  <span className="font-medium text-muted-foreground">Keterangan</span>
-                  <div>
-                    <Badge variant={statusVariant(item.status)}>{item.status}</Badge>
-                  </div>
-                </div>
+              
                 <div className="flex flex-col gap-1.5">
                   <span className="font-medium text-muted-foreground">Negara</span>
                   <span className="font-medium text-foreground">{formatValue(item.negara)}</span>
@@ -384,12 +367,7 @@ function WilayahDetailViewer({ item }: { item: z.infer<typeof schema> }) {
                     {formatDate(item.periode_selesai)}
                   </span>
                 </div>
-                <div className="col-span-2 flex flex-col gap-1.5">
-                  <span className="font-medium text-muted-foreground">karya</span>
-                  <span className="font-medium text-foreground">
-                    {formatValue(item.fungsi_khusus)}
-                  </span>
-                </div>
+               
               </div>
             </div>
           </div>
