@@ -94,7 +94,7 @@ export async function refreshTokens() {
       throw new Error("No refresh token available");
     }
 
-    const res = await axios.post(`${BASE_URL}/api/v1/refreshToken`, {
+    const res = await axios.post(`${BASE_URL}/refreshToken`, {
       refresh_token: rToken,
     });
 
