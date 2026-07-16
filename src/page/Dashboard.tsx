@@ -34,11 +34,12 @@ export default function Page() {
     setAppliedSearch(searchInput.trim().toLowerCase());
   };
 
-  const filteredProfiles = appliedSearch
+  const filteredProfiles = (appliedSearch
     ? userProfile.filter((e) =>
       e.full_name?.toLowerCase().includes(appliedSearch)
     )
-    : userProfile;
+    : userProfile
+  ).slice().sort((a, b) => Number(a.nkp) - Number(b.nkp));
 
   useEffect(() => {
     if (initRef.current) return;
