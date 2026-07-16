@@ -117,34 +117,12 @@ function formatDate(value?: string | null, options?: Intl.DateTimeFormatOptions)
   return date.toLocaleDateString("id-ID", options)
 }
 
-// function DragHandle({ id }: { id: number }) {
-//   const { attributes, listeners } = useSortable({ id })
-
-//   return (
-//     <Button
-//       {...attributes}
-//       {...listeners}
-//       variant="ghost"
-//       size="icon"
-//       className="size-7 text-muted-foreground hover:bg-transparent"
-//     >
-//       <IconGripVertical className="size-3 text-muted-foreground" />
-//       <span className="sr-only">Drag to reorder</span>
-//     </Button>
-//   )
-// }
-
 const columns: ColumnDef<z.infer<typeof schema>>[] = [
-//  {
-//   id: "drag",
-//   header: () => null,
-//   cell: ({ row }) => <DragHandle id={row.original.id} />,
-//   size: 1, // lebih kecil lagi
-// },
+
   {
     accessorKey: "full_name",
     header: "Full Name",
-    size: 39, // 25%
+    size: 39,
     cell: ({ row }) => (
       <div className="w-full min-w-0"><TableCellViewer item={row.original} /></div>
     ),
@@ -698,14 +676,14 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
   return (
     <Drawer direction={isMobile ? "bottom" : "right"} open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-  <Button
-    variant="link"
-    className="w-full min-w-0 justify-start px-0 text-left text-foreground font-medium truncate"
-    title={item.full_name}
-  >
-    {item.full_name}
-  </Button>
-</DrawerTrigger>
+        <Button
+          variant="link"
+          className="w-full min-w-0 justify-start px-0 text-left text-foreground font-medium truncate"
+          title={item.full_name}
+        >
+          {item.full_name}
+        </Button>
+      </DrawerTrigger>
       <DrawerContent className={!isMobile ? "sm:max-w-lg" : ""}>
         <DrawerHeader className="gap-4 pb-6 pt-8 text-left">
           <div className="flex items-center gap-4">
