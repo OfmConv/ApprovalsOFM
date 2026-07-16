@@ -143,13 +143,6 @@ export async function verifyNKP(nkp: any) {
   }
 }
 
-/**
- * Login untuk anggota.
- * PENTING: fungsi ini HANYA mengembalikan { status: 200, success: true }
- * jika backend benar-benar mengirim access_token yang valid.
- * Jika tidak, status dipaksa jadi 401 agar UI (LoginPage) tahu ini kegagalan,
- * bukan disamarkan sebagai sukses (200) tanpa token.
- */
 export async function login(nkp: string, secret: string) {
   try {
     const res = await axiosInstance.post("/login", {
@@ -159,9 +152,6 @@ export async function login(nkp: string, secret: string) {
 
     console.log("Response:", res.data);
 
-    // PENTING: backend LoginMember mengembalikan access_token di level TOP,
-    // bukan di dalam objek "data" seperti LoginAdmin. Jadi cek res.data.access_token
-    // langsung, bukan res.data.data.access_token.
     if (res.status === 200) {
       try {
         localStorage.setItem("token", res.data.data.access_token);
@@ -172,9 +162,6 @@ export async function login(nkp: string, secret: string) {
         return { status: 500, success: false, error: "Failed to save token" };
       }
     } else {
-      // Seharusnya tidak akan sering terjadi karena backend sudah benar
-      // mengembalikan 401 untuk kredensial salah, tapi tetap dijaga
-      // sebagai fallback kalau bentuk response tidak sesuai ekspektasi.
       return {
         status: 401,
         success: false,
@@ -218,7 +205,6 @@ export async function getProfile(type: string, nkp?: string) {
     if (nkp) params.append("nkp", nkp);
 
     const res = await axiosInstance.get(`/getProfile?${params.toString()}`);
-    // console.log(res)
     return res.data;
   } catch (error) {
     console.log(error);
@@ -494,10 +480,6 @@ export async function deleteUser(nkp: string) {
   }
 }
 
-/**
- * Khusus ADMIN: update data profil utama langsung (tanpa approval).
- * Backend PATCH langsung ke tabel details_users berdasarkan nkp.
- */
 export async function updateProfileDirect(
   nkp: string,
   detailUser: Record<string, any>,
@@ -517,10 +499,6 @@ export async function updateProfileDirect(
   }
 }
 
-/**
- * Khusus ADMIN: insert/update/delete riwayat pendidikan langsung ke tabel education,
- * tanpa lewat approval.
- */
 export async function updateEducationDirect(
   nkp: string,
   action: "insert" | "update" | "delete",
@@ -536,9 +514,6 @@ export async function updateEducationDirect(
   return res.data;
 }
 
-/**
- * Khusus ADMIN: insert/update/delete riwayat keagamaan langsung, tanpa approval.
- */
 export async function updateReligiousFeastDirect(
   nkp: string,
   action: "insert" | "update" | "delete",

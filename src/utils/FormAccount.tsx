@@ -30,7 +30,6 @@ import { Badge } from "@/components/ui/badge"
 import { Field } from "@/components/ui/field"
 import { Modal } from "./Modals"
 import { Popup } from "./popup"
-import { Globe, MapPin } from "lucide-react"
 
 export function FormAccount() {
   const [isVerifyNkp, setIsVerifyNkp] = React.useState("NeedVerify")
@@ -397,7 +396,6 @@ export function FormAccount() {
       }
     }, 500)
   }
-
 
   return (
     <div className="w-full rounded-2xl border bg-card shadow-sm overflow-hidden">

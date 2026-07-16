@@ -283,7 +283,7 @@ export function DataTable({ data: initialData }: {
     },
     globalFilterFn,
     onGlobalFilterChange: setGlobalFilter,
-    getRowId: (row) => row.id.toString(),
+    getRowId: (row) => row?.id?.toString() ?? crypto.randomUUID(),
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,

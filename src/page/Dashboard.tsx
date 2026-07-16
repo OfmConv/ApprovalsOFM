@@ -40,7 +40,6 @@ export default function Page() {
     )
     : userProfile;
 
-    // console.log(filteredProfiles);
   useEffect(() => {
     if (initRef.current) return;
     initRef.current = true;
@@ -240,5 +239,3 @@ export default function Page() {
     </SidebarProvider>
   )
 }
-
-
