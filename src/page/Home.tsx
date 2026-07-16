@@ -133,7 +133,7 @@ function Hero() {
   return (
     <section className="relative w-full min-h-[100dvh] overflow-hidden flex flex-col justify-end">
       <img
-        src="/Kapitularis-1536x802.jpg"
+        src="/Kapitularis.png"
         alt="Interior gereja New Horizon Chapel"
         className="absolute inset-0 h-full w-full object-cover object-center md:object-top"
         loading="eager"
@@ -263,7 +263,7 @@ function LayoutArtikel() {
       <div className="flex flex-col md:flex-row md:items-start md:gap-8">
         <div className="w-full md:w-1/2">
           <img
-            src="./Gabungan.jpg"
+            src="./bersama.jpg"
             alt="Foto para frater bersama"
             className="h-full w-full object-cover rounded-sm"
           />
