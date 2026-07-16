@@ -205,8 +205,11 @@ export function DataTable({ data: initialData }: {
   const [data, setData] = React.useState(() => initialData)
 
   React.useEffect(() => {
-    setData(initialData)
-  }, [initialData])
+  const sorted = [...initialData].sort(
+    (a, b) => (Number(a.nkp) || 0) - (Number(b.nkp) || 0)
+  )
+  setData(sorted)
+}, [initialData])
 
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
