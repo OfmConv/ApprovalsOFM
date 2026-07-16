@@ -39,7 +39,7 @@ export function FormAccount() {
   const [detailProfile, setDetailProfile] = React.useState(true)
   const [showSubmitForm, setShowSubmitForm] = React.useState(false)
   const [showPassConfirm, setShowPassConfirm] = React.useState(false)
-
+  const [showSuccessModal, setShowSuccessModal] = React.useState(false)
   const [verifyKey, setVerifyKey] = React.useState({
     Nkp: {
       NkpAvailable: null,
@@ -142,9 +142,13 @@ export function FormAccount() {
   }
 
   async function submitForm() {
+    if (!validateForm()) {
+      return false
+    }
     await getToken()
     try {
       await createAccount(UserData)
+      setShowSuccessModal(true)
       return true
     } catch (error) {
       return false
@@ -396,7 +400,53 @@ export function FormAccount() {
       }
     }, 500)
   }
+  type RequiredField = { key: string; label: string; group: "user" | "detail_user" }
 
+  const REQUIRED_FIELDS: RequiredField[] = [
+    { key: "nkp", label: "NKP", group: "user" },
+    { key: "email", label: "Email", group: "user" },
+    { key: "secret", label: "Password", group: "user" },
+    { key: "full_name", label: "Full Name", group: "detail_user" },
+    { key: "family_name", label: "Family Name", group: "detail_user" },
+    { key: "name", label: "Name", group: "detail_user" },
+    { key: "ktp_name", label: "KTP Name", group: "detail_user" },
+    { key: "date_of_birth", label: "Date of Birth", group: "detail_user" },
+    { key: "place_of_birth", label: "Place of Birth", group: "detail_user" },
+    { key: "phone_number", label: "Phone Number", group: "detail_user" },
+    { key: "birth_province", label: "Birth Province", group: "detail_user" },
+    { key: "birth_region", label: "Birth Region", group: "detail_user" },
+    { key: "birth_country", label: "Birth Country", group: "detail_user" },
+    // sengaja TIDAK termasuk: dead_date, place_of_burial, place_of_death
+  ]
+
+  const [formError, setFormError] = React.useState<string>("")
+
+  function validateForm(): boolean {
+    const missing = REQUIRED_FIELDS.filter((f) => {
+      const value = (UserData as any)[f.group][f.key]
+      return value === null || value === undefined || String(value).trim() === ""
+    })
+
+    if (missing.length > 0) {
+      setFormError(
+        `Field berikut wajib diisi: ${missing.map((f) => f.label).join(", ")}`
+      )
+      return false
+    }
+
+    if (verifyKey.Nkp.NkpAvailable === false || isVerifyNkp === "UnVerify") {
+      setFormError("NKP tidak tersedia / belum terverifikasi.")
+      return false
+    }
+
+    if (verifyKey.Email.EmailAvailable === false || isVerifyEmail === "UnVerify") {
+      setFormError("Email tidak tersedia / belum terverifikasi.")
+      return false
+    }
+
+    setFormError("")
+    return true
+  }
   return (
     <div className="w-full rounded-2xl border bg-card shadow-sm overflow-hidden">
 
@@ -719,12 +769,24 @@ export function FormAccount() {
           </div>
         }
       </div>
+      {formError && (
+        <div className="px-4 sm:px-8">
+          <p className="text-sm text-red-600 font-medium">{formError}</p>
+        </div>
+      )}
 
       <Popup
         open={showSubmitForm}
         onClose={() => setShowSubmitForm(false)}
         onSubmit={() => submitForm()}
         data={UserData}
+      />
+      <Modal
+        title="Account Created Successfully"
+        description="Please refresh the page to load the latest data."
+        open={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+        onConfirm={() => setShowSuccessModal(false)}
       />
       <Modal
         title="Passwords don't match"
@@ -736,7 +798,18 @@ export function FormAccount() {
 
       <div className="flex items-center justify-end gap-2 border-t bg-muted/20 px-4 sm:px-8 py-4">
         <Button onClick={setButton} className={detailProfile ? "px-6 bg-[#2E6193] hover:bg-[#1477C2] text-white" : "px-6 bg-white border border-[#1477C2] text-[#1477C2] hover:bg-[#1477C2]/10"}>{detailProfile ? "Next" : "Back"}</Button>
-        {detailProfile === false ? <Button onClick={() => setShowSubmitForm(true)} className="px-6 bg-[#2E6193] hover:bg-[#1477C2] text-white">Submit</Button> : <></>}
+        {detailProfile === false ? (
+          <Button
+            onClick={() => {
+              if (validateForm()) {
+                setShowSubmitForm(true)
+              }
+            }}
+            className="px-6 bg-[#2E6193] hover:bg-[#1477C2] text-white"
+          >
+            Submit
+          </Button>
+        ) : <></>}
       </div>
     </div>
   )
