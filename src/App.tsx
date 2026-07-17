@@ -7,16 +7,19 @@ import LoginPage from "./page/Login";
 import NotFound from "./page/NotFound";
 import Home from "./page/Home";
 import History from "./utils/History";
+import ErrorBoundary from "./utils/ErrorBoundary";
 
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />
+    element: <Home />,
+    errorElement: <ErrorBoundary><div>Terjadi kesalahan.</div></ErrorBoundary>
   },
   {
     path: '/login',
-    element: <LoginPage />
+    element: <LoginPage />,
+    errorElement: <ErrorBoundary><div>Terjadi kesalahan.</div></ErrorBoundary>
   },
   {
     path: '/dashboard/:t',
@@ -24,15 +27,18 @@ const router = createBrowserRouter([
       <TooltipProvider>
         <Auth />
       </TooltipProvider>
-    )
+    ),
+    errorElement: <ErrorBoundary><div>Terjadi kesalahan.</div></ErrorBoundary>
   },
   {
     path: '/history',
-    element: <History />
+    element: <History />,
+    errorElement: <ErrorBoundary><div>Terjadi kesalahan.</div></ErrorBoundary>
   },
   {
     path: '/anggota/:t',
-    element: <AuthUsers />
+    element: <AuthUsers />,
+    errorElement: <ErrorBoundary><div>Terjadi kesalahan.</div></ErrorBoundary>
   },
   {
     path: '*',
