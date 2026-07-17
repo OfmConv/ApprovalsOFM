@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { TooltipProvider } from "./components/ui/tooltip";
 import { Auth, AuthUsers } from "./services/auth";
 import { useEffect, useState } from "react";
@@ -40,17 +40,19 @@ const router = createBrowserRouter([
   },
 ]);
 
+
 function App() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const init = async () => {
-      setReady(true);
-      return <Navigate to="/dashboard" />
-    }
-    setTimeout(() => {
-      init();
+    let mounted = true;
+    const timer = setTimeout(() => {
+      if (mounted) setReady(true);
     }, 3000);
+    return () => {
+      mounted = false;
+      clearTimeout(timer);
+    };
   }, []);
 
   if (ready === false) return (
