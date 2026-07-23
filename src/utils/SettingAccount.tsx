@@ -14,20 +14,18 @@ import.meta.env.VITE_CREDENTIALS
 
 function GeneralSettings() {
     const [theme, setTheme] = useState(localStorage.getItem("theme") ?? "system");
+
     useEffect(() => {
         const root = document.documentElement
 
-        const applyTheme = (t: string) => {
-            if (t === "dark") {
-                root.classList.add("dark")
-            } else if (t === "light") {
-                root.classList.remove("dark")
-            } else {
-                const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-                prefersDark ? root.classList.add("dark") : root.classList.remove("dark")
-            }
+        if (theme === "dark") {
+            root.classList.add("dark")
+        } else if (theme === "light") {
+            root.classList.remove("dark")
+        } else {
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+            prefersDark ? root.classList.add("dark") : root.classList.remove("dark")
         }
-        applyTheme(theme)
         localStorage.setItem("theme", theme)
 
         if (theme === "system") {
@@ -39,6 +37,7 @@ function GeneralSettings() {
             return () => media.removeEventListener("change", handler)
         }
     }, [theme]);
+
     return (
         <div className="flex flex-col gap-6 mt-5">
             <Separator />
