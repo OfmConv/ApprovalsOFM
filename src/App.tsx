@@ -8,6 +8,7 @@ import NotFound from "./page/NotFound";
 import Home from "./page/Home";
 import History from "./utils/History";
 import ErrorBoundary from "./utils/ErrorBoundary";
+import Article from "./page/Article";
 
 
 const router = createBrowserRouter([
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
     path: '/anggota/:t',
     element: <AuthUsers />,
     errorElement: <ErrorBoundary><div>Terjadi kesalahan.</div></ErrorBoundary>
+  },
+  {
+    path: '/kegiatan',
+    element: <Article />
   },
   {
     path: '*',

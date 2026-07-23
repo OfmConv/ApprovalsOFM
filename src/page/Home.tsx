@@ -14,7 +14,7 @@ import { DataTableWilayah } from "@/utils/components/DataTableWilayah"
 import { getAllWilayah } from "@/services/api"
 
 const navLinks = [
-  { label: "Beranda", href: "#" },
+  { label: "Beranda", href: "/" },
   { label: "Struktur Kepemimpinan ", href: "#kepemimpinan" },
   { label: "Tentang Kami", href: "#tentang" },
   { label: "Berkarya di ", href: "#berkarya" },
@@ -38,7 +38,7 @@ function SectionHeading({ children }: { children: ReactNode }) {
   );
 }
 
-function Navbar() {
+export function Navbar() {
   const navigate = useNavigate();
 
   function handleLogin() {
@@ -130,6 +130,10 @@ function Hero() {
     navigate("/history");
   }
 
+  function navigateToArticle() {
+    navigate("/kegiatan")
+  }
+
   return (
     <section className="relative w-full min-h-[100dvh] overflow-hidden flex flex-col justify-end">
       <img
@@ -160,7 +164,13 @@ function Hero() {
                 onClick={HandleHistory}
                 className="inline-flex items-center gap-2 rounded-md bg-[#616572] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#4d505b] sm:px-5"
               >
-                Lihat Sejarah
+                Sejarah Minister
+              </button>
+              <button
+                onClick={navigateToArticle}
+                className="inline-flex items-center gap-2 rounded-md border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-medium text-white backdrop-blur-md backdrop-saturate-150 shadow-sm transition-colors hover:bg-white/20 sm:px-5"
+              >
+                Lihat Kegiatan
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>
@@ -422,7 +432,6 @@ function Home() {
       <Navbar />
       <Hero />
       <MainContent />
-
     </div>
   );
 }

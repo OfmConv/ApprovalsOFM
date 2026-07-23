@@ -1,6 +1,7 @@
 "use client"
 import * as React from "react"
 import {
+  IconArticle,
   IconListDetails,
   IconReport,
   IconSettings,
@@ -55,6 +56,11 @@ const data = {
     },
     {
       id: 5,
+      title: "Article",
+      icon: IconArticle
+    },
+    {
+      id: 6,
       title: "Settings",
       url: "#",
       icon: IconSettings,
@@ -66,13 +72,10 @@ const data = {
 export function AppSidebar({ userSelect, ...props }: React.ComponentProps<typeof Sidebar> & {userSelect: (val: number) => void }) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
-      
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:p-1.5!"
+            <SidebarMenuButton  asChild  className="data-[slot=sidebar-menu-button]:p-1.5!"
             >
               <a href="#">
                 <img src="/Logo_ordo1.png" className="size-8!"/>

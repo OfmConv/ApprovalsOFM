@@ -580,3 +580,72 @@ export async function updateGalleryPhotoDirect(
   });
   return res.data;
 }
+
+export async function getArticles() {
+  try {
+    const res = await axiosInstance.get("/articles");
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function createArticle(body: {
+  jdl_artikel: string;
+  description: string;
+  img: string;
+}) {
+  try {
+    const res = await axiosInstance.post("/articles", body);
+    console.log(res);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function updateArticle(
+  id: number,
+  body: Partial<{
+    jdl_artikel: string;
+    description: string;
+    img: string;
+  }>
+) {
+  try {
+    const res = await axiosInstance.patch(`/articles/${id}`, body);
+    console.log(res);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function deleteArticle(id: number) {
+  try {
+    const res = await axiosInstance.delete(`/articles/${id}`);
+    console.log(res);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getPresignedUploadURL(body: {
+  type: string;
+  nkp?: string;
+  id?: string;
+  content_type: string;
+}) {
+  try {
+    const res = await axiosInstance.post("/storage/presign", body);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}

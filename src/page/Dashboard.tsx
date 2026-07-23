@@ -20,6 +20,7 @@ import { ApprovalAlertModal } from "@/utils/ApprovalAlertModal";
 import { z } from "zod";
 import { schema } from "@/utils/components/DataTableApprovals";
 import { FormJabatan } from "@/utils/FormJabatan";
+import { ArticleForm } from "@/utils/FormArticle";
 
 export default function Page() {
   const [userProfile, setUserProfile] = useState<any[]>([]);
@@ -220,6 +221,11 @@ export default function Page() {
                     <div className="flex justify-center p-6">
                       <FormJabatan />
                     </div>
+                  </SidebarInset> :
+                  userSelect === 5 ?
+                  <SidebarInset>
+                    <SiteHeader Headers="Add New Article" />
+                    <ArticleForm />
                   </SidebarInset>
                   : <SidebarInset className="w-full">
                     <SiteHeader Headers="Settings" />
