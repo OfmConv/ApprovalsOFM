@@ -44,7 +44,7 @@ const ArticleListItem = React.memo(function ArticleListItem({
   const isProtected = article.id === 1 || article.id === 2
 
   return (
-    <div className="flex items-center justify-between gap-4 py-4">
+    <div className="flex items-center justify-between gap-4 py-4 w-100">
       <div className="flex items-center gap-4 min-w-0">
         {article.img && (
           <img
