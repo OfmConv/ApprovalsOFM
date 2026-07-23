@@ -277,24 +277,37 @@ function History() {
 }
 
 function LayoutArtikel() {
+  const [article, setArticle] = useState<any>(null);
+
+  useEffect(() => {
+    async function init() {
+      try {
+        const res = await getArticles(2);
+        setArticle(res);
+      } catch (err) {
+        console.error("Gagal mengambil artikel:", err);
+      }
+    }
+    init();
+  }, []);
+
   return (
     <Reveal>
       <div className="flex flex-col md:flex-row md:items-start md:gap-8">
         <div className="w-full md:w-1/2">
           <img
-            src="./bersama.jpg"
-            alt="Foto para frater bersama"
+            src={article?.img}
+            alt={article?.jdl_artikel}
             className="h-full w-full object-cover rounded-sm"
           />
         </div>
 
-        {/* Menambahkan pt-6 untuk memberi nafas jarak teks terhadap gambar di atasnya saat mobile */}
         <div className="w-full flex-1 px-4 pt-6 pb-8 text-left sm:px-6 md:px-0 md:pt-0">
           <h3 className="font-serif text-xl text-gray-900 sm:text-2xl">
-            Menjawab Panggilan dan Melayani dalam Persaudaraan.
+            {article?.jdl_artikel}
           </h3>
           <p className="mt-3 text-sm leading-relaxed text-gray-600 sm:text-base">
-            Segenap jajaran imam dan saudara Ordo Saudara Dina Konventual (OFMConv) berfoto bersama di depan kompleks Biara Santo Yosef Delitua, Sumatra Utara. Foto ini mengabadikan momen kebersamaan dan kesatuan hati para saudara dalam menjalankan roda pelayanan kasih, pembinaan iman, serta karya pastoral di bumi Nusantara.
+            {article?.description}
           </p>
         </div>
       </div>
