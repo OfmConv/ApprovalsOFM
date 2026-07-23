@@ -89,14 +89,14 @@ export default function BlogGrid() {
               />
             </div>
 
-            <CardContent className="px-0 pt-4 min-w-0">
+            {/* <CardContent className="px-0 pt-4 min-w-0">
               <div className="text-lg font-semibold text-slate-900 break-words">
                 {featured.jdl_artikel}
               </div>
               <div className="mt-1 text-sm text-muted-foreground break-words whitespace-normal">
                 {featured.description}
               </div>
-            </CardContent>
+            </CardContent> */}
           </Card>
         )}
 
