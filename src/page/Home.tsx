@@ -135,13 +135,17 @@ function Hero() {
     navigate("/kegiatan");
   }
 
-  React.useEffect(() => {
-    async function init() {
+ React.useEffect(() => {
+  async function init() {
+    try {
       const res = await getArticles(1);
-      setArticle(res?.data);
+      setArticle(res);
+    } catch (error) {
+      console.log(error);
     }
-    init();
-  }, []);
+  }
+  init();
+}, []);
 
   return (
     <section className="relative w-full min-h-[100dvh] overflow-hidden flex flex-col justify-end">
