@@ -71,7 +71,7 @@ export default function BlogGrid() {
     [gridArticles, debouncedQuery]
   );
 
-  return (
+ return (
     <div className="relative min-h-screen w-full overflow-x-hidden bg-white">
       <Navbar />
       <section className="w-full max-w-6xl mx-auto px-6 py-10 mt-10">
@@ -88,11 +88,11 @@ export default function BlogGrid() {
                 className="h-full w-full object-cover"
               />
             </div>
-            <CardContent className="px-0 pt-4">
-              <div className="text-lg font-semibold text-slate-900">
+            <CardContent className="px-0 pt-4 min-w-0">
+              <div className="text-lg font-semibold text-slate-900 break-words">
                 {featured.jdl_artikel}
               </div>
-              <div className="mt-1 text-sm text-muted-foreground">
+              <div className="mt-1 text-sm text-muted-foreground break-words whitespace-normal">
                 {featured.description}
               </div>
             </CardContent>
@@ -130,11 +130,11 @@ export default function BlogGrid() {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <CardContent className="px-0 pt-0">
-                <div className="text-base font-semibold text-slate-900">
+              <CardContent className="px-0 pt-0 min-w-0">
+                <div className="text-base font-semibold text-slate-900 break-words">
                   {post.jdl_artikel}
                 </div>
-                <div className="mt-1 mb-5 ml-5 mr-5 text-justify text-sm text-muted-foreground">
+                <div className="mt-1 mb-5 ml-5 mr-5 text-justify text-sm text-muted-foreground break-words whitespace-normal">
                   {post.description}
                 </div>
               </CardContent>
