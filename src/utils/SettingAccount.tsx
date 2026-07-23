@@ -13,7 +13,7 @@ import { Modal } from "./Modals"
 import.meta.env.VITE_CREDENTIALS
 
 function GeneralSettings() {
-    const [theme, setTheme] = useState(localStorage.getItem("theme") ?? "system");
+    const [theme, setTheme] = useState(localStorage.getItem("theme") ?? "light");
     useEffect(() => {
         const root = document.documentElement
 
