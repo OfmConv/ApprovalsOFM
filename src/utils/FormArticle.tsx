@@ -324,7 +324,7 @@ export function ArticleForm() {
           <p className="text-sm text-muted-foreground text-center">Belum ada artikel</p>
         )}
 
-        <div className="flex flex-col divide-y">
+        <div className="flex flex-col divide-y w-full">
           {articles.map((article) => (
             <ArticleListItem
               key={article.id}
