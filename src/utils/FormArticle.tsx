@@ -44,7 +44,7 @@ const ArticleListItem = React.memo(function ArticleListItem({
   const isProtected = article.id === 1 || article.id === 2
 
   return (
-    <div className="flex items-center justify-between gap-4 py-4 w-full">
+    <div className="flex items-center justify-between gap-4 py-4 w-full min-w-0">
       <div className="flex items-center gap-4 min-w-0">
         {article.img && (
           <img
@@ -317,14 +317,14 @@ export function ArticleForm() {
         {status.state === "error" && <p className="text-xs text-red-600">{status.message}</p>}
       </div>
 
-      <div className="mt-6 border bg-card shadow-sm rounded-2xl p-6">
+      <div className="mt-6 border bg-card shadow-sm rounded-2xl p-6 min-w-0">
         <h3 className="text-center text-lg font-semibold mb-4">Artikel Tersimpan</h3>
 
         {articles.length === 0 && (
           <p className="text-sm text-muted-foreground text-center">Belum ada artikel</p>
         )}
 
-        <div className="flex flex-col divide-y w-full">
+        <div className="flex flex-col divide-y w-full min-w-0">
           {articles.map((article) => (
             <ArticleListItem
               key={article.id}
