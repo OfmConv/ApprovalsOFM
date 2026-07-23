@@ -1,75 +1,75 @@
 "use client"
 
-import { Moon, Sun, Monitor, ArrowRight, AlertTriangle } from "lucide-react"
+import { ArrowRight, AlertTriangle } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+// import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import React, { useEffect, useState } from "react"
 import { changeAdminAcc, changePassword, deleteUser } from "@/services/api"
 import { Modal } from "./Modals"
 import.meta.env.VITE_CREDENTIALS
 
-function GeneralSettings() {
-    const [theme, setTheme] = useState(localStorage.getItem("theme") ?? "light");
-    useEffect(() => {
-        const root = document.documentElement
+// function GeneralSettings() {
+//     const [theme, setTheme] = useState(localStorage.getItem("theme") ?? "light");
+//     useEffect(() => {
+//         const root = document.documentElement
 
-        const applyTheme = (t: string) => {
-            if (t === "dark") {
-                root.classList.add("dark")
-            } else if (t === "light") {
-                root.classList.remove("dark")
-            } else {
-                const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-                prefersDark ? root.classList.add("dark") : root.classList.remove("dark")
-            }
-        }
-        applyTheme(theme)
-        localStorage.setItem("theme", theme)
+//         const applyTheme = (t: string) => {
+//             if (t === "dark") {
+//                 root.classList.add("dark")
+//             } else if (t === "light") {
+//                 root.classList.remove("dark")
+//             } else {
+//                 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+//                 prefersDark ? root.classList.add("dark") : root.classList.remove("dark")
+//             }
+//         }
+//         applyTheme(theme)
+//         localStorage.setItem("theme", theme)
 
-        if (theme === "system") {
-            const media = window.matchMedia("(prefers-color-scheme: dark)")
-            const handler = (e: MediaQueryListEvent) => {
-                e.matches ? root.classList.add("dark") : root.classList.remove("dark")
-            }
-            media.addEventListener("change", handler)
-            return () => media.removeEventListener("change", handler)
-        }
-    }, [theme]);
-    return (
-        <div className="flex flex-col gap-6 mt-5">
-            <Separator />
-            <div className="flex flex-col gap-4">
-                <div>
-                    <h3 className="text-sm font-medium">Tema</h3>
-                    <p className="text-sm text-muted-foreground">Pilih tampilan aplikasi</p>
-                </div>
-                <ToggleGroup
-                    type="single"
-                    value={theme}
-                    onValueChange={(v) => v && setTheme(v)}
-                    className="flex flex-row justify-center w-full"
-                >
-                    <ToggleGroupItem value="light" className="flex flex-col items-center gap-2 h-auto py-3 rounded-lg border data-[state=on]:border-primary data-[state=on]:bg-primary/5">
-                        <Sun className="size-4" />
-                        <span className="text-xs">Light</span>
-                    </ToggleGroupItem>
-                    <ToggleGroupItem value="dark" className="flex flex-col items-center gap-2 h-auto py-3 rounded-lg border data-[state=on]:border-primary data-[state=on]:bg-primary/5">
-                        <Moon className="size-4" />
-                        <span className="text-xs">Dark</span>
-                    </ToggleGroupItem>
-                    <ToggleGroupItem value="system" className="flex flex-col items-center gap-2 h-auto py-3 rounded-lg border data-[state=on]:border-primary data-[state=on]:bg-primary/5">
-                        <Monitor className="size-4" />
-                        <span className="text-xs">System</span>
-                    </ToggleGroupItem>
-                </ToggleGroup>
-            </div>
-        </div>
-    )
-}
+//         if (theme === "system") {
+//             const media = window.matchMedia("(prefers-color-scheme: dark)")
+//             const handler = (e: MediaQueryListEvent) => {
+//                 e.matches ? root.classList.add("dark") : root.classList.remove("dark")
+//             }
+//             media.addEventListener("change", handler)
+//             return () => media.removeEventListener("change", handler)
+//         }
+//     }, [theme]);
+//     return (
+//         <div className="flex flex-col gap-6 mt-5">
+//             <Separator />
+//             <div className="flex flex-col gap-4">
+//                 <div>
+//                     <h3 className="text-sm font-medium">Tema</h3>
+//                     <p className="text-sm text-muted-foreground">Pilih tampilan aplikasi</p>
+//                 </div>
+//                 <ToggleGroup
+//                     type="single"
+//                     value={theme}
+//                     onValueChange={(v) => v && setTheme(v)}
+//                     className="flex flex-row justify-center w-full"
+//                 >
+//                     <ToggleGroupItem value="light" className="flex flex-col items-center gap-2 h-auto py-3 rounded-lg border data-[state=on]:border-primary data-[state=on]:bg-primary/5">
+//                         <Sun className="size-4" />
+//                         <span className="text-xs">Light</span>
+//                     </ToggleGroupItem>
+//                     <ToggleGroupItem value="dark" className="flex flex-col items-center gap-2 h-auto py-3 rounded-lg border data-[state=on]:border-primary data-[state=on]:bg-primary/5">
+//                         <Moon className="size-4" />
+//                         <span className="text-xs">Dark</span>
+//                     </ToggleGroupItem>
+//                     <ToggleGroupItem value="system" className="flex flex-col items-center gap-2 h-auto py-3 rounded-lg border data-[state=on]:border-primary data-[state=on]:bg-primary/5">
+//                         <Monitor className="size-4" />
+//                         <span className="text-xs">System</span>
+//                     </ToggleGroupItem>
+//                 </ToggleGroup>
+//             </div>
+//         </div>
+//     )
+// }
 
 function DeleteConfirmModal({
     open,
@@ -162,7 +162,7 @@ function ChangePassword({ Udata, detailUser }: any) {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPopup, setShowPoup] = useState(false)
     const [showDeletePopup, setShowDeletePopup] = useState(false)
-    const [getNKP, setGetNkp] = useState('')
+    // const [getNKP, setGetNkp] = useState('')
     const isFormValid = selectedNkp && password.length >= 8 && password === confirmPassword;
     const daftarUser = Array.isArray(Udata) ? Udata : [];
 
@@ -438,14 +438,14 @@ export function AkunAdmin() {
 export function SettingsPage({ detailUser, Udata }: any) {
     return (
         <Tabs defaultValue="general" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="general">Umum</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2">
+                {/* <TabsTrigger value="general">Umum</TabsTrigger> */}
                 <TabsTrigger value="password">Password</TabsTrigger>
                 <TabsTrigger value="admin">Admin</TabsTrigger>
             </TabsList>
-            <TabsContent value="general">
+            {/* <TabsContent value="general">
                 <GeneralSettings />
-            </TabsContent>
+            </TabsContent> */}
             <TabsContent value="password">
                 <ChangePassword Udata={Udata} detailUser={detailUser} />
             </TabsContent>
