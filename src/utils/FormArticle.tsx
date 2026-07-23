@@ -44,8 +44,8 @@ const ArticleListItem = React.memo(function ArticleListItem({
   const isProtected = article.id === 1 || article.id === 2
 
   return (
-    <div className="flex items-center justify-between gap-4 py-4 w-full">
-      <div className="flex items-center gap-4 min-w-0 flex-1">
+    <div className="flex items-start justify-between gap-4 py-4 w-full">
+      <div className="flex items-start gap-4 min-w-0 flex-1">
         {article.img && (
           <img
             src={article.img}
@@ -54,9 +54,11 @@ const ArticleListItem = React.memo(function ArticleListItem({
             className="w-14 h-14 rounded-lg object-cover shrink-0"
           />
         )}
-        <div className="min-w-0">
-          <p className="font-medium truncate">{article.jdl_artikel}</p>
-          <p className="text-sm text-muted-foreground truncate">{article.description}</p>
+        <div className="min-w-0 flex-1">
+          <p className="font-medium break-words whitespace-normal">{article.jdl_artikel}</p>
+          <p className="text-sm text-muted-foreground break-words whitespace-normal">
+            {article.description}
+          </p>
         </div>
       </div>
 
