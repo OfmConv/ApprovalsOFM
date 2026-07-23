@@ -223,7 +223,7 @@ export default function Page() {
                     </div>
                   </SidebarInset> :
                   userSelect === 5 ?
-                  <SidebarInset>
+                  <SidebarInset className="w-full min-w-0">
                     <SiteHeader Headers="Add New Article" />
                     <ArticleForm />
                   </SidebarInset>

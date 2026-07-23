@@ -55,8 +55,10 @@ const ArticleListItem = React.memo(function ArticleListItem({
           />
         )}
         <div className="min-w-0 flex-1">
-          <p className="font-medium break-words whitespace-normal">{article.jdl_artikel}</p>
-          <p className="text-sm text-muted-foreground break-words whitespace-normal">
+          <p className="font-medium break-words whitespace-normal text-left">
+            {article.jdl_artikel}
+          </p>
+          <p className="text-sm text-muted-foreground break-words whitespace-normal text-justify">
             {article.description}
           </p>
         </div>
@@ -98,7 +100,7 @@ export function ArticleForm() {
   const fetchArticles = React.useCallback(async () => {
     try {
       const data = await getArticles()
-       const sorted = [...(data || [])].sort((a, b) => a.id - b.id)
+      const sorted = [...(data || [])].sort((a, b) => a.id - b.id)
       setArticles(sorted || [])
     } catch (error) {
       console.error("[fetchArticles] error:", error)
@@ -153,32 +155,32 @@ export function ArticleForm() {
     resetForm()
   }, [resetForm])
 
- const handleDelete = React.useCallback(
-  async (id: number) => {
-    if (id === 1 || id === 2) {
-      setStatus({ state: "error", message: "Artikel ini tidak boleh dihapus" })
-      return
-    }
-
-    setDeletingId(id)
-    try {
-      await deleteArticle(id)
-      setArticles((prev) => prev.filter((a) => a.id !== id))
-      if (editingId === id) {
-        resetForm()
+  const handleDelete = React.useCallback(
+    async (id: number) => {
+      if (id === 1 || id === 2) {
+        setStatus({ state: "error", message: "Artikel ini tidak boleh dihapus" })
+        return
       }
-    } catch (error: any) {
-      console.error("[handleDelete] error:", error)
-      setStatus({
-        state: "error",
-        message: error.response?.data?.message || error.message || "Gagal menghapus artikel",
-      })
-    } finally {
-      setDeletingId(null)
-    }
-  },
-  [editingId, resetForm]
-)
+
+      setDeletingId(id)
+      try {
+        await deleteArticle(id)
+        setArticles((prev) => prev.filter((a) => a.id !== id))
+        if (editingId === id) {
+          resetForm()
+        }
+      } catch (error: any) {
+        console.error("[handleDelete] error:", error)
+        setStatus({
+          state: "error",
+          message: error.response?.data?.message || error.message || "Gagal menghapus artikel",
+        })
+      } finally {
+        setDeletingId(null)
+      }
+    },
+    [editingId, resetForm]
+  )
 
   const handleSubmit = React.useCallback(async () => {
     if (!jdlArtikel || !description || (!isEditing && !photo)) {
@@ -246,7 +248,7 @@ export function ArticleForm() {
 
   return (
     <div className="w-full p-10">
-      
+
       <div className="flex flex-col gap-3 border bg-card shadow-sm rounded-2xl p-6">
         <div className="flex flex-col gap-2">
           <Label className="text-sm font-medium">Judul Artikel</Label>
@@ -259,13 +261,14 @@ export function ArticleForm() {
           />
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 w-full min-w-0">
           <Label className="text-sm font-medium">Deskripsi</Label>
           <Textarea
             placeholder="Deskripsi artikel..."
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             disabled={isLoading}
+            className="w-full break-words whitespace-pre-wrap [overflow-wrap:anywhere] resize-none"
           />
         </div>
 
@@ -299,8 +302,8 @@ export function ArticleForm() {
                 ? "Mengupdate..."
                 : "Menyimpan..."
               : isEditing
-              ? "Update Artikel"
-              : "Simpan Artikel"}
+                ? "Update Artikel"
+                : "Simpan Artikel"}
           </Button>
 
           {isEditing && (

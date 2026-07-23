@@ -216,7 +216,7 @@ export function MinisterProvinsialForm() {
 
   return (
     <div className=" space-y-10">
-      {/* FORM CREATE SAJA */}
+ 
       <form onSubmit={handleCreateSubmit} className="space-y-6 rounded-xl border p-6 shadow-sm">
         <h2 className="text-base font-semibold">Tambah Data Baru</h2>
 
@@ -271,7 +271,6 @@ export function MinisterProvinsialForm() {
         </Button>
       </form>
 
-      {/* LIST + EDIT + DELETE */}
       <div className="rounded-xl border p-6 shadow-sm">
         <h2 className="mb-4 text-lg font-semibold">Data Minister Provinsial Tersimpan</h2>
         <Separator className="mb-4" />
@@ -316,7 +315,6 @@ export function MinisterProvinsialForm() {
         )}
       </div>
 
-      {/* MODAL EDIT (POPUP) */}
       <Modal
         title={`Edit: ${editItem?.nama ?? ""}`}
         description="Perbarui data minister provinsial di bawah ini."
@@ -356,23 +354,6 @@ export function MinisterProvinsialForm() {
             />
           </div>
 
-          <div className="space-y-1.5">
-            <Label htmlFor="edit-urutan">Urutan Tampil</Label>
-            <Input
-              id="edit-urutan"
-              type="number"
-              min="1"
-              step="1"
-              value={editForm.urutan}
-              onChange={(e) => {
-                const value = e.target.value
-                if (value !== "" && Number(value) < 1) return
-                updateEditField("urutan", value)
-              }}
-              placeholder="1"
-            />
-          </div>
-
           <div className="space-y-1.5 sm:col-span-2">
             <Label htmlFor="edit-keterangan">Keterangan (opsional)</Label>
             <Textarea
@@ -389,7 +370,6 @@ export function MinisterProvinsialForm() {
         )}
       </Modal>
 
-      {/* MODAL HASIL (sukses/gagal) */}
       <Modal
         title={resultModal.title}
         description={resultModal.description}
