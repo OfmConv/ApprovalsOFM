@@ -6,10 +6,10 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 import { ArrowRight, Menu } from "lucide-react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import React, { useEffect, useRef, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
-import { GetDewanPimpinan } from "@/services/api";
+import { getArticles, GetDewanPimpinan } from "@/services/api";
 import { DataTableWilayah } from "@/utils/components/DataTableWilayah"
 import { getAllWilayah } from "@/services/api"
 
@@ -134,6 +134,13 @@ function Hero() {
     navigate("/kegiatan")
   }
 
+  React.useEffect(() => {
+    async function init() {
+    const res =  await getArticles(1)
+    console.log(res)
+    }
+    init();
+  },[])
   return (
     <section className="relative w-full min-h-[100dvh] overflow-hidden flex flex-col justify-end">
       <img

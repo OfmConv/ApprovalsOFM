@@ -581,9 +581,13 @@ export async function updateGalleryPhotoDirect(
   return res.data;
 }
 
-export async function getArticles() {
+export async function getArticles(id: any) {
   try {
+    if (id === null) {
     const res = await axiosInstance.get("/articles");
+    return res.data.data;
+    }
+    const res = await axiosInstance.get(`/articles?id=${id}`);
     return res.data.data;
   } catch (error) {
     console.log(error);
