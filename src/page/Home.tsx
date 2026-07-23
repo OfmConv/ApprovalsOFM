@@ -125,27 +125,29 @@ export function Navbar() {
 
 function Hero() {
   const navigate = useNavigate();
+  const [article, setArticle] = React.useState<any>(null);
 
   function HandleHistory() {
     navigate("/history");
   }
 
   function navigateToArticle() {
-    navigate("/kegiatan")
+    navigate("/kegiatan");
   }
 
   React.useEffect(() => {
     async function init() {
-    const res =  await getArticles(1)
-    console.log(res)
+      const res = await getArticles(1);
+      setArticle(res?.data);
     }
     init();
-  },[])
+  }, []);
+
   return (
     <section className="relative w-full min-h-[100dvh] overflow-hidden flex flex-col justify-end">
       <img
-        src="/Kapitularis.png"
-        alt="Interior gereja New Horizon Chapel"
+        src={article?.img}
+        alt={article?.jdl_artikel}
         className="absolute inset-0 h-full w-full object-cover object-center md:object-top"
         loading="eager"
       />
@@ -155,17 +157,13 @@ function Hero() {
       <div className="relative z-10 mx-auto flex w-full h-full max-w-6xl flex-col justify-end px-4 pb-24 pt-32 sm:px-6 sm:pb-20">
         <div className="flex flex-col justify-end gap-8 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
-
-              <h1 className="max-w-lg text-left font-serif text-3xl leading-[1.15] text-white sm:text-4xl sm:leading-[1.1] md:text-2xl">
-              OFMConv 
-              <br />
-              Fraternitas, Minoritas, Konventualitas
-              </h1>
+            <h1 className="max-w-lg text-left font-serif text-3xl leading-[1.15] text-white sm:text-4xl sm:leading-[1.1] md:text-2xl">
+              {article?.jdl_artikel}
+            </h1>
             <p className="mt-4 max-w-md text-left text-sm text-gray-200 md:text-1xl">
-              Ordo Fratrum Minorum Conventual (OFMConv) adalah ordo Fransiskan
-              tertua, hidup dalam persaudaraan, kesederhanaan, dan doa sejak
-              tahun 1209.
+              {article?.description}
             </p>
+
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <button
                 onClick={HandleHistory}
