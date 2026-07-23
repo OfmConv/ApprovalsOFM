@@ -99,7 +99,7 @@ export function ArticleForm() {
 
   const fetchArticles = React.useCallback(async () => {
     try {
-      const data = await getArticles(null)
+      const data = await getArticles(0)
       const sorted = [...(data || [])].sort((a, b) => a.id - b.id)
       setArticles(sorted || [])
     } catch (error) {
