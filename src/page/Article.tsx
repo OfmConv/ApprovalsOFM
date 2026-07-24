@@ -35,7 +35,7 @@ export default function BlogGrid() {
 
   const fetchArticles = useCallback(async () => {
     try {
-      const data = await getArticles();
+      const data = await getArticles(0);
       setArticles(data || []);
     } catch (error) {
       console.error("[fetchArticles] error:", error);
