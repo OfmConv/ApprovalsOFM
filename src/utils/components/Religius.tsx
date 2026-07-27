@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -26,6 +25,9 @@ const FORMATION_TYPE_OPTIONS = [
     "Tahbisan Imamat",
 ];
 
+const formatKey = (key: string) =>
+    key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+
 export default function ReligiousFeastSection({ nkp, isAdmin = false }: { nkp: string; isAdmin?: boolean }) {
     const [list, setList] = useState<ReligiousFeastRecord[]>([]);
     const [loading, setLoading] = useState(true);
@@ -38,7 +40,7 @@ export default function ReligiousFeastSection({ nkp, isAdmin = false }: { nkp: s
     const [errorModalOpen, setErrorModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [successModalOpen, setSuccessModalOpen] = useState(false);
-    const [successMessage, setSuccessMessage] = useState("");
+    const [successChanges, setSuccessChanges] = useState<Record<string, any>>({});
 
     const [deleteTarget, setDeleteTarget] = useState<ReligiousFeastRecord | null>(null);
 
@@ -87,15 +89,15 @@ export default function ReligiousFeastSection({ nkp, isAdmin = false }: { nkp: s
             const action = editingRecord ? "update" : "insert";
 
             if (isAdmin) {
-                const res = await updateReligiousFeastDirect(nkp, action, form, editingRecord?.religious_id);
+                await updateReligiousFeastDirect(nkp, action, form, editingRecord?.religious_id);
                 setFormOpen(false);
-                setSuccessMessage(res?.message || "Data keagamaan berhasil disimpan.");
+                setSuccessChanges(form);
                 setSuccessModalOpen(true);
 
                 const data = await getReligiousFeast(nkp);
                 setList(data ?? []);
             } else {
-                const res = await requestReligiousFeastChange(
+                await requestReligiousFeastChange(
                     nkp,
                     editingRecord ? "Koreksi data keagamaan" : "Menambahkan riwayat formasi baru",
                     action,
@@ -103,7 +105,7 @@ export default function ReligiousFeastSection({ nkp, isAdmin = false }: { nkp: s
                     editingRecord?.religious_id
                 );
                 setFormOpen(false);
-                setSuccessMessage(res?.message || "Pengajuan berhasil dikirim, menunggu approval.");
+                setSuccessChanges(form);
                 setSuccessModalOpen(true);
             }
         } catch (error: any) {
@@ -125,21 +127,21 @@ export default function ReligiousFeastSection({ nkp, isAdmin = false }: { nkp: s
             };
 
             if (isAdmin) {
-                const res = await updateReligiousFeastDirect(nkp, "delete", payload, deleteTarget.religious_id);
-                setSuccessMessage(res?.message || "Data keagamaan berhasil dihapus.");
+                await updateReligiousFeastDirect(nkp, "delete", payload, deleteTarget.religious_id);
+                setSuccessChanges(payload);
                 setSuccessModalOpen(true);
 
                 const data = await getReligiousFeast(nkp);
                 setList(data ?? []);
             } else {
-                const res = await requestReligiousFeastChange(
+                await requestReligiousFeastChange(
                     nkp,
                     "Menghapus riwayat formasi",
                     "delete",
                     payload,
                     deleteTarget.religious_id
                 );
-                setSuccessMessage(res?.message || "Pengajuan hapus berhasil dikirim, menunggu approval.");
+                setSuccessChanges(payload);
                 setSuccessModalOpen(true);
             }
         } catch (error: any) {
@@ -331,10 +333,17 @@ export default function ReligiousFeastSection({ nkp, isAdmin = false }: { nkp: s
 
             <Modal
                 title={isAdmin ? "Perubahan Disimpan" : "Pengajuan Terkirim"}
-                description={successMessage}
                 open={successModalOpen}
                 onClose={() => setSuccessModalOpen(false)}
-            />
+            >
+                <div className="space-y-1 text-left">
+                    {Object.entries(successChanges).map(([key, value]) => (
+                        <p key={key} className="text-sm text-gray-600">
+                            <span className="font-medium">{formatKey(key)}:</span> {value || "-"}
+                        </p>
+                    ))}
+                </div>
+            </Modal>
         </div>
     );
 }

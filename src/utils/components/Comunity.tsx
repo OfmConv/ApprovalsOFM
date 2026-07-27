@@ -14,6 +14,9 @@ type AssignmentRecord = {
     date: string;
 };
 
+const formatKey = (key: string) =>
+    key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+
 export default function CommunitySection({ nkp, isAdmin = false }: { nkp: string; isAdmin?: boolean }) {
     const [list, setList] = useState<AssignmentRecord[]>([]);
     const [loading, setLoading] = useState(true);
@@ -26,7 +29,7 @@ export default function CommunitySection({ nkp, isAdmin = false }: { nkp: string
     const [errorModalOpen, setErrorModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [successModalOpen, setSuccessModalOpen] = useState(false);
-    const [successMessage, setSuccessMessage] = useState("");
+    const [successChanges, setSuccessChanges] = useState<Record<string, any>>({});
 
     const [deleteTarget, setDeleteTarget] = useState<AssignmentRecord | null>(null);
 
@@ -74,15 +77,15 @@ export default function CommunitySection({ nkp, isAdmin = false }: { nkp: string
             const action = editingRecord ? "update" : "insert";
 
             if (isAdmin) {
-                const res = await updateAssignmentDirect(nkp, action, form, editingRecord?.assignment_id);
+                await updateAssignmentDirect(nkp, action, form, editingRecord?.assignment_id);
                 setFormOpen(false);
-                setSuccessMessage(res?.message || "Data penugasan berhasil disimpan.");
+                setSuccessChanges(form);
                 setSuccessModalOpen(true);
 
                 const data = await getAssignment(nkp);
                 setList(data ?? []);
             } else {
-                const res = await requestAssignmentChange(
+                await requestAssignmentChange(
                     nkp,
                     editingRecord ? "Koreksi data penugasan" : "Menambahkan penugasan baru",
                     action,
@@ -90,7 +93,7 @@ export default function CommunitySection({ nkp, isAdmin = false }: { nkp: string
                     editingRecord?.assignment_id
                 );
                 setFormOpen(false);
-                setSuccessMessage(res?.message || "Pengajuan berhasil dikirim, menunggu approval.");
+                setSuccessChanges(form);
                 setSuccessModalOpen(true);
             }
         } catch (error: any) {
@@ -111,21 +114,21 @@ export default function CommunitySection({ nkp, isAdmin = false }: { nkp: string
             };
 
             if (isAdmin) {
-                const res = await updateAssignmentDirect(nkp, "delete", payload, deleteTarget.assignment_id);
-                setSuccessMessage(res?.message || "Data penugasan berhasil dihapus.");
+                await updateAssignmentDirect(nkp, "delete", payload, deleteTarget.assignment_id);
+                setSuccessChanges(payload);
                 setSuccessModalOpen(true);
 
                 const data = await getAssignment(nkp);
                 setList(data ?? []);
             } else {
-                const res = await requestAssignmentChange(
+                await requestAssignmentChange(
                     nkp,
                     "Menghapus penugasan",
                     "delete",
                     payload,
                     deleteTarget.assignment_id
                 );
-                setSuccessMessage(res?.message || "Pengajuan hapus berhasil dikirim, menunggu approval.");
+                setSuccessChanges(payload);
                 setSuccessModalOpen(true);
             }
         } catch (error: any) {
@@ -281,10 +284,17 @@ export default function CommunitySection({ nkp, isAdmin = false }: { nkp: string
 
             <Modal
                 title={isAdmin ? "Perubahan Disimpan" : "Pengajuan Terkirim"}
-                description={successMessage}
                 open={successModalOpen}
                 onClose={() => setSuccessModalOpen(false)}
-            />
+            >
+                <div className="space-y-1 text-left">
+                    {Object.entries(successChanges).map(([key, value]) => (
+                        <p key={key} className="text-sm text-gray-600">
+                            <span className="font-medium">{formatKey(key)}:</span> {value || "-"}
+                        </p>
+                    ))}
+                </div>
+            </Modal>
         </div>
     );
 }

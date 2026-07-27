@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -75,6 +73,9 @@ function SectionHeader({ icon: Icon, title }: { icon: any; title: string }) {
     );
 }
 
+const formatKey = (key: string) =>
+    key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+
 export default function ProfilePage() {
     const [profile, setProfile] = useState<any>({});
     const [changes, setChanges] = useState<any>({});
@@ -88,7 +89,7 @@ export default function ProfilePage() {
     const [errorModalOpen, setErrorModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [successModalOpen, setSuccessModalOpen] = useState(false);
-    const [successMessage] = useState("");
+    const [successChanges, setSuccessChanges] = useState<Record<string, any>>({});
 
     useEffect(() => {
         async function load() {
@@ -121,6 +122,7 @@ export default function ProfilePage() {
     };
 
     const handleSubmit = async () => {
+
         if (Object.keys(changes).length === 0) {
             return;
         }
@@ -130,10 +132,14 @@ export default function ProfilePage() {
                 const { email, ...detailChanges } = changes;
                 await updateProfileDirect(nkp, detailChanges, email);
             } else {
+
                 const { email, ...detailChanges } = changes;
                 await requestChange(nkp, "Update data pribadi", detailChanges, email);
+                setSuccessChanges(changes);
+
             }
             setChanges({});
+
             setSuccessModalOpen(true);
         } catch (error: any) {
             setErrorMessage(
@@ -231,7 +237,6 @@ export default function ProfilePage() {
                             : isChange === 4 ?
                                 <PhotoGallerySection nkp={nkp} isAdmin={isAdmin} />
                                 : <>
-
                                     <div className="mx-auto space-y-5 mt-5">
                                         <Card className="border-0 shadow-sm">
                                             <CardContent className="p-6">
@@ -250,7 +255,8 @@ export default function ProfilePage() {
                                                 </Button>
                                             </CardContent>
                                         </Card>
-                                    </div></>
+                                    </div>
+                                </>
             }
             <Modal
                 title="Failed to send request"
@@ -260,10 +266,17 @@ export default function ProfilePage() {
             />
             <Modal
                 title={isAdmin ? "Changes Saved Successfully" : "Request Sent Successfully"}
-                description={successMessage}
                 open={successModalOpen}
                 onClose={() => setSuccessModalOpen(false)}
-            />
+            >
+                <div className="space-y-1 text-left">
+                    {Object.entries(successChanges).map(([key, value]) => (
+                        <p key={key} className="text-sm text-gray-600">
+                            <span className="font-medium">{formatKey(key)}:</span> {value || "-"}
+                        </p>
+                    ))}
+                </div>
+            </Modal>
         </div>
     );
 }
