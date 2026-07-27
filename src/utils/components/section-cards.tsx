@@ -6,7 +6,7 @@ import { ProfileModal } from "../ModalUsers";
 
 export function ProfileCard({ nkp, familyName, fullname, religiousName, ktpName, namePassport, dateBirth, placeBirth, phoneNumber, study, email, avatarUrl, background, education, assignment, feastival }: interfaceProfile) {
   return (
-    <Card className="w-full min-h-[320px] rounded-2xl border shadow-sm flex flex-col">
+    <Card className="w-full h-full min-h-[320px] rounded-2xl border shadow-sm flex flex-col">
       <CardContent className="pt-3 pb-1 flex flex-col flex-1 items-center gap-2">
 
         <Avatar className="w-20 h-20">
