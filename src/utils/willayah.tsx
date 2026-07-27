@@ -37,7 +37,7 @@ const EMPTY_FORM = {
   provinsi: "",
   negara: "Indonesia",
   pemimpin: "",
-  jabatan: "",
+  jabatan: "Guardian",
   periode_mulai: "",
   periode_selesai: "",
   fungsi_khusus: "",
@@ -150,7 +150,7 @@ export function WilayahForm() {
 
   return (
     <div className=" space-y-10 ">
-      <form onSubmit={handleSubmit} className="space-y-6 rounded-xl border p-6 shadow-sm">
+      <form onSubmit={handleSubmit} autoComplete="off" className="space-y-6 rounded-xl border p-6 shadow-sm">
 
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -159,6 +159,7 @@ export function WilayahForm() {
             <Input
               id="nama_lokasi"
               value={form.nama_lokasi}
+              autoComplete="off"
               onChange={(e) => updateField("nama_lokasi", e.target.value)}
               placeholder="Biara St. Yosep"
               required
@@ -180,6 +181,7 @@ export function WilayahForm() {
             <Input
               id="status"
               value={form.status}
+              autoComplete="off"
               onChange={(e) => updateField("status", e.target.value)}
               placeholder="Isi karya..."
             />
@@ -190,6 +192,7 @@ export function WilayahForm() {
             <Input
               id="kota"
               value={form.kota}
+              autoComplete="off"
               onChange={(e) => updateField("kota", e.target.value)}
               placeholder="Delitua"
             />
@@ -210,6 +213,7 @@ export function WilayahForm() {
             <Input
               id="negara"
               value={form.negara}
+              autoComplete="off"
               onChange={(e) => updateField("negara", e.target.value)}
             />
           </div>
@@ -240,6 +244,7 @@ export function WilayahForm() {
               id="periode_selesai"
               type="date"
               value={form.periode_selesai}
+              autoComplete="off"
               onChange={(e) => updateField("periode_selesai", e.target.value)}
             />
           </div>
