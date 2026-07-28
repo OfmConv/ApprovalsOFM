@@ -19,7 +19,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-const nkp = localStorage.getItem("nkp")
 const data = {
   user: {
     name: "test",
@@ -70,6 +69,16 @@ const data = {
 }
 
 export function AppSidebar({ userSelect, ...props }: React.ComponentProps<typeof Sidebar> & {userSelect: (val: number) => void }) {
+   const [nkp, setNkp] = React.useState<string | null>(null)
+
+  React.useEffect(() => {
+  setNkp(localStorage.getItem("nkp"))
+
+  // Sinkron ulang kalau tab lain ubah localStorage
+  const handleStorage = () => setNkp(localStorage.getItem("nkp"))
+  window.addEventListener("storage", handleStorage)
+  return () => window.removeEventListener("storage", handleStorage)
+}, [])
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
