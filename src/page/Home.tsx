@@ -191,7 +191,7 @@ function Hero() {
               <p className="text-[11px] text-gray-300 sm:text-xs">Didirikan</p>
             </div>
             <div className="text-left md:text-right">
-              <p className="font-serif text-2xl text-white sm:text-3xl">113</p>
+              <p className="font-serif text-2xl text-white sm:text-3xl">139</p>
               <p className="text-[11px] text-gray-300 sm:text-xs">
                 Saudara di Indonesia
               </p>
