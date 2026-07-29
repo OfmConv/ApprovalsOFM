@@ -12,6 +12,8 @@ import ReligiousFeastSection from "@/utils/components/Religius";
 import CommunitySection from "@/utils/components/Comunity";
 import PhotoGallerySection from "@/utils/components/Galery";
 
+const formatKey = (key: string) => key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+
 function EditableField({ label, value, onChange, labelClassName }: {
     label: string;
     value: string;
@@ -72,9 +74,6 @@ function SectionHeader({ icon: Icon, title }: { icon: any; title: string }) {
         </div>
     );
 }
-
-const formatKey = (key: string) =>
-    key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
 export default function ProfilePage() {
     const [profile, setProfile] = useState<any>({});

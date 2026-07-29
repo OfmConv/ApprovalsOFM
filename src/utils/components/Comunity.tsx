@@ -139,7 +139,7 @@ export default function CommunitySection({ nkp, isAdmin = false }: { nkp: string
         }
     };
 
-   return (
+    return (
         <div className="mx-auto space-y-5 mt-5">
             <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">

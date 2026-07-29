@@ -56,6 +56,7 @@ const InfoRow = memo(({ icon, label, value }: {
     </div>
   </div>
 ))
+
 InfoRow.displayName = "InfoRow"
 
 const ProfilTab = memo(({ profile }: { profile: Profile }) => {
@@ -141,6 +142,7 @@ const ReligiusTab = memo(({ profile }: { profile: Profile }) => {
     </div>
   )
 })
+
 ReligiusTab.displayName = "ReligiusTab"
 
 export function ProfileModal({ profile }: { profile: Profile }) {

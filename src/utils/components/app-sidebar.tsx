@@ -74,7 +74,6 @@ export function AppSidebar({ userSelect, ...props }: React.ComponentProps<typeof
   React.useEffect(() => {
   setNkp(localStorage.getItem("nkp"))
 
-  // Sinkron ulang kalau tab lain ubah localStorage
   const handleStorage = () => setNkp(localStorage.getItem("nkp"))
   window.addEventListener("storage", handleStorage)
   return () => window.removeEventListener("storage", handleStorage)
@@ -102,7 +101,6 @@ export function AppSidebar({ userSelect, ...props }: React.ComponentProps<typeof
       <SidebarFooter>
         <NavUser nkp={nkp} user={data.user} />
       </SidebarFooter>
-      
     </Sidebar>
   )
 }

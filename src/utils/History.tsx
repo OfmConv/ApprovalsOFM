@@ -18,6 +18,7 @@ function formatPeriode(mulai?: string | null, selesai?: string | null) {
   const tahunSelesai = selesai ? selesai.split("T")[0].split("-")[0] : "saat ini"
   return `${tahunMulai}–${tahunSelesai}`
 }
+
 function Reveal({ children, delay = 0 }: any) {
   const ref = React.useRef(null);
   const [visible, setVisible] = React.useState(false);
@@ -53,6 +54,7 @@ function Reveal({ children, delay = 0 }: any) {
     </div>
   );
 }
+
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-4">
@@ -64,6 +66,7 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
+
 export function History() {
   const [daftarMinister, setDaftarMinister] = React.useState<MinisterProvinsial[]>([])
   const [loading, setLoading] = React.useState(true)

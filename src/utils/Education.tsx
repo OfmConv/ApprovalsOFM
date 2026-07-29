@@ -185,21 +185,21 @@ export default function EducationSection({ nkp, isAdmin = false }: { nkp: string
                     ) : (
                         <div className="space-y-3">
                             {educationList.sort((a, b) => {
-          const order: any = {
-            SD: 1,
-            SMP: 2,
-            SMA: 3,
-            D1: 4,
-            D2: 5,
-            D3: 6,
-            D4: 7,
-            S1: 8,
-            S2: 9,
-            S3: 10,
-          };
+                                const order: any = {
+                                    SD: 1,
+                                    SMP: 2,
+                                    SMA: 3,
+                                    D1: 4,
+                                    D2: 5,
+                                    D3: 6,
+                                    D4: 7,
+                                    S1: 8,
+                                    S2: 9,
+                                    S3: 10,
+                                };
 
-          return (order[a.level] || 99) - (order[b.level] || 99);
-        }).map((record) => (
+                                return (order[a.level] || 99) - (order[b.level] || 99);
+                            }).map((record) => (
                                 <div
                                     key={record.education_id}
                                     className="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50/60 px-4 py-3"
@@ -242,7 +242,6 @@ export default function EducationSection({ nkp, isAdmin = false }: { nkp: string
                 </CardContent>
             </Card>
 
-            {/* Modal tambah / edit */}
             <Modal
                 title={editingRecord ? "Edit Riwayat Pendidikan" : "Tambah Riwayat Pendidikan"}
                 open={formOpen}
@@ -251,7 +250,6 @@ export default function EducationSection({ nkp, isAdmin = false }: { nkp: string
             >
                 <div className="space-y-3">
                     <div>
-                        {/* <p className="text-xs font-medium text-gray-500 mb-1.5">Jenjang</p> */}
                         <select
                             value={form.level}
                             onChange={(e) => setForm((prev) => ({ ...prev, level: e.target.value }))}
@@ -265,7 +263,6 @@ export default function EducationSection({ nkp, isAdmin = false }: { nkp: string
                     </div>
 
                     <div>
-                        {/* <p className="text-xs font-medium text-gray-500 mb-1.5">Nama Sekolah / Universitas</p> */}
                         <Input
                             value={form.institution}
                             onChange={(e) => setForm((prev) => ({ ...prev, institution: e.target.value }))}
@@ -303,7 +300,6 @@ export default function EducationSection({ nkp, isAdmin = false }: { nkp: string
                 </div>
             </Modal>
 
-            {/* Modal konfirmasi hapus */}
             <Modal
                 title="Hapus Riwayat Pendidikan"
                 description={
@@ -318,7 +314,6 @@ export default function EducationSection({ nkp, isAdmin = false }: { nkp: string
                 onConfirm={confirmDelete}
             />
 
-            {/* Modal error */}
             <Modal
                 title="Gagal Mengirim Pengajuan"
                 description={errorMessage}

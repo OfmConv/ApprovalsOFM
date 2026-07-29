@@ -22,7 +22,7 @@ function LoginPage() {
 
   async function handleLoginAdmin(e: any) {
     e.preventDefault();
-    if (ready) return; // ✅ cegah double-fire
+    if (ready) return;
     try {
       const getStatus = await loginAdmin(userName, password, true);
       const token = localStorage.getItem("token");
@@ -45,7 +45,7 @@ function LoginPage() {
 
   async function handleLogin(e: any) {
     e.preventDefault();
-    if (ready) return; // ✅ cegah double-fire
+    if (ready) return;
     try {
       const result = await login(userName, password);
       if (result.status === 200) {
@@ -60,7 +60,6 @@ function LoginPage() {
     }
   }
 
-  // ✅ satu-satunya perubahan struktural: submit form disesuaikan dgn form yang aktif
   const activeSubmit = changeForm === 'admin' ? handleLoginAdmin : handleLogin;
 
   function handleButton(e: string) {
@@ -204,7 +203,6 @@ function LoginPage() {
                   </div>
                 </Field>
 
-                {/* ✅ onClick DIHAPUS — cukup type="submit", form yang urus */}
                 <Button
                   type="submit"
                   className="w-full h-12 rounded-xl text-sm font-medium flex items-center gap-2.5 transition-all"
@@ -283,7 +281,6 @@ function LoginPage() {
                   </div>
                 </Field>
 
-                {/* ✅ onClick DIHAPUS — cukup type="submit" */}
                 <Button
                   type="submit"
                   className="w-full h-12 rounded-xl text-sm font-medium flex items-center gap-2.5 transition-all"
@@ -299,7 +296,6 @@ function LoginPage() {
                   Login
                 </Button>
 
-                {/* ✅ type="button" ditambahkan — sebelumnya hilang, bisa ikut submit form */}
                 <Button
                   type="button"
                   onClick={() => handleButton('welcome')}

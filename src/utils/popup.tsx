@@ -68,7 +68,7 @@ export function Popup({ open, data, onClose, onSubmit }: PopupProps) {
 
   const { user, detail_user } = data;
 
-  
+
   const handleSubmit = () => {
     let statusCreate;
     setLoading(true);

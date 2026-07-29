@@ -168,16 +168,6 @@ export function WilayahForm() {
 
           <div className="space-y-1.5">
             <Label htmlFor="status">Karya</Label>
-            {/* <Select value={form.status} onValueChange={(v) => updateField("status", v)}>
-              <SelectTrigger id="status" className="w-full">
-                <SelectValue placeholder="Pilih status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Biara">Biara</SelectItem>
-                <SelectItem value="Rumah Filial">Rumah Filial</SelectItem>
-                <SelectItem value="Kantor Provinsi">Kantor Provinsi</SelectItem>
-              </SelectContent>
-            </Select> */}
             <Input
               id="status"
               value={form.status}
@@ -249,15 +239,7 @@ export function WilayahForm() {
             />
           </div>
 
-          {/* <div className="space-y-1.5 sm:col-span-2">
-            <Label htmlFor="fungsi_khusus">Karya</Label>
-            <Input
-              id="fungsi_khusus"
-              value={form.fungsi_khusus}
-              onChange={(e) => updateField("fungsi_khusus", e.target.value)}
-              placeholder="Kantor Pusat Provinsi"
-            />
-          </div> */}
+
         </div>
 
         <Button type="submit" disabled={submitting} className="w-full sm:w-auto bg-[#2E6193] hover:bg-[#1477C2] text-white ">

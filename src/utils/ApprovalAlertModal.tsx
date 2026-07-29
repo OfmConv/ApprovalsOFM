@@ -43,7 +43,6 @@ export function ApprovalAlertModal({
                             <X className="w-4 h-4" />
                         </button>
 
-                        {/* icon dengan efek pulse */}
                         <div className="relative inline-flex items-center justify-center mx-auto">
                             <span className="absolute inline-flex h-16 w-16 rounded-full bg-white/30 animate-ping" />
                             <span className="relative inline-flex items-center justify-center h-16 w-16 rounded-full bg-white shadow-lg">
@@ -52,7 +51,6 @@ export function ApprovalAlertModal({
                         </div>
                     </div>
 
-                    {/* body, overlap dikit ke header */}
                     <div className="relative px-6 pb-6 -mt-5 z-10">
                         <div className="bg-white rounded-xl text-center pt-3">
                             <h2 className="text-lg font-bold text-gray-900">

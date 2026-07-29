@@ -86,7 +86,6 @@ function formatDate(value: unknown) {
   return str.split("T")[0]
 }
 
-
 function buildColumns(): ColumnDef<z.infer<typeof schema>>[] {
   return [
     {
@@ -156,7 +155,7 @@ export function DataTableWilayah({
   })
   const [globalFilter, setGlobalFilter] = React.useState("")
   const [searchTerm, setSearchTerm] = React.useState("")
-  const [searchColumn, setSearchColumn] = React.useState("all")
+  const [searchColumn] = React.useState("all")
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
@@ -345,7 +344,7 @@ function WilayahDetailViewer({ item }: { item: z.infer<typeof schema> }) {
               </div>
               <Separator className="mb-5" />
               <div className="grid grid-cols-2 gap-x-6 gap-y-5">
-              
+
                 <div className="flex flex-col gap-1.5">
                   <span className="font-medium text-muted-foreground">Negara</span>
                   <span className="font-medium text-foreground">{formatValue(item.negara)}</span>
@@ -367,7 +366,7 @@ function WilayahDetailViewer({ item }: { item: z.infer<typeof schema> }) {
                     {formatDate(item.periode_selesai)}
                   </span>
                 </div>
-               
+
               </div>
             </div>
           </div>

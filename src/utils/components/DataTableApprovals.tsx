@@ -150,14 +150,6 @@ function buildColumns(
   onReject?: ApprovalAction
 ): ColumnDef<z.infer<typeof schema>>[] {
   return [
-    // {
-    //   accessorKey: "approval_id",
-    //   header: "ID",
-    //   cell: ({ row }) => (
-    //     <div className="w-full font-medium text-sm">#{row.original.approval_id}</div>
-    //   ),
-    //   enableHiding: false,
-    // },
     {
       accessorKey: "nkp",
       header: "NKP",
@@ -274,67 +266,67 @@ export function DataTableApprovals({
   return (
     <div className="w-full flex-col justify-start gap-6">
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between px-4 lg:px-6 pb-6">
-  <div className="flex items-center gap-2 text-muted-foreground">
-    
-  </div>
-  <div className="flex flex-wrap items-center gap-2">
-    <Select value={searchColumn} onValueChange={setSearchColumn}>
-      <SelectTrigger className="w-[140px] sm:w-[160px] h-9">
-        <SelectValue placeholder="Pilih Kolom" />
-      </SelectTrigger>
-      <SelectContent side="bottom">
-        <SelectItem value="all">Semua Kolom</SelectItem>
-        <SelectItem value="nkp">NKP</SelectItem>
-        <SelectItem value="tipe">Tipe</SelectItem>
-        <SelectItem value="status">Status</SelectItem>
-        <SelectItem value="description">Deskripsi</SelectItem>
-      </SelectContent>
-    </Select>
+        <div className="flex items-center gap-2 text-muted-foreground">
 
-    <div className="relative flex-1 min-w-[140px] sm:flex-none">
-      <IconSearch className="absolute left-2.5 top-2.5 size-4 text-muted-foreground" />
-      <Input
-        placeholder="Cari approval..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="h-9 w-full sm:w-[200px] pl-8 lg:w-[250px]"
-      />
-    </div>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <Select value={searchColumn} onValueChange={setSearchColumn}>
+            <SelectTrigger className="w-[140px] sm:w-[160px] h-9">
+              <SelectValue placeholder="Pilih Kolom" />
+            </SelectTrigger>
+            <SelectContent side="bottom">
+              <SelectItem value="all">Semua Kolom</SelectItem>
+              <SelectItem value="nkp">NKP</SelectItem>
+              <SelectItem value="tipe">Tipe</SelectItem>
+              <SelectItem value="status">Status</SelectItem>
+              <SelectItem value="description">Deskripsi</SelectItem>
+            </SelectContent>
+          </Select>
 
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className="bg-[#2E6193] hover:bg-[#1477C2] text-white hover:text-white"
-        >
-          <IconLayoutColumns />
-          <span className="hidden lg:inline">Customize Columns</span>
-          <span className="lg:hidden">Columns</span>
-          <IconChevronDown />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        {table
-          .getAllColumns()
-          .filter(
-            (column) =>
-              typeof column.accessorFn !== "undefined" && column.getCanHide()
-          )
-          .map((column) => (
-            <DropdownMenuCheckboxItem
-              key={column.id}
-              className="capitalize"
-              checked={column.getIsVisible()}
-              onCheckedChange={(value) => column.toggleVisibility(!!value)}
-            >
-              {column.id}
-            </DropdownMenuCheckboxItem>
-          ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
-  </div>
-</div>
+          <div className="relative flex-1 min-w-[140px] sm:flex-none">
+            <IconSearch className="absolute left-2.5 top-2.5 size-4 text-muted-foreground" />
+            <Input
+              placeholder="Cari approval..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="h-9 w-full sm:w-[200px] pl-8 lg:w-[250px]"
+            />
+          </div>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                size="sm"
+                className="bg-[#2E6193] hover:bg-[#1477C2] text-white hover:text-white"
+              >
+                <IconLayoutColumns />
+                <span className="hidden lg:inline">Customize Columns</span>
+                <span className="lg:hidden">Columns</span>
+                <IconChevronDown />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              {table
+                .getAllColumns()
+                .filter(
+                  (column) =>
+                    typeof column.accessorFn !== "undefined" && column.getCanHide()
+                )
+                .map((column) => (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      </div>
 
       <div className="overflow-auto rounded-lg border h-[450px] mx-4 lg:mx-6">
         <Table>
@@ -456,9 +448,8 @@ function ApprovalDetailViewer({
       setResultModal({
         open: true,
         title: type === "approve" ? "Approval Disetujui" : "Approval Ditolak",
-        description: `Approval #${item.approval_id} (${tipeLabel(item.tipe)}) untuk NKP ${item.nkp} berhasil di${
-          type === "approve" ? "setujui" : "tolak"
-        }.`,
+        description: `Approval #${item.approval_id} (${tipeLabel(item.tipe)}) untuk NKP ${item.nkp} berhasil di${type === "approve" ? "setujui" : "tolak"
+          }.`,
       })
     } catch (error) {
       const message =
@@ -476,98 +467,98 @@ function ApprovalDetailViewer({
   return (
     <>
       <Drawer direction={isMobile ? "bottom" : "right"} open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        <Button variant="outline" size="sm">
-          Lihat Detail
-        </Button>
-      </DrawerTrigger>
-      <DrawerContent className={!isMobile ? "sm:max-w-lg" : ""}>
-        <DrawerHeader className="gap-4 pb-6 pt-8 text-left">
-          <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <FileText className="h-7 w-7" />
-            </div>
-            <div className="flex flex-col gap-1">
-              <DrawerTitle className="text-xl">{tipeLabel(item.tipe)}</DrawerTitle>
-              <DrawerDescription>{item.description}</DrawerDescription>
-            </div>
-          </div>
-        </DrawerHeader>
-
-        <div className="flex flex-col gap-6 overflow-y-auto px-6 pb-8 text-sm">
-          <div className="rounded-xl border bg-muted/20 p-5 shadow-sm">
-            <div className="mb-4 flex items-center gap-2">
-              <Layers className="h-5 w-5 text-primary" />
-              <span className="text-base font-semibold text-foreground">Ringkasan Approval</span>
-            </div>
-            <Separator className="mb-5" />
-            <div className="grid grid-cols-2 gap-x-6 gap-y-5">
-              <div className="flex flex-col gap-1.5">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Fingerprint className="h-4 w-4" />
-                  <span className="font-medium">NKP</span>
-                </div>
-                <div className="font-medium text-foreground">{item.nkp}</div>
+        <DrawerTrigger asChild>
+          <Button variant="outline" size="sm">
+            Lihat Detail
+          </Button>
+        </DrawerTrigger>
+        <DrawerContent className={!isMobile ? "sm:max-w-lg" : ""}>
+          <DrawerHeader className="gap-4 pb-6 pt-8 text-left">
+            <div className="flex items-center gap-4">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <FileText className="h-7 w-7" />
               </div>
-              <div className="flex flex-col gap-1.5">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <ListChecks className="h-4 w-4" />
-                  <span className="font-medium">Status</span>
-                </div>
-                <div>
-                  <Badge variant={statusVariant(item.status)} className="capitalize">
-                    {item.status}
-                  </Badge>
-                </div>
+              <div className="flex flex-col gap-1">
+                <DrawerTitle className="text-xl">{tipeLabel(item.tipe)}</DrawerTitle>
+                <DrawerDescription>{item.description}</DrawerDescription>
               </div>
             </div>
-          </div>
+          </DrawerHeader>
 
-          <div className="rounded-xl border bg-muted/20 p-5 shadow-sm">
-            <div className="mb-4 flex items-center gap-2">
-              <FileText className="h-5 w-5 text-primary" />
-              <span className="text-base font-semibold text-foreground">
-                Data Perubahan ({tipeLabel(item.tipe)})
-              </span>
-            </div>
-            <Separator className="mb-5" />
-            {entries.length ? (
-              <div className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
-                {entries.map(([key, value]) => (
-                  <div key={key} className="flex flex-col gap-1.5">
-                    <span className="font-medium text-muted-foreground">{fieldLabel(key)}</span>
-                    <span className="font-medium text-foreground break-words">
-                      {formatValue(value)}
-                    </span>
+          <div className="flex flex-col gap-6 overflow-y-auto px-6 pb-8 text-sm">
+            <div className="rounded-xl border bg-muted/20 p-5 shadow-sm">
+              <div className="mb-4 flex items-center gap-2">
+                <Layers className="h-5 w-5 text-primary" />
+                <span className="text-base font-semibold text-foreground">Ringkasan Approval</span>
+              </div>
+              <Separator className="mb-5" />
+              <div className="grid grid-cols-2 gap-x-6 gap-y-5">
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Fingerprint className="h-4 w-4" />
+                    <span className="font-medium">NKP</span>
                   </div>
-                ))}
+                  <div className="font-medium text-foreground">{item.nkp}</div>
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <ListChecks className="h-4 w-4" />
+                    <span className="font-medium">Status</span>
+                  </div>
+                  <div>
+                    <Badge variant={statusVariant(item.status)} className="capitalize">
+                      {item.status}
+                    </Badge>
+                  </div>
+                </div>
               </div>
-            ) : (
-              <p className="text-muted-foreground">Tidak ada data perubahan.</p>
-            )}
-          </div>
-        </div>
+            </div>
 
-        <DrawerFooter className="flex-row gap-3 border-t pt-4">
-          <Button
-            variant="destructive"
-            className="flex-1"
-            disabled={!isPending || pendingAction !== null}
-            onClick={() => handleAction("reject")}
-          >
-            <X className="h-4 w-4" />
-            {pendingAction === "reject" ? "Memproses..." : "Reject"}
-          </Button>
-          <Button
-            className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white"
-            disabled={!isPending || pendingAction !== null}
-            onClick={() => handleAction("approve")}
-          >
-            <Check className="h-4 w-4" />
-            {pendingAction === "approve" ? "Memproses..." : "Approve"}
-          </Button>
-        </DrawerFooter>
-      </DrawerContent>
+            <div className="rounded-xl border bg-muted/20 p-5 shadow-sm">
+              <div className="mb-4 flex items-center gap-2">
+                <FileText className="h-5 w-5 text-primary" />
+                <span className="text-base font-semibold text-foreground">
+                  Data Perubahan ({tipeLabel(item.tipe)})
+                </span>
+              </div>
+              <Separator className="mb-5" />
+              {entries.length ? (
+                <div className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+                  {entries.map(([key, value]) => (
+                    <div key={key} className="flex flex-col gap-1.5">
+                      <span className="font-medium text-muted-foreground">{fieldLabel(key)}</span>
+                      <span className="font-medium text-foreground break-words">
+                        {formatValue(value)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-muted-foreground">Tidak ada data perubahan.</p>
+              )}
+            </div>
+          </div>
+
+          <DrawerFooter className="flex-row gap-3 border-t pt-4">
+            <Button
+              variant="destructive"
+              className="flex-1"
+              disabled={!isPending || pendingAction !== null}
+              onClick={() => handleAction("reject")}
+            >
+              <X className="h-4 w-4" />
+              {pendingAction === "reject" ? "Memproses..." : "Reject"}
+            </Button>
+            <Button
+              className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white"
+              disabled={!isPending || pendingAction !== null}
+              onClick={() => handleAction("approve")}
+            >
+              <Check className="h-4 w-4" />
+              {pendingAction === "approve" ? "Memproses..." : "Approve"}
+            </Button>
+          </DrawerFooter>
+        </DrawerContent>
       </Drawer>
 
       <Modal

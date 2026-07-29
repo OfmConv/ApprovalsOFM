@@ -66,16 +66,10 @@ export default function PhotoGallerySection({ nkp, isAdmin = false }: { nkp: str
         setEditingRecord(record);
         setForm({ title: record.title, description: record.description });
         setPreviewUrl(record.file_path);
-        // foto lama sudah punya URL R2 valid, langsung pakai sebagai uploadedUrl
-        // supaya kalau user tidak ganti foto, file_path lama tetap terpakai saat save
         setUploadedUrl(record.file_path);
         setFormOpen(true);
     };
 
-    // Upload langsung ke R2 begitu file dipilih, mengikuti alur yang sama
-    // dengan ProfileHeader (background/profile): presign -> PUT ke R2 -> public_url.
-    // uploadedUrl (public_url dari R2) yang nantinya dikirim sebagai file_path,
-    // bukan base64.
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
@@ -350,7 +344,6 @@ export default function PhotoGallerySection({ nkp, isAdmin = false }: { nkp: str
                 </div>
             </Modal>
 
-            {/* Modal konfirmasi hapus */}
             <Modal
                 title="Hapus Foto"
                 description={
@@ -365,7 +358,6 @@ export default function PhotoGallerySection({ nkp, isAdmin = false }: { nkp: str
                 onConfirm={confirmDelete}
             />
 
-            {/* Modal error */}
             <Modal
                 title="Gagal Mengirim Pengajuan"
                 description={errorMessage}
@@ -373,7 +365,6 @@ export default function PhotoGallerySection({ nkp, isAdmin = false }: { nkp: str
                 onClose={() => setErrorModalOpen(false)}
             />
 
-            {/* Modal sukses */}
             <Modal
                 title={isAdmin ? "Perubahan Disimpan" : "Pengajuan Terkirim"}
                 description={successMessage}
