@@ -25,11 +25,11 @@ function LoginPage() {
     if (ready) return;
     try {
       const getStatus = await loginAdmin(userName, password, true);
-      const token = localStorage.getItem("token");
+
       if (getStatus === 200) {
         setReady(true);
         setTimeout(() => {
-          navigate(`/dashboard/${token}`);
+          navigate('/dashboard');
         }, 3000);
       } else if (getStatus === 401) {
         setReady(false);
@@ -49,9 +49,8 @@ function LoginPage() {
     try {
       const result = await login(userName, password);
       if (result.status === 200) {
-        const token = localStorage.getItem("token");
         setReady(true);
-        setTimeout(() => navigate(`/anggota/${token}`, { state: { nkp: userName } }), 3000);
+        setTimeout(() => navigate('/anggota', { state: { nkp: userName } }), 3000);
       } else {
         setShowFailModal(true);
       }

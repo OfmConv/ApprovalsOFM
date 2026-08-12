@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorBoundary><div>Terjadi kesalahan.</div></ErrorBoundary>
   },
   {
-    path: '/dashboard/:t',
+    path: '/dashboard',
     element: (
       <TooltipProvider>
         <Auth />
@@ -37,8 +37,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorBoundary><div>Terjadi kesalahan.</div></ErrorBoundary>
   },
   {
-    path: '/anggota/:t',
-    element: <AuthUsers />,
+    path: '/anggota',
+    element: (
+      <TooltipProvider>
+        <AuthUsers />
+      </TooltipProvider>
+    ),
     errorElement: <ErrorBoundary><div>Terjadi kesalahan.</div></ErrorBoundary>
   },
   {

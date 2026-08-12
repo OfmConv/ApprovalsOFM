@@ -1,8 +1,8 @@
 import axios from "axios";
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,
-
 });
 
 const PUBLIC_ENDPOINTS = [
@@ -16,7 +16,7 @@ const PUBLIC_ENDPOINTS = [
 function isPublicEndpoint(url?: string) {
   if (!url) return false;
   return PUBLIC_ENDPOINTS.some((endpoint) => url.includes(endpoint));
-}
+};
 
 axiosInstance.interceptors.request.use(
   (config) => {
@@ -80,12 +80,12 @@ export async function GetUsers() {
     console.log(error);
     throw error;
   }
-}
+};
 
 export async function getToken() {
   const tokens = await localStorage.getItem("token");
   return tokens;
-}
+};
 
 export async function refreshTokens() {
   try {
@@ -106,7 +106,7 @@ export async function refreshTokens() {
     window.location.href = "/login";
     throw error;
   }
-}
+};
 
 export async function createAccount(body: any) {
   try {
@@ -117,7 +117,7 @@ export async function createAccount(body: any) {
     console.log(error);
     throw error;
   }
-}
+};
 
 export async function verifyEmail(emails: any) {
   try {
@@ -129,7 +129,7 @@ export async function verifyEmail(emails: any) {
     console.log(error);
     throw error;
   }
-}
+};
 
 export async function verifyNKP(nkp: any) {
   try {
@@ -141,21 +141,18 @@ export async function verifyNKP(nkp: any) {
     console.log(error);
     throw error;
   }
-}
+};
 
 export async function login(nkp: string, secret: string) {
   try {
-    const res = await axiosInstance.post("/login", {
-      nkp,
-      secret,
-    });
+    const res = await axiosInstance.post("/login", { nkp, secret });
 
-    console.log("Response:", res.data);
 
     if (res.status === 200) {
       try {
         localStorage.setItem("token", res.data.data.access_token);
         localStorage.setItem("RToken", res.data.data.refresh_token);
+        localStorage.setItem("nkp", res.data.data.nkp);
 
         return { status: 200, success: true };
       } catch (storageError) {
@@ -188,6 +185,7 @@ export async function loginAdmin(nkp: string, secret: string, adminAcc: boolean)
 
     if (res.status === 200 && res.data?.data?.access_token) {
       localStorage.setItem("token", res.data.data.access_token);
+      localStorage.setItem("role", res.data.data.role);
       localStorage.setItem("RToken", res.data.data.refresh_token);
       localStorage.setItem("nkp", res.data.data.nkp);
       return 200;
@@ -197,7 +195,7 @@ export async function loginAdmin(nkp: string, secret: string, adminAcc: boolean)
   } catch (error: any) {
     return error?.response?.status ?? 500;
   }
-}
+};
 
 export async function getProfile(type: string, nkp?: string) {
   try {
@@ -210,7 +208,7 @@ export async function getProfile(type: string, nkp?: string) {
     console.log(error);
     throw error;
   }
-}
+};
 
 export async function getPendingData() {
   try {
@@ -219,7 +217,7 @@ export async function getPendingData() {
   } catch (error) {
     return error;
   }
-}
+};
 
 export async function changePassword(nkp: string, newPas: any) {
   try {
@@ -227,13 +225,12 @@ export async function changePassword(nkp: string, newPas: any) {
       nkp: nkp,
       new_password: newPas,
     });
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);
     throw error;
   }
-}
+};
 
 export async function changeAdminAcc(currentNKP: string, newNKP: string) {
   try {
@@ -241,13 +238,12 @@ export async function changeAdminAcc(currentNKP: string, newNKP: string) {
       current_nkp: currentNKP,
       new_nkp: newNKP,
     });
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);
     throw error;
   }
-}
+};
 
 export async function requestChange(
   nkp: string,
@@ -262,18 +258,17 @@ export async function requestChange(
       email,
       detail_user: detailUser,
     });
-    console.log("SUCCESS:", res.data);
     return res.data;
   } catch (error) {
     console.log("MASUK CATCH?", error);
     throw error;
   }
-}
+};
 
 export async function getEducation(nkp: string) {
   const res = await axiosInstance.get("/getEducation", { params: { nkp } });
   return res.data.data;
-}
+};
 
 export async function requestEducationChange(
   nkp: string,
@@ -297,7 +292,6 @@ export async function approve(id: number) {
     const res = await axiosInstance.patch("/approvals/approve", {
       approval_id: id,
     });
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -310,7 +304,6 @@ export async function reject(id: number) {
     const res = await axiosInstance.post("/approvals/reject", {
       approval_id: id,
     });
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -391,7 +384,6 @@ export async function createWilayah(body: {
 }) {
   try {
     const res = await axiosInstance.post("/wilayah", body);
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -402,7 +394,6 @@ export async function createWilayah(body: {
 export async function deleteWilayah(id: number) {
   try {
     const res = await axiosInstance.delete(`/wilayah/${id}`);
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -413,7 +404,6 @@ export async function deleteWilayah(id: number) {
 export async function getAllMinisterProvinsial() {
   try {
     const res = await axiosInstance.get("/minister-provinsial");
-    console.log(res);
     return res.data.data;
   } catch (error) {
     console.log(error);
@@ -430,7 +420,6 @@ export async function createMinisterProvinsial(body: {
 }) {
   try {
     const res = await axiosInstance.post("/minister-provinsial", body);
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -450,7 +439,6 @@ export async function updateMinisterProvinsial(
 ) {
   try {
     const res = await axiosInstance.patch(`/minister-provinsial/${id}`, body);
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -461,7 +449,6 @@ export async function updateMinisterProvinsial(
 export async function deleteMinisterProvinsial(id: number) {
   try {
     const res = await axiosInstance.delete(`/minister-provinsial/${id}`);
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -472,7 +459,6 @@ export async function deleteMinisterProvinsial(id: number) {
 export async function deleteUser(nkp: string) {
   try {
     const res = await axiosInstance.delete(`/admin/user/${nkp}`);
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -491,7 +477,6 @@ export async function updateProfileDirect(
       email,
       detail_user: detailUser,
     });
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -602,7 +587,6 @@ export async function createArticle(body: {
 }) {
   try {
     const res = await axiosInstance.post("/articles", body);
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -620,7 +604,6 @@ export async function updateArticle(
 ) {
   try {
     const res = await axiosInstance.patch(`/articles/${id}`, body);
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -631,7 +614,6 @@ export async function updateArticle(
 export async function deleteArticle(id: number) {
   try {
     const res = await axiosInstance.delete(`/articles/${id}`);
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);

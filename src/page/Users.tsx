@@ -83,7 +83,7 @@ export default function ProfilePage() {
     const nkp = location.state?.nkp;
 
     const isAdmin = location.state?.isAdmin === true;
-
+    console.log(isAdmin);
     const [isChange, setIsChange] = useState(0)
     const [errorModalOpen, setErrorModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");

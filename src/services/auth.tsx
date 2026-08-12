@@ -1,25 +1,51 @@
-import Users from "../page/Users" 
+import { useEffect, useState } from "react";
 import Dashboard from "../page/Dashboard";
-import NotFound from '@/page/NotFound';
-import { useParams } from "react-router-dom";
+import NotFound from "@/page/NotFound";
+import { decodeJWT, isTokenExpired } from "@/types/jwt";
+import { Loading } from "@/utils/Loading";
+
+type GuardStatus = "checking" | "authorized" | "denied";
+
+function useAuthGuard(requiredIsAdmin: boolean): GuardStatus {
+  const [status, setStatus] = useState<GuardStatus>("checking");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token || isTokenExpired(token)) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("RToken");
+      localStorage.removeItem("role");
+      localStorage.removeItem("nkp");
+      setStatus("denied");
+      return;
+    }
+
+    const payload = decodeJWT(token);
+
+    if (!payload || Boolean(payload.is_admin) !== requiredIsAdmin) {
+      setStatus("denied");
+      return;
+    }
+
+    setStatus("authorized");
+  }, [requiredIsAdmin]);
+
+  return status;
+}
 
 export const Auth = () => {
-    const { t } = useParams();
-    const token =  localStorage.getItem("token");
+  const status = useAuthGuard(true);
 
-  if (!token || t !== token) {
-    return <NotFound />;
-  }
-
+  if (status === "checking") return <Loading />;
+  if (status === "denied") return <NotFound />;
   return <Dashboard />;
 };
 
 export const AuthUsers = () => {
-    const { t } = useParams();
-    const token =  localStorage.getItem("token");
+  const status = useAuthGuard(false);
 
-    if (!token || t !== token) {
-        return <NotFound />;
-    }
-    return <Users />;
-}
+  if (status === "checking") return <Loading />;
+  if (status === "denied") return <NotFound />;
+  return <Dashboard />;
+};
