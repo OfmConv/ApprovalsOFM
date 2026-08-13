@@ -67,7 +67,7 @@ const ProfilTab = memo(({ profile }: { profile: Profile }) => {
     { icon: <IconMail size={14} />, label: "Email", value: profile.email },
     { icon: <IconId size={14} />, label: "Nama di KTP", value: profile.namaKtp },
     { icon: <IconId size={14} />, label: "Nama di Paspor", value: profile.namaPaspor },
-    { icon: <IconCalendar size={14} />, label: "Tanggal Lahir", value: profile.tanggalLahir },
+    { icon: <IconCalendar size={14} />, label: "Tanggal Lahir", value: profile.tanggalLahir?.slice(0,10) },
     { icon: <IconMapPin size={14} />, label: "Tempat Lahir", value: profile.tempatLahir },
   ], [profile])
 
