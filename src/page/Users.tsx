@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Pencil, Check, User, MapPin, HeartCrack, FileText } from "lucide-react";
 import { getProfile, requestChange, updateProfileDirect } from "@/services/api";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import ProfileHeader from "./ProfileHeader";
 import { Modal } from "@/utils/Modals"
 import EducationSection from "../utils/Education";
@@ -80,10 +80,12 @@ export default function ProfilePage() {
     const [changes, setChanges] = useState<any>({});
 
     const location = useLocation();
-    const nkp = location.state?.nkp;
+    const params = useParams();
+
+    const nkp = params.nkp ?? location.state?.nkp;
 
     const isAdmin = location.state?.isAdmin === true;
-    console.log(isAdmin);
+
     const [isChange, setIsChange] = useState(0)
     const [errorModalOpen, setErrorModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");

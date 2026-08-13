@@ -666,15 +666,11 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
   }
 
   const handleEdit = () => {
-    const adminToken = localStorage.getItem("token")
-    setOpen(false)
-    navigate(`/anggota/${adminToken}`, {
-      state: {
-        nkp: item.nkp,
-        isAdmin: true,
-      },
-    })
-  }
+  setOpen(false)
+  navigate(`/anggota/${item.nkp}`, {
+    state: { isAdmin: true },
+  })
+}
 
   return (
     <Drawer direction={isMobile ? "bottom" : "right"} open={open} onOpenChange={setOpen}>

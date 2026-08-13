@@ -9,7 +9,7 @@ import Home from "./page/Home";
 import History from "./utils/History";
 import ErrorBoundary from "./utils/ErrorBoundary";
 import Article from "./page/Article";
-
+import Users from "./page/Users";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +45,11 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorBoundary><div>Terjadi kesalahan.</div></ErrorBoundary>
   },
+  {
+  path: '/anggota/:nkp',
+  element: <Users />,
+  errorElement: <ErrorBoundary><div>Terjadi kesalahan.</div></ErrorBoundary>
+},
   {
     path: '/kegiatan',
     element: <Article />

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import type React from "react";
 import Dashboard from "../page/Dashboard";
 import NotFound from "@/page/NotFound";
-import { decodeJWT, isTokenExpired } from "@/types/jwt";
+import { isTokenExpired } from "@/types/jwt";
 import { Loading } from "@/utils/Loading";
 
 type GuardStatus = "checking" | "authorized" | "denied";
@@ -11,8 +12,9 @@ function useAuthGuard(requiredIsAdmin: boolean): GuardStatus {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
 
-    if (!token || isTokenExpired(token)) {
+    if (!token || isTokenExpired(token) || !role) {
       localStorage.removeItem("token");
       localStorage.removeItem("RToken");
       localStorage.removeItem("role");
@@ -21,9 +23,9 @@ function useAuthGuard(requiredIsAdmin: boolean): GuardStatus {
       return;
     }
 
-    const payload = decodeJWT(token);
+    const isAdmin = role !== "MemberOFM";
 
-    if (!payload || Boolean(payload.is_admin) !== requiredIsAdmin) {
+    if (isAdmin !== requiredIsAdmin) {
       setStatus("denied");
       return;
     }
@@ -48,4 +50,12 @@ export const AuthUsers = () => {
   if (status === "checking") return <Loading />;
   if (status === "denied") return <NotFound />;
   return <Dashboard />;
+};
+
+export const RequireAdmin = ({ children }: { children: React.ReactNode }) => {
+  const status = useAuthGuard(true);
+
+  if (status === "checking") return <Loading />;
+  if (status === "denied") return <NotFound />;
+  return <>{children}</>;
 };
