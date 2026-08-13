@@ -87,11 +87,13 @@ export function History() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 sm:px-6">
+      <div className="mt-10">
       <h2 className="text-center font-serif text-2xl text-gray-900 sm:text-3xl">
-        <SectionHeading>Sejarah Minister Provinsial</SectionHeading>
+        <SectionHeading><strong>Sejarah Minister Provinsial</strong></SectionHeading>
       </h2>
+      </div>
 
-      <div className="mt-10 space-y-4 sm:mt-14">
+      <div className="space-y-4 sm:mt-4">
         {loading ? (
           <p className="text-center text-sm text-gray-500">Memuat data...</p>
         ) : daftarMinister.length === 0 ? (

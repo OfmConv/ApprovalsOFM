@@ -315,7 +315,6 @@ function LayoutArtikel() {
   );
 }
 
-
 function MainContent() {
   const [dewanPimpinan, setDewanPimpinan] = useState<any[]>([]);
   const [wilayah, setWilayah] = useState<any[]>([]);
