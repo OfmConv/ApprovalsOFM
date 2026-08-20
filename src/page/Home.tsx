@@ -20,15 +20,12 @@ const navLinks = [
   { label: "Berkarya di ", href: "#berkarya" },
 ];
 
-
 function SectionHeading({ children }: { children: ReactNode }) {
   return (
     <div className="flex w-full items-center gap-2 sm:gap-4">
-      {/* Tambahkan min-w-[20px] agar garis tidak hilang sepenuhnya saat teks sangat panjang */}
+
       <Separator className="flex-1 min-w-[20px]" />
 
-      {/* HAPUS 'shrink-0' dan ubah ukuran teks mobile jadi text-lg. 
-          Tambahkan 'text-center' dan 'leading-tight' agar rapi saat turun baris */}
       <h2 className="text-center font-serif text-lg leading-tight text-gray-900 sm:text-2xl md:text-3xl">
         {children}
       </h2>
@@ -457,7 +454,6 @@ function Home() {
   );
 }
 
-
 function Footer() {
   return (
     <footer id="tentang" className="border-t border-black/5 bg-[#1B1C1F] text-gray-300">
@@ -509,9 +505,9 @@ function Footer() {
           <div>
             <h4 className="font-serif text-sm text-white">Kontak</h4>
             <ul className="mt-4 space-y-3 text-sm text-gray-400">
-              <li>Jl. Contoh Alamat No. 1, Kota</li>
-              <li>ofmconv@example.org</li>
-              <li>+62 812-3456-7890</li>
+              <li>Jl Sibiru-biru No.1, RT.2/RW.3, Deli Tua Timur</li>
+              <li>parokidelitua@gmail.com</li>
+              <li>+62 852-6279-7708</li>
             </ul>
           </div>
 

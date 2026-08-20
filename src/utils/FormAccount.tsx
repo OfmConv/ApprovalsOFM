@@ -32,14 +32,15 @@ import { Modal } from "./Modals"
 import { Popup } from "./popup"
 
 export function FormAccount() {
-  const [isVerifyNkp, setIsVerifyNkp] = React.useState("NeedVerify")
-  const [isVerifyEmail, setIsVerifyEmail] = React.useState("NeedVerify")
-  const [showPassword, setShowPassword] = React.useState(false)
-  const [showConfirm, setShowConfirm] = React.useState(false)
-  const [detailProfile, setDetailProfile] = React.useState(true)
-  const [showSubmitForm, setShowSubmitForm] = React.useState(false)
-  const [showPassConfirm, setShowPassConfirm] = React.useState(false)
-  const [showSuccessModal, setShowSuccessModal] = React.useState(false)
+  const [isVerifyNkp, setIsVerifyNkp] = React.useState("NeedVerify");
+  const [isVerifyEmail, setIsVerifyEmail] = React.useState("NeedVerify");
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirm, setShowConfirm] = React.useState(false);
+  const [detailProfile, setDetailProfile] = React.useState(true);
+  const [showSubmitForm, setShowSubmitForm] = React.useState(false);
+  const [showPassConfirm, setShowPassConfirm] = React.useState(false);
+  const [showSuccessModal, setShowSuccessModal] = React.useState(false);
+  const [formError, setFormError] = React.useState<string>("");
   const [verifyKey, setVerifyKey] = React.useState({
     Nkp: {
       NkpAvailable: null,
@@ -49,7 +50,26 @@ export function FormAccount() {
       EmailAvailable: null,
       message: ""
     }
-  })
+  });
+
+  const debounceTimer = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+   type RequiredField = { key: string; label: string; group: "user" | "detail_user" }
+
+  const REQUIRED_FIELDS: RequiredField[] = [
+    { key: "nkp", label: "NKP", group: "user" },
+    { key: "email", label: "Email", group: "user" },
+    { key: "secret", label: "Password", group: "user" },
+    { key: "full_name", label: "Full Name", group: "detail_user" },
+    { key: "family_name", label: "Family Name", group: "detail_user" },
+    { key: "name", label: "Name", group: "detail_user" },
+    { key: "ktp_name", label: "KTP Name", group: "detail_user" },
+    { key: "date_of_birth", label: "Date of Birth", group: "detail_user" },
+    { key: "place_of_birth", label: "Place of Birth", group: "detail_user" },
+    { key: "phone_number", label: "Phone Number", group: "detail_user" },
+    { key: "birth_province", label: "Birth Province", group: "detail_user" },
+    { key: "birth_region", label: "Birth Region", group: "detail_user" },
+    { key: "birth_country", label: "Birth Country", group: "detail_user" },
+  ];
 
   const [UserData, setUserData] = React.useState({
     user: {
@@ -79,7 +99,7 @@ export function FormAccount() {
       birth_country: "",
       place_of_death: null
     }
-  })
+  });
 
   async function verificationNKP(v: any) {
     setIsVerifyNkp("Waiting")
@@ -162,8 +182,6 @@ export function FormAccount() {
       setDetailProfile(true)
     }
   }
-
-  const debounceTimer = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   function handleInput(e: any) {
     clearTimeout(debounceTimer.current)
@@ -400,26 +418,6 @@ export function FormAccount() {
       }
     }, 500)
   }
-  type RequiredField = { key: string; label: string; group: "user" | "detail_user" }
-
-  const REQUIRED_FIELDS: RequiredField[] = [
-    { key: "nkp", label: "NKP", group: "user" },
-    { key: "email", label: "Email", group: "user" },
-    { key: "secret", label: "Password", group: "user" },
-    { key: "full_name", label: "Full Name", group: "detail_user" },
-    { key: "family_name", label: "Family Name", group: "detail_user" },
-    { key: "name", label: "Name", group: "detail_user" },
-    { key: "ktp_name", label: "KTP Name", group: "detail_user" },
-    { key: "date_of_birth", label: "Date of Birth", group: "detail_user" },
-    { key: "place_of_birth", label: "Place of Birth", group: "detail_user" },
-    { key: "phone_number", label: "Phone Number", group: "detail_user" },
-    { key: "birth_province", label: "Birth Province", group: "detail_user" },
-    { key: "birth_region", label: "Birth Region", group: "detail_user" },
-    { key: "birth_country", label: "Birth Country", group: "detail_user" },
-    // sengaja TIDAK termasuk: dead_date, place_of_burial, place_of_death
-  ]
-
-  const [formError, setFormError] = React.useState<string>("")
 
   function validateForm(): boolean {
     const missing = REQUIRED_FIELDS.filter((f) => {
@@ -447,6 +445,7 @@ export function FormAccount() {
     setFormError("")
     return true
   }
+  
   return (
     <div className="w-full rounded-2xl border bg-card shadow-sm overflow-hidden">
 

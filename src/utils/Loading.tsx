@@ -1,9 +1,5 @@
 import { cn } from "@/lib/utils";
-
-interface LoadingProps {
-  className?: string;
-  style?: React.CSSProperties;
-}
+import type { LoadingProps } from "@/types/interface";
 
 export function Loading({ className, style }: LoadingProps) {
   return (

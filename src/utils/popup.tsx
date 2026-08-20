@@ -1,47 +1,6 @@
 import { Button } from "@/components/ui/button";
+import type { PopupProps } from "@/types/interface";
 import { useState } from "react";
-
-interface DetailUser {
-  full_name: string;
-  family_name: string;
-  name: string;
-  ktp_name: string;
-  name_in_passport: string;
-  nkp: string;
-  phone_number: string;
-  date_of_birth: string;
-  place_of_birth: string;
-  religious_name: string;
-  photo_profile: string | null;
-  photo_background: string | null;
-  other_information: string | null;
-  dead_date: string | null;
-  place_of_burial: string | null;
-  birth_province: string;
-  birth_region: string;
-  birth_country: string;
-  place_of_death: string | null;
-
-}
-
-interface User {
-  email: string;
-  nkp: string;
-  is_admin: boolean;
-  secret: string;
-}
-
-interface UserResponse {
-  user: User;
-  detail_user: DetailUser;
-}
-
-interface PopupProps {
-  open: boolean;
-  data: UserResponse;
-  onClose: () => void;
-  onSubmit: () => void;
-}
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -60,6 +19,23 @@ function Pill({ children }: { children: React.ReactNode }) {
   );
 }
 
+function IconVerified({ className = "" }: { className?: string }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={className}>
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M22 4 12 14.01l-3-3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconEmail() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400 shrink-0">
+      <rect width="20" height="16" x="2" y="4" rx="2" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    </svg>
+  );
+}
 
 export function Popup({ open, data, onClose, onSubmit }: PopupProps) {
   const [loading, setLoading] = useState(false);
@@ -67,7 +43,6 @@ export function Popup({ open, data, onClose, onSubmit }: PopupProps) {
   if (!open || !data) return null;
 
   const { user, detail_user } = data;
-
 
   const handleSubmit = () => {
     let statusCreate;
@@ -160,23 +135,5 @@ export function Popup({ open, data, onClose, onSubmit }: PopupProps) {
         </div>
       </div>
     </div>
-  );
-}
-
-function IconVerified({ className = "" }: { className?: string }) {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className={className}>
-      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M22 4 12 14.01l-3-3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function IconEmail() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400 shrink-0">
-      <rect width="20" height="16" x="2" y="4" rx="2" />
-      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-    </svg>
   );
 }

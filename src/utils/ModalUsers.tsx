@@ -5,32 +5,7 @@ import {
   IconX, IconPhone, IconMail, IconBook, IconCross,
   IconMapPin, IconId, IconUser, IconCalendar,
 } from "@tabler/icons-react"
-
-interface Profile {
-  nkp: number
-  namaLengkap: string
-  namaBaptis: string
-  namaKeluarga?: string
-  namaKtp?: string
-  namaPaspor?: string
-  tanggalLahir?: string
-  tempatLahir?: string
-  noHp: string
-  email: string
-  pendidikan: string
-  avatarUrl?: string
-  background?: string,
-  sd?: string
-  smp?: string
-  sma?: string
-  s1?: string
-  profesiPerdana?: string
-  profesiMeriah?: string
-  tahbisanImamat?: string
-  education?: any[]
-  assignment?: any[]
-  feastival?: any[]
-}
+import type { Profile } from "@/types/interface"
 
 const TABS = [
   { key: "profil", label: "Profil" },

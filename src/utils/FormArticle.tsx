@@ -7,17 +7,10 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { axiosInstance } from "@/services/api"
 import { getArticles, createArticle, updateArticle, deleteArticle } from "@/services/api"
-import type { PresignResponse } from "@/types/interface"
+import type { Article, PresignResponse } from "@/types/interface"
 
 const MAX_FILE_SIZE_MB = 5
 const DEBOUNCE_MS = 300
-
-interface Article {
-  id: number
-  jdl_artikel: string
-  description: string
-  img: string
-}
 
 function useDebouncedValue<T>(value: T, delay: number) {
   const [debounced, setDebounced] = React.useState(value)

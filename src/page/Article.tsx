@@ -4,13 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Navbar } from "./Home";
 import { getArticles } from "@/services/api";
+import type { Article } from "@/types/interface";
 
-interface Article {
-  id: number;
-  jdl_artikel: string;
-  description: string;
-  img: string;
-}
 
 const DEBOUNCE_MS = 300;
 

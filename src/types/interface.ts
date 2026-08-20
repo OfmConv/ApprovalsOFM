@@ -82,3 +82,89 @@ export interface JabatanRow {
   photo: File | null
 }
 
+export interface DetailUser {
+  full_name: string;
+  family_name: string;
+  name: string;
+  ktp_name: string;
+  name_in_passport: string;
+  nkp: string;
+  phone_number: string;
+  date_of_birth: string;
+  place_of_birth: string;
+  religious_name: string;
+  photo_profile: string | null;
+  photo_background: string | null;
+  other_information: string | null;
+  dead_date: string | null;
+  place_of_burial: string | null;
+  birth_province: string;
+  birth_region: string;
+  birth_country: string;
+  place_of_death: string | null;
+
+}
+
+export interface User {
+  email: string;
+  nkp: string;
+  is_admin: boolean;
+  secret: string;
+}
+
+export interface UserResponse {
+  user: User;
+  detail_user: DetailUser;
+}
+
+export interface PopupProps {
+  open: boolean;
+  data: UserResponse;
+  onClose: () => void;
+  onSubmit: () => void;
+}
+
+export interface Article {
+  id: number
+  jdl_artikel: string
+  description: string
+  img: string
+}
+
+export interface LoadingProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface Profile {
+  nkp: number
+  namaLengkap: string
+  namaBaptis: string
+  namaKeluarga?: string
+  namaKtp?: string
+  namaPaspor?: string
+  tanggalLahir?: string
+  tempatLahir?: string
+  noHp: string
+  email: string
+  pendidikan: string
+  avatarUrl?: string
+  background?: string,
+  sd?: string
+  smp?: string
+  sma?: string
+  s1?: string
+  profesiPerdana?: string
+  profesiMeriah?: string
+  tahbisanImamat?: string
+  education?: any[]
+  assignment?: any[]
+  feastival?: any[]
+}
+
+export interface Article {
+  id: number;
+  jdl_artikel: string;
+  description: string;
+  img: string;
+}

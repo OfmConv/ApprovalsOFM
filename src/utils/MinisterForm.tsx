@@ -40,15 +40,14 @@ function toDateInputValue(value?: string | null) {
 export function MinisterProvinsialForm() {
   const [form, setForm] = React.useState(EMPTY_FORM)
   const [submitting, setSubmitting] = React.useState(false)
-
-  const [list, setList] = React.useState<MinisterProvinsial[]>([])
   const [loading, setLoading] = React.useState(false)
-  const [deletingId, setDeletingId] = React.useState<number | null>(null)
-
-  const [editItem, setEditItem] = React.useState<MinisterProvinsial | null>(null)
-  const [editForm, setEditForm] = React.useState(EMPTY_FORM)
   const [showEditModal, setShowEditModal] = React.useState(false)
   const [editSubmitting, setEditSubmitting] = React.useState(false)
+  const [list, setList] = React.useState<MinisterProvinsial[]>([])
+  const [deletingId, setDeletingId] = React.useState<number | null>(null)
+  const [editItem, setEditItem] = React.useState<MinisterProvinsial | null>(null)
+  const [editForm, setEditForm] = React.useState(EMPTY_FORM)
+
 
   const [resultModal, setResultModal] = React.useState<{
     open: boolean
@@ -216,7 +215,7 @@ export function MinisterProvinsialForm() {
 
   return (
     <div className=" space-y-10">
- 
+
       <form onSubmit={handleCreateSubmit} className="space-y-6 rounded-xl border p-6 shadow-sm">
         <h2 className="text-base font-semibold">Tambah Data Baru</h2>
 
