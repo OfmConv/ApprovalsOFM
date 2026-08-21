@@ -45,10 +45,10 @@ export function NavUser({
     navigate("/")
   }
 
-  function handleProfile() {
-    const token = localStorage.getItem("token")
-    setTimeout(() => navigate(`/anggota/${token}`, { state: { nkp: nkp,  isAdmin: true  } }), 1000);
-  }
+  // function handleProfile() {
+  //   const token = localStorage.getItem("nkp")
+  //   setTimeout(() => navigate(`/anggota/${token}`, { state: { nkp: nkp,  isAdmin: true  } }), 1000);
+  // }
 
   return (
     <SidebarMenu>
@@ -75,10 +75,10 @@ export function NavUser({
             align="end"
             sideOffset={4}
           >
-            <DropdownMenuItem onClick={handleProfile}>
+            {/* <DropdownMenuItem onClick={handleProfile}>
               <IconUser />
               Profile
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
             <DropdownMenuItem onClick={handleLogout}>
               <IconLogout />
               Log out
