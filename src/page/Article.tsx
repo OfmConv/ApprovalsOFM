@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Navbar } from "./Home";
 import { getArticles } from "@/services/api";
 import type { Article } from "@/types/interface";
+import { Button } from "@/components/ui/button";
 
 
 const DEBOUNCE_MS = 300;
@@ -19,6 +20,8 @@ function useDebouncedValue<T>(value: T, delay: number) {
 
   return debounced;
 }
+
+
 
 export default function BlogGrid() {
   const [query, setQuery] = useState("");
@@ -72,9 +75,8 @@ export default function BlogGrid() {
       <section className="w-full max-w-6xl mx-auto px-6 py-10 mt-10">
         {featured && (
           <Card
-            className={`mb-10 overflow-hidden border-none shadow-none py-0 transition-all duration-700 ease-out ${
-              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
+            className={`mb-10 overflow-hidden border-none shadow-none py-0 transition-all duration-700 ease-out ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
           >
             <div className="h-55 w-full overflow-hidden">
               <img
@@ -83,19 +85,11 @@ export default function BlogGrid() {
                 className="h-full w-full object-cover"
               />
             </div>
-
-            {/* <CardContent className="px-0 pt-4 min-w-0">
-              <div className="text-lg font-semibold text-slate-900 break-words">
-                {featured.jdl_artikel}
-              </div>
-              <div className="mt-1 text-sm text-muted-foreground break-words whitespace-normal">
-                {featured.description}
-              </div>
-            </CardContent> */}
           </Card>
         )}
 
         <div className="flex justify-end mb-8">
+
           <div className="relative w-full max-w-xs">
             <Input
               placeholder="Cari Kegiatan..."
@@ -111,11 +105,10 @@ export default function BlogGrid() {
           {filtered.map((post, index) => (
             <Card
               key={post.id}
-              className={`overflow-hidden border-none shadow-none py-0 transition-all duration-700 ease-out ${
-                mounted
+              className={`overflow-hidden border-none shadow-none py-0 transition-all duration-700 ease-out ${mounted
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-6"
-              }`}
+                }`}
               style={{ transitionDelay: `${index * 120}ms` }}
             >
               <div className="aspect-[4/3] w-full overflow-hidden ">
@@ -142,6 +135,17 @@ export default function BlogGrid() {
               Tidak ada artikel yang cocok dengan pencarian.
             </p>
           )}
+        </div>
+        <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] pt-10 pb-10 pl-10 pr-10">
+          <div className="relative w-full aspect-[4/3] sm:aspect-[16/9]">
+         <iframe
+  src="https://calendar.google.com/calendar/embed?src=ofmconvindo%40gmail.com&ctz=Asia%2FJakarta&showTitle=0&showTz=0&showPrint=0&showCalendars=0&showTabs=0&showNav=1&mode=MONTH"
+  style={{ border: 0 }}
+  className="absolute inset-0 h-full w-full"
+  frameBorder="0"
+  scrolling="no"
+/>
+          </div>
         </div>
       </section>
     </div>
