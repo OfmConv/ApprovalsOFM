@@ -151,6 +151,7 @@ export async function login(nkp: string, secret: string) {
     if (res.status === 200) {
       try {
         localStorage.setItem("token", res.data.data.access_token);
+        localStorage.setItem("role", res.data.data.role);
         localStorage.setItem("RToken", res.data.data.refresh_token);
         localStorage.setItem("nkp", res.data.data.nkp);
 
