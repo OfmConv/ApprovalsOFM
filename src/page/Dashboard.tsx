@@ -93,14 +93,14 @@ export default function Page() {
             feastivalMap[item.nkp].push(item);
           }
         });
-
+        if (isAdmin){
         const pending = await getPendingData();
         setNeedApprovals(pending ?? [])
 
         if (pending && pending.length >= 0) {
           setApprovalPopupOpen(true);
         }
-
+      }
         const hasilGabungan = safeUsers.map((userItem: any) => {
           return {
             ...userItem,
