@@ -73,6 +73,7 @@ export const schema = z.object({
   periode_mulai: z.string().nullable().optional(),
   periode_selesai: z.string().nullable().optional(),
   fungsi_khusus: z.string().nullable().optional(),
+  tanggal_berdiri: z.string().nullable().optional(),
 })
 
 function formatValue(value: unknown) {
@@ -366,7 +367,12 @@ function WilayahDetailViewer({ item }: { item: z.infer<typeof schema> }) {
                     {formatDate(item.periode_selesai)}
                   </span>
                 </div>
-
+                 <div className="flex flex-col gap-1.5">
++                 <span className="font-medium text-muted-foreground">Tanggal Berdiri</span>
++                 <span className="font-medium text-foreground">
++                   {formatDate(item.tanggal_berdiri)}
++                 </span>
++               </div>
               </div>
             </div>
           </div>
