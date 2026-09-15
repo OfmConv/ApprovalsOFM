@@ -59,7 +59,6 @@ export default function Page() {
 
         const listUsers = profileData?.users?.users || profileData?.users || [];
         const safeUsers = Array.isArray(listUsers) ? listUsers : [];
-
         const detailMap: Record<string, any> = {};
         const safeDetails = Array.isArray(profileData?.details) ? profileData.details : [];
         safeDetails.forEach((item: any) => {

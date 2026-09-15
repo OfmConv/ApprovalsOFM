@@ -18,8 +18,7 @@ function isPublicEndpoint(url?: string) {
   return PUBLIC_ENDPOINTS.some((endpoint) => url.includes(endpoint));
 };
 
-axiosInstance.interceptors.request.use(
-  (config) => {
+axiosInstance.interceptors.request.use((config) => {
     if (isPublicEndpoint(config.url)) {
       return config;
     }
@@ -28,15 +27,13 @@ axiosInstance.interceptors.request.use(
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
-  },
-  (error) => Promise.reject(error)
+  }, (error) => Promise.reject(error)
 );
 
-axiosInstance.interceptors.response.use(
-  (response) => response,
+axiosInstance.interceptors.response.use((response) => response,
   async (error) => {
     const originalRequest = error.config;
-
+    
     if (isPublicEndpoint(originalRequest?.url)) {
       return Promise.reject(error);
     }
@@ -371,6 +368,31 @@ export async function getAllWilayah() {
   }
 }
 
+export async function updateWilayah(
+  id: number,
+  body: {
+    nama_lokasi?: string;
+    status?: string;
+    kota?: string;
+    provinsi?: string;
+    negara?: string;
+    pemimpin?: string;
+    jabatan?: string;
+    periode_mulai?: string;
+    periode_selesai?: string;
+    fungsi_khusus?: string;
+    tanggal_berdiri?: string;
+  }
+) {
+  try {
+    const res = await axiosInstance.patch(`/wilayah/${id}`, body);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 export async function createWilayah(body: {
   nama_lokasi: string;
   status: string;
@@ -382,6 +404,7 @@ export async function createWilayah(body: {
   periode_mulai?: string;
   periode_selesai?: string;
   fungsi_khusus?: string;
+  tanggal_berdiri?: string;
 }) {
   try {
     const res = await axiosInstance.post("/wilayah", body);
@@ -636,3 +659,4 @@ export async function getPresignedUploadURL(body: {
     throw error;
   }
 }
+

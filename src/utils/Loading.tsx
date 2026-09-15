@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import type { LoadingProps } from "@/types/interface";
 
 export function Loading({ className, style }: LoadingProps) {

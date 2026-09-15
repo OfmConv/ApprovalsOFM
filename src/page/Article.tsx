@@ -5,9 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Navbar } from "./Home";
 import { getArticles } from "@/services/api";
 import type { Article } from "@/types/interface";
-import { Button } from "@/components/ui/button";
-
-
+import { Button } from "@/components/ui/button"
+import { Modal } from "@/utils/Modals";
 const DEBOUNCE_MS = 300;
 
 function useDebouncedValue<T>(value: T, delay: number) {
@@ -21,13 +20,12 @@ function useDebouncedValue<T>(value: T, delay: number) {
   return debounced;
 }
 
-
-
 export default function BlogGrid() {
   const [query, setQuery] = useState("");
   const [mounted, setMounted] = useState(false);
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isActive, setIsActive] = useState(false)
 
   const debouncedQuery = useDebouncedValue(query, DEBOUNCE_MS);
 
@@ -69,6 +67,7 @@ export default function BlogGrid() {
     [gridArticles, debouncedQuery]
   );
 
+ 
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden bg-white">
       <Navbar />
@@ -106,8 +105,8 @@ export default function BlogGrid() {
             <Card
               key={post.id}
               className={`overflow-hidden border-none shadow-none py-0 transition-all duration-700 ease-out ${mounted
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-6"
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-6"
                 }`}
               style={{ transitionDelay: `${index * 120}ms` }}
             >
@@ -123,9 +122,10 @@ export default function BlogGrid() {
                 <div className="text-base font-semibold text-slate-900 break-words">
                   {post.jdl_artikel}
                 </div>
-                <div className="mt-1 mb-5 ml-5 mr-5 text-justify text-sm text-muted-foreground break-words whitespace-normal">
+                <div className="h-5 mt-1 mb-5 ml-5 mr-5 text-justify text-sm text-muted-foreground break-words whitespace-normal">
                   {post.description}
                 </div>
+                <div><Button variant="outline" onClick={() => setIsActive(true) }>Scrollable Content</Button></div>
               </CardContent>
             </Card>
           ))}
@@ -135,18 +135,20 @@ export default function BlogGrid() {
               Tidak ada artikel yang cocok dengan pencarian.
             </p>
           )}
+          
         </div>
         <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] pt-10 pb-10 pl-10 pr-10">
           <div className="relative w-full aspect-[4/3] sm:aspect-[16/9]">
-         <iframe
-  src="https://calendar.google.com/calendar/embed?src=ofmconvindo%40gmail.com&ctz=Asia%2FJakarta&showTitle=0&showTz=0&showPrint=0&showCalendars=0&showTabs=0&showNav=1&mode=MONTH"
-  style={{ border: 0 }}
-  className="absolute inset-0 h-full w-full"
-  frameBorder="0"
-  scrolling="no"
-/>
+            <iframe
+              src="https://calendar.google.com/calendar/embed?src=ofmconvindo%40gmail.com&ctz=Asia%2FJakarta&showTitle=0&showTz=0&showPrint=0&showCalendars=0&showTabs=0&showNav=1&mode=MONTH"
+              style={{ border: 0 }}
+              className="absolute inset-0 h-full w-full"
+              frameBorder="0"
+              scrolling="no"
+            />
           </div>
         </div>
+       <Modal title="Yes" onClose={() => setIsActive(false)} open={isActive} description="tes" />
       </section>
     </div>
   );
