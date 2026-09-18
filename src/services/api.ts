@@ -660,3 +660,26 @@ export async function getPresignedUploadURL(body: {
   }
 }
 
+export async function getStatistik() {
+  try {
+    const res = await axiosInstance.get("/statistik");
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function updateStatistik(body: {
+  didirikan?: number;
+  jumlah_saudara?: number;
+  negara?: number;
+}) {
+  try {
+    const res = await axiosInstance.patch("/statistik", body);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}

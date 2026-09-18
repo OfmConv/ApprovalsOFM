@@ -4,7 +4,7 @@ import * as React from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { axiosInstance } from "@/services/api"
+import { axiosInstance, getStatistik, updateStatistik } from "@/services/api"
 import { WilayahForm } from "@/utils/willayah"
 import type { JabatanRow, PresignResponse } from "@/types/interface"
 import { MinisterProvinsialForm } from "./MinisterForm"
@@ -121,6 +121,7 @@ export function FormJabatan() {
   return (
     <>
       <div className="w-full">
+         <StatistikForm />
         <h3 className="text-lg font-semibold mb-3 text-left">Update Kuria Dewan Pimpinan</h3>
         <div className="flex flex-col divide-y border bg-card shadow-sm rounded-2xl">
 
@@ -185,4 +186,136 @@ export function FormJabatan() {
 
 function AdminWilayahPage() {
   return <WilayahForm />
+}
+
+function StatistikForm() {
+  const [placeholder, setPlaceholder] = React.useState({
+    didirikan: "",
+    jumlah_saudara: "",
+    negara: "",
+  })
+  const [form, setForm] = React.useState({
+    didirikan: "",
+    jumlah_saudara: "",
+    negara: "",
+  })
+  const [submitting, setSubmitting] = React.useState(false)
+  const [status, setStatus] = React.useState<{ state: "idle" | "success" | "error"; message: string }>({
+    state: "idle",
+    message: "",
+  })
+
+  React.useEffect(() => {
+    async function loadStatistik() {
+      try {
+        const data = await getStatistik()
+        setPlaceholder({
+          didirikan: data?.didirikan != null ? String(data.didirikan) : "",
+          jumlah_saudara: data?.jumlah_saudara != null ? String(data.jumlah_saudara) : "",
+          negara: data?.negara != null ? String(data.negara) : "",
+        })
+      } catch (error) {
+        console.error("Gagal mengambil data statistik:", error)
+      }
+    }
+    loadStatistik()
+  }, [])
+
+  function updateField(key: keyof typeof form, value: string) {
+    setForm((prev) => ({ ...prev, [key]: value }))
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+
+    const body: { didirikan?: number; jumlah_saudara?: number; negara?: number } = {}
+    if (form.didirikan !== "") body.didirikan = Number(form.didirikan)
+    if (form.jumlah_saudara !== "") body.jumlah_saudara = Number(form.jumlah_saudara)
+    if (form.negara !== "") body.negara = Number(form.negara)
+
+    if (Object.keys(body).length === 0) {
+      setStatus({ state: "error", message: "Isi minimal salah satu field untuk diupdate." })
+      return
+    }
+
+    try {
+      setSubmitting(true)
+      await updateStatistik(body)
+      setStatus({ state: "success", message: "Statistik berhasil diperbarui." })
+
+      const data = await getStatistik()
+      setPlaceholder({
+        didirikan: data?.didirikan != null ? String(data.didirikan) : "",
+        jumlah_saudara: data?.jumlah_saudara != null ? String(data.jumlah_saudara) : "",
+        negara: data?.negara != null ? String(data.negara) : "",
+      })
+      setForm({ didirikan: "", jumlah_saudara: "", negara: "" })
+    } catch (error: any) {
+      setStatus({
+        state: "error",
+        message: error?.response?.data?.message || error.message || "Terjadi kesalahan",
+      })
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  return (
+    <div className="mb-8">
+      <h3 className="text-lg text-left font-semibold mb-3">Update Statistik</h3>
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 gap-4 rounded-xl border p-6 shadow-sm sm:grid-cols-3"
+      >
+        <div className="space-y-1.5">
+          <Label htmlFor="didirikan">Didirikan</Label>
+          <Input
+            id="didirikan"
+            type="number"
+            value={form.didirikan}
+            onChange={(e) => updateField("didirikan", e.target.value)}
+            placeholder={placeholder.didirikan || "1209"}
+          />
+        </div>
+
+        <div className="space-y-1.5">
+          <Label htmlFor="jumlah_saudara">Saudara di Indonesia</Label>
+          <Input
+            id="jumlah_saudara"
+            type="number"
+            value={form.jumlah_saudara}
+            onChange={(e) => updateField("jumlah_saudara", e.target.value)}
+            placeholder={placeholder.jumlah_saudara || "139"}
+          />
+        </div>
+
+        <div className="space-y-1.5">
+          <Label htmlFor="negara">Negara di Dunia</Label>
+          <Input
+            id="negara"
+            type="number"
+            value={form.negara}
+            onChange={(e) => updateField("negara", e.target.value)}
+            placeholder={placeholder.negara || "70"}
+          />
+        </div>
+
+        <div className="sm:col-span-3 flex flex-col items-end">
+          <Button
+            type="submit"
+            disabled={submitting}
+            className="w-full sm:w-auto bg-[#2E6193] hover:bg-[#1477C2] text-white "
+          >
+            {submitting ? "Menyimpan..." : "Update Statistik"}
+          </Button>
+          {status.state === "success" && (
+            <p className="mt-2 text-xs text-green-600">{status.message}</p>
+          )}
+          {status.state === "error" && (
+            <p className="mt-2 text-xs text-red-600">{status.message}</p>
+          )}
+        </div>
+      </form>
+    </div>
+  )
 }
