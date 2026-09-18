@@ -145,7 +145,18 @@ export function DataTableWilayah({
 }: {
   data: z.infer<typeof schema>[] | null | undefined
 }) {
-  const safeData = React.useMemo(() => data ?? [], [data])
+  // Diurutkan berdasarkan tanggal_berdiri (tertua -> termuda).
+  // Data tanpa tanggal_berdiri (null/kosong) ditaruh paling bawah.
+  const safeData = React.useMemo(() => {
+    const list = data ?? []
+    return [...list].sort((a, b) => {
+      if (!a.tanggal_berdiri && !b.tanggal_berdiri) return 0
+      if (!a.tanggal_berdiri) return 1
+      if (!b.tanggal_berdiri) return -1
+      return new Date(a.tanggal_berdiri).getTime() - new Date(b.tanggal_berdiri).getTime()
+    })
+  }, [data])
+
   const columns = React.useMemo(() => buildColumns(), [])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -367,12 +378,13 @@ function WilayahDetailViewer({ item }: { item: z.infer<typeof schema> }) {
                     {formatDate(item.periode_selesai)}
                   </span>
                 </div>
-                 <div className="flex flex-col gap-1.5">
-                <span className="font-medium text-muted-foreground">Tanggal Berdiri</span>
-                 <span className="font-medium text-foreground">
-                   {formatDate(item.tanggal_berdiri)}
-                 </span>
-               </div>
+                <div className="flex flex-col gap-1.5">
+                  <span className="font-medium text-muted-foreground">Tanggal Berdiri</span>
+                  <span className="font-medium text-foreground">
+                    {formatDate(item.tanggal_berdiri)}
+                  </span>
+                </div>
+
               </div>
             </div>
           </div>
