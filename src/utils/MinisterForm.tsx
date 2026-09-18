@@ -217,7 +217,7 @@ export function MinisterProvinsialForm() {
     <div className=" space-y-10">
 
       <form onSubmit={handleCreateSubmit} className="space-y-6 rounded-xl border p-6 shadow-sm">
-        <h2 className="text-base font-semibold">Tambah Data Baru</h2>
+        {/* <h2 className="text-base font-semibold">Tambah Data Baru</h2> */}
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div className="space-y-1.5 sm:col-span-2">
