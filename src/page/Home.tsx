@@ -9,9 +9,9 @@ import { ArrowRight, Menu } from "lucide-react";
 import React, { useEffect, useRef, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
-import { getArticles, GetDewanPimpinan, getStatistik  } from "@/services/api";
-import { DataTableWilayah } from "@/utils/components/DataTableWilayah"
-import { getAllWilayah } from "@/services/api"
+import { getArticles, GetDewanPimpinan, getStatistik } from "@/services/api";
+import { DataTableWilayah } from "@/utils/components/DataTableWilayah";
+import { getAllWilayah } from "@/services/api";
 
 const navLinks = [
   { label: "Beranda", href: "/" },
@@ -20,16 +20,72 @@ const navLinks = [
   { label: "Berkarya di ", href: "#berkarya" },
 ];
 
+type Statistik = {
+  didirikan: number;
+  jumlah_saudara: number;
+  negara: number;
+};
+
+const STATISTIK_FALLBACK: Statistik = {
+  didirikan: 1209,
+  jumlah_saudara: 139,
+  negara: 70,
+};
+
+function useStatistik() {
+  const [statistik, setStatistik] = useState<Statistik | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function load() {
+      try {
+        const data = await getStatistik();
+        if (!cancelled) setStatistik(data);
+      } catch (error) {
+        console.error("Gagal mengambil data statistik:", error);
+      }
+    }
+
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return statistik;
+}
+
+function AnimatedNumber({ value, duration = 1200 }: { value: number; duration?: number }) {
+  const [display, setDisplay] = React.useState(0);
+
+  React.useEffect(() => {
+    let startTime: number | null = null;
+    let frameId: number;
+
+    function step(timestamp: number) {
+      if (startTime === null) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      setDisplay(Math.floor(progress * value));
+      if (progress < 1) {
+        frameId = requestAnimationFrame(step);
+      }
+    }
+
+    frameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frameId);
+  }, [value, duration]);
+
+  return <>{display}</>;
+}
+
 function SectionHeading({ children }: { children: ReactNode }) {
   return (
     <div className="flex w-full items-center gap-2 sm:gap-4">
-
       <Separator className="flex-1 min-w-[20px]" />
-
       <h2 className="text-center font-serif text-lg leading-tight text-gray-900 sm:text-2xl md:text-3xl">
         {children}
       </h2>
-
       <Separator className="flex-1 min-w-[20px]" />
     </div>
   );
@@ -47,7 +103,8 @@ export function Navbar() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
         <a
           href="#"
-          className="flex items-center gap-2 font-serif text-lg font-semibold text-[#1B1C1F]">
+          className="flex items-center gap-2 font-serif text-lg font-semibold text-[#1B1C1F]"
+        >
           <img
             src="./Logo_ordo1.png"
             alt="Logo OFMConv"
@@ -61,9 +118,7 @@ export function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className={
-                "text-sm font-medium text-gray-700 transition-colors hover:text-red-800"
-              }
+              className="text-sm font-medium text-gray-700 transition-colors hover:text-red-800"
             >
               {link.label}
             </a>
@@ -95,9 +150,7 @@ export function Navbar() {
                   <SheetClose asChild key={link.label}>
                     <a
                       href={link.href}
-                      className={
-                        "text-base font-medium text-gray-700 transition-colors hover:text-red-800"
-                      }
+                      className="text-base font-medium text-gray-700 transition-colors hover:text-red-800"
                     >
                       {link.label}
                     </a>
@@ -120,14 +173,21 @@ export function Navbar() {
   );
 }
 
+function HeroStat({ value, label }: { value: number; label: string }) {
+  return (
+    <div className="text-left md:text-right">
+      <p className="font-serif text-2xl text-white sm:text-3xl">
+        <AnimatedNumber value={value} />
+      </p>
+      <p className="text-[11px] text-gray-300 sm:text-xs">{label}</p>
+    </div>
+  );
+}
+
 function Hero() {
   const navigate = useNavigate();
   const [article, setArticle] = React.useState<any>(null);
-  const [statistik, setStatistik] = React.useState<{
-    didirikan: number;
-    jumlah_saudara: number;
-    negara: number;
-  } | null>(null);
+  const statistik = useStatistik();
 
   function HandleHistory() {
     navigate("/history");
@@ -147,16 +207,6 @@ function Hero() {
       }
     }
     init();
-
-    async function initStatistik() {
-      try {
-        const data = await getStatistik();
-        setStatistik(data);
-      } catch (error) {
-        console.log("Gagal mengambil data statistik:", error);
-      }
-    }
-    initStatistik();
   }, []);
 
   return (
@@ -198,28 +248,18 @@ function Hero() {
           </div>
 
           <div className="flex w-full justify-between gap-2 md:w-auto md:justify-end md:gap-8">
-            <div className="text-left md:text-right">
-              <p className="font-serif text-2xl text-white sm:text-3xl">
-                {statistik?.didirikan ?? 1209}
-              </p>
-              <p className="text-[11px] text-gray-300 sm:text-xs">Didirikan</p>
-            </div>
-            <div className="text-left md:text-right">
-              <p className="font-serif text-2xl text-white sm:text-3xl">
-                {statistik?.jumlah_saudara ?? 139}
-              </p>
-              <p className="text-[11px] text-gray-300 sm:text-xs">
-                Saudara di Indonesia
-              </p>
-            </div>
-            <div className="text-left md:text-right">
-              <p className="font-serif text-2xl text-white sm:text-3xl">
-                {statistik?.negara ?? 70}
-              </p>
-              <p className="text-[11px] text-gray-300 sm:text-xs">
-                Negara di Dunia
-              </p>
-            </div>
+            <HeroStat
+              value={statistik?.didirikan ?? STATISTIK_FALLBACK.didirikan}
+              label="Didirikan"
+            />
+            <HeroStat
+              value={statistik?.jumlah_saudara ?? STATISTIK_FALLBACK.jumlah_saudara}
+              label="Saudara di Indonesia"
+            />
+            <HeroStat
+              value={statistik?.negara ?? STATISTIK_FALLBACK.negara}
+              label="Negara di Dunia"
+            />
           </div>
         </div>
       </div>
@@ -229,7 +269,6 @@ function Hero() {
 
 function LeaderCard({ photo, name, role }: any) {
   return (
-    // Memperkecil max-w di mobile (160px) agar muat dalam grid 2 kolom tanpa overflow
     <div className="mx-auto w-full max-w-[160px] sm:max-w-[240px]">
       <div className="relative">
         <div className="rounded-sm border-[3px] border-[#616572] bg-white shadow-[0_15px_30px_-10px_rgba(0,0,0,0.25)]">
@@ -244,7 +283,6 @@ function LeaderCard({ photo, name, role }: any) {
       </div>
 
       <div className="mt-3 text-center sm:mt-5">
-        {/* Mengecilkan teks di mobile menjadi text-sm agar tidak terlalu panjang */}
         <p className="font-serif text-sm leading-snug text-gray-900 sm:text-lg">
           {name}
         </p>
@@ -347,6 +385,7 @@ function MainContent() {
       }
     }
     initWilayah();
+
     async function init() {
       try {
         const res = await GetDewanPimpinan();
@@ -417,7 +456,11 @@ function MainContent() {
             Peta Wilayah Pelayanan Fransiskan Konventual
           </SectionHeading>
         </div>
-        <img src="./Map.png" alt="Peta Wilayah" className="mx-auto mt-6 w-full max-w-3xl object-contain" />
+        <img
+          src="./Map.png"
+          alt="Peta Wilayah"
+          className="mx-auto mt-6 w-full max-w-3xl object-contain"
+        />
 
         <div className="mt-10 w-full overflow-x-auto">
           <DataTableWilayah data={wilayah} />
@@ -493,7 +536,9 @@ function Footer() {
               <span>OFMConv</span>
             </a>
             <p className="mt-4 max-w-xs text-left text-sm leading-relaxed text-gray-400">
-              convindo.com merupakan Approvals system OFM Conventual Indonesia yang menyajikan update berita dan informasi seputar komunitas OFMConv di Indonesia.
+              convindo.com merupakan Approvals system OFM Conventual Indonesia
+              yang menyajikan update berita dan informasi seputar komunitas
+              OFMConv di Indonesia.
             </p>
           </div>
 
