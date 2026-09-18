@@ -9,7 +9,7 @@ import { ArrowRight, Menu } from "lucide-react";
 import React, { useEffect, useRef, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
-import { getArticles, GetDewanPimpinan } from "@/services/api";
+import { getArticles, GetDewanPimpinan, getStatistik  } from "@/services/api";
 import { DataTableWilayah } from "@/utils/components/DataTableWilayah"
 import { getAllWilayah } from "@/services/api"
 
@@ -123,6 +123,11 @@ export function Navbar() {
 function Hero() {
   const navigate = useNavigate();
   const [article, setArticle] = React.useState<any>(null);
+  const [statistik, setStatistik] = React.useState<{
+    didirikan: number;
+    jumlah_saudara: number;
+    negara: number;
+  } | null>(null);
 
   function HandleHistory() {
     navigate("/history");
@@ -142,6 +147,16 @@ function Hero() {
       }
     }
     init();
+
+    async function initStatistik() {
+      try {
+        const data = await getStatistik();
+        setStatistik(data);
+      } catch (error) {
+        console.log("Gagal mengambil data statistik:", error);
+      }
+    }
+    initStatistik();
   }, []);
 
   return (
@@ -184,17 +199,23 @@ function Hero() {
 
           <div className="flex w-full justify-between gap-2 md:w-auto md:justify-end md:gap-8">
             <div className="text-left md:text-right">
-              <p className="font-serif text-2xl text-white sm:text-3xl">1209</p>
+              <p className="font-serif text-2xl text-white sm:text-3xl">
+                {statistik?.didirikan ?? 1209}
+              </p>
               <p className="text-[11px] text-gray-300 sm:text-xs">Didirikan</p>
             </div>
             <div className="text-left md:text-right">
-              <p className="font-serif text-2xl text-white sm:text-3xl">139</p>
+              <p className="font-serif text-2xl text-white sm:text-3xl">
+                {statistik?.jumlah_saudara ?? 139}
+              </p>
               <p className="text-[11px] text-gray-300 sm:text-xs">
                 Saudara di Indonesia
               </p>
             </div>
             <div className="text-left md:text-right">
-              <p className="font-serif text-2xl text-white sm:text-3xl">70</p>
+              <p className="font-serif text-2xl text-white sm:text-3xl">
+                {statistik?.negara ?? 70}
+              </p>
               <p className="text-[11px] text-gray-300 sm:text-xs">
                 Negara di Dunia
               </p>
