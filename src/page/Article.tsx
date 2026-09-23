@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { Search } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Navbar } from "./Home";
+import { Navbar } from "../utils/homeComponent";
 import { getArticles } from "@/services/api";
 import type { Article } from "@/types/interface";
 import { Button } from "@/components/ui/button"
